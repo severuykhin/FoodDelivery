@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&subset=cyrillic');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    min-height: 100vh;
+}
+
+.container-fluide {
+    max-width: 1140px;
+    margin: auto;
+    padding: 0 15px;
+}
+
+.slick-dots {
+    list-style: none;
+    padding: 0 0 0 15px;
+
+    li {
+        display: inline-block;
+        font-size: 0;
+        vertical-align: top;
+        
+        button {
+            width: 15px;
+            height: 15px;
+            cursor: pointer;
+            outline: none;
+            border-radius: 50%;
+            border: none;
+            background-color: #a1c834;
+            transition: all, .2s;
+        }
+
+        &.slick-active {
+            button {
+                box-shadow: 0 0 0 2px $white,
+                            0 0 0px 4px #a1c834;
+            }
+        }
+        
+        &:not(:last-child) {
+            margin-right: 20px;
+        }
+    }
+}

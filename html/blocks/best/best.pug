@@ -1,0 +1,10 @@
+.best
+    .best__title
+        h2 Любимые блюда наших гостей
+    .container
+        .best__inner
+            each i in [1,2,3,4,5,6]
+                .best__item
+                    include ../dish/dish 
+        .buttons__container.buttons__container-center
+            a(href="#").button.button__primary.button__primary-big Смотреть меню

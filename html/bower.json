@@ -1,0 +1,20 @@
+{
+  "name": "ramstel",
+  "version": "0.1.0",
+  "description": "ramstel",
+  "authors": [
+    "Lihachev Alexey"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "v4.0.0-alpha.6",
+    "jquery": "^3.1.1"
+  }
+}

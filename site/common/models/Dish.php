@@ -1,0 +1,69 @@
+<?php
+
+namespace common\models;
+
+use Yii;
+use yii\base\NotSupportedException;
+use yii\behaviors\TimestampBehavior;
+use yii\behaviors\SluggableBehavior;
+use yii\db\ActiveRecord;
+use yii\helpers\VarDumper;
+use common\models\Category;
+
+class Dish extends ActiveRecord
+{
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+
+            [
+                'class' => SluggableBehavior::className(),
+                'attribute' => 'title',
+                // 'slugAttribute' => 'slug',
+            ],
+        ];
+    }
+
+    public static function tableName()
+    {
+        return '{{%dish}}';
+    }
+
+    public function rules()
+    {
+        return [
+            [['title', 'description', 'weight', 'price_actual', 'category_id'], 'required'],
+            [['title', 'description', 'weight', 'price_actual'], 'string'],
+            [['active', 'action', 'best'], 'boolean']
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'title'        => 'Название',
+            'description'  => 'Описание',
+            'weight'       => 'Вес',
+            'category_id'  => 'Категория',
+            'active'       => 'Активно',
+            'action'       => 'Акция',
+            'best'         => 'Лучшие',
+            'pic'          => 'Изображение',
+            'price_actual' => 'Текущая цена',
+            'price_old'    => 'Старая цена (для акций)',
+            'created_at'   => 'Дата создания',
+            'updated_at'   => 'Дата последнего обновления',
+        ];
+    }
+
+    public static function findBySlug($slug)
+    {
+        return self::find()->where(['slug' => $slug])->one();
+    }
+
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
+}

@@ -1,0 +1,15 @@
+@include media-breakpoint-up(xs) {
+  .about {
+    &__title {
+      text-align: center;
+      h2 {
+        font-weight: 700;
+        padding: 0 15px;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(xs) {
+
+}

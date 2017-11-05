@@ -1,0 +1,89 @@
+.dish {
+  background: $white;
+  border-radius: 4px;
+  &__image {
+    height: 233px;
+    overflow: hidden;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    img {
+      width: 100%;
+    }
+  }
+  &__info {
+    padding: 20px;
+    border-bottom: 1px dashed rgba(120, 206, 7, 0.568);
+  }
+  &__title {
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  &__weight {
+    color: #888;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  &__text {
+    color: #777;
+    font-size: 13px;
+    letter-spacing: 0.5;
+    line-height: 18px;
+  }
+  &__order {
+    padding: 15px;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+  }
+  &__price {
+    display: inline-block;
+    margin-left: 15px;
+    font-weight: 700;
+    position: relative;
+    color: $black;
+  }
+  &__old {
+    position: absolute;
+    top: -10px;
+    color: #888;
+    right: -26px;
+    text-decoration: line-through;
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 1220px) {
+    .dish {
+      &__image {
+        height: 193px;
+        overflow: hidden;
+      }
+    }
+}
+
+@media screen and (max-width: 990px) {
+  .dish {
+    &__image {
+      height: 220px;
+      overflow: hidden;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .dish {
+    &__image {
+      height: auto;
+      overflow: hidden;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .dish {
+    &__image {
+      height: auto;
+      overflow: hidden;
+    }
+  }
+}
