@@ -7,7 +7,16 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div>
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1>
+        <?= Html::encode($this->title) ?> 
+        <?= Html::a(!empty($model->pic) ? 'Сменить изображение' : 'Добавить изображение', 
+            [
+            'menu/image?id=' . $model->id
+            ], 
+            [
+                'class' => 'btn btn-success'
+            ] )?>
+    </h1>
 
     <div class="container-fluid">
         
@@ -19,3 +28,5 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
 </div>
+<br>
+<br>

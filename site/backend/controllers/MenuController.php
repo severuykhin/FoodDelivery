@@ -3,8 +3,10 @@ namespace backend\controllers;
 
 use Yii;
 use yii\web\Controller;
+use yii\web\UploadedFile;
 use common\models\Dish;
 use common\models\Category;
+use common\models\Image;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
 use yii\helpers\VarDumper;
@@ -27,6 +29,12 @@ class MenuController extends Controller
         ]);
     }
 
+    /**
+     * 
+     * Создание пункта меню
+     * 
+     * 
+     * */ 
     public function actionCreate()
     {
         $model      = new Dish();
@@ -35,7 +43,7 @@ class MenuController extends Controller
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post()) & $model->validate()) {
                 if ($model->save()) {
-                    $this->redirect(['/menu']);
+                    $this->redirect(['menu/view?id=' . $model->id]);
                 }
             }
         }
@@ -47,6 +55,12 @@ class MenuController extends Controller
         ]);
     }
 
+    /**
+     * 
+     * Редактирование пункта меню
+     * 
+     * 
+     * */ 
     public function actionUpdate($id)
     {
         $model      = Dish::findOne($id);
@@ -55,7 +69,7 @@ class MenuController extends Controller
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post()) & $model->validate()) {
                 if ($model->save()) {
-                    $this->redirect(['/menu']);
+                    $this->redirect(['menu/view?id=' . $model->id]);
                 }
             }
         }
@@ -66,6 +80,56 @@ class MenuController extends Controller
         ]);
     }
 
+    /**
+     * 
+     * Загрузка изображения для пункта меню
+     * 
+     * 
+     * */ 
+
+    public function actionImage($id)
+    {
+        $image = new Image();
+        $model = Dish::findOne($id);
+
+        if (Yii::$app->request->isPost) {
+
+            $file = UploadedFile::getInstance($image, 'image');
+
+            $result = $model->saveImage($image->upload($file, $model->id));
+
+            if (true === $result) {
+                $this->redirect(['menu/view?id=' . $model->id]);
+            }
+        }
+
+        return $this->render('image', [
+            'model' => $model,
+            'image' => $image
+        ]);
+    }
+
+    /**
+     * 
+     * Просмотр пункта меню
+     * 
+     * 
+     * */ 
+
+    public function actionView($id)
+    {   
+        $model = Dish::findOne($id);
+        return $this->render('view', [
+            'model' => $model
+        ]);
+    }
+
+    /**
+     * 
+     * Удаление пункта меню
+     * 
+     * 
+     * */ 
     public function actionDelete($id)
     {
         $model = Dish::findOne($id);

@@ -1,4 +1,10 @@
-<?=  $this->render('_actions'); ?>
+
+
+<?=  $this->render('_actions', [
+  'actionDishes' => $actionDishes
+]); ?>
+
+
 <div class="best">
       <div class="best__title">
         <h2>Любимые блюда наших гостей</h2>

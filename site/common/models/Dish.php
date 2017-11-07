@@ -12,6 +12,9 @@ use common\models\Category;
 
 class Dish extends ActiveRecord
 {
+    const STATUS_ACTIVE   = 1;
+    const STATUS_INACTIVE = 0;
+
     public function behaviors()
     {
         return [
@@ -34,7 +37,7 @@ class Dish extends ActiveRecord
     {
         return [
             [['title', 'description', 'weight', 'price_actual', 'category_id'], 'required'],
-            [['title', 'description', 'weight', 'price_actual'], 'string'],
+            [['title', 'description', 'weight', 'price_actual', 'price_old'], 'string'],
             [['active', 'action', 'best'], 'boolean']
         ];
     }
@@ -65,5 +68,12 @@ class Dish extends ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
+
+    public function saveImage($fileName)
+    {
+        $this->pic = $fileName;
+
+        return $this->save(false);
     }
 }

@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\Category;
+use common\models\Dish;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
 use yii\web\Controller;
@@ -52,7 +53,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
 	{
-        return $this->render('index');
+        $actionDishes = Dish::find()->where(['action' => Dish::STATUS_ACTIVE])->all();
+
+        return $this->render('index', [
+            'actionDishes' => $actionDishes
+        ]);
 	}
 
 }
