@@ -16,9 +16,28 @@ class Image extends model
         ];
     }
 
+    public static function uploadReview($file, $oldName = null)
+    {
+        $fileName = self::generateName($file->baseName) . '.' . $file->extension;
+        $path = Yii::getAlias('@statics') . '/uploads/reviews';
+        $fullPath = $path . '/' . $fileName;
+        $oldPath = '';
+
+        if ($oldName) {
+            $oldPath = $path . '/' . $oldName;
+            if (file_exists($oldPath)) {
+                unlink($oldPath);
+            }   
+        }
+
+        $file->saveAs($fullPath);
+
+        return $fileName;
+    }
+
     public function upload($file, $id)
     {
-        $fileName = $this->generateName($file->baseName) . '.' . $file->extension;
+        $fileName = self::generateName($file->baseName) . '.' . $file->extension;
         $path = Yii::getAlias('@statics') . '/uploads/dishes/' . $id;
         $fullPath = $path . '/' . $fileName;
 
@@ -35,7 +54,7 @@ class Image extends model
         return $fileName;
     }
 
-    public function generateName($name)
+    public static function generateName($name)
     {
         return md5($name);
     }

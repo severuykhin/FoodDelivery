@@ -9,7 +9,8 @@ module.exports = {
         web : "../site/web/statics",
         htmlSrc: [
             "pug/index.pug",
-            "pug/contacts.pug"
+            "pug/contacts.pug",
+            "pug/category.pug"
         ],
         levels: ["xs", "sm", "md", "lg", "xl"],
         html: ["pug/*.pug", "blocks/**/*.pug"],
@@ -30,7 +31,8 @@ module.exports = {
             "adv",
             "app",
             "modal",
-            "overlay"
+            "overlay",
+            "social"
         ],
         js: ['../node_modules/slick-carousel/slick/slick.min.js'],
         json: "blocks/**/*.json",
@@ -44,7 +46,7 @@ module.exports = {
             css   : "blocks/**/**/*.css",
             sass  : "blocks/**/**/*.scss",
             js    : "blocks/**/**/*.js",
-            images: "blocks/**/**/*.{gif,jpg,png,ico,svg}"
+            images: "blocks/**/**/*.{gif,jpg,jpeg,png,ico,svg}"
         }
     },
     plugins: {

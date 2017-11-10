@@ -60,6 +60,11 @@ class Category extends ActiveRecord
         return self::find()->where(['slug' => $slug])->one();
     }
 
+    public static function findWithDishes($slug)
+    {   
+        return self::find()->where(['slug' => $slug])->with(['dishes']);
+    }
+
     public static function getTitlesArray()
     {
         $categories = self::find()->orderBy(['sort' => SORT_DESC])->asArray()->all();

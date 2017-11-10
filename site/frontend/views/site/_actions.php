@@ -4,7 +4,7 @@ use aquy\thumbnail\Thumbnail;
 
 ?>
 
-<div class="content__block">
+<div class="content__block" style="background: url(/statics/images/wood-background-2940.jpeg); background-size: cover;">
       <div class="container">
         <div class="actions" data-role="actions">
 
@@ -32,7 +32,7 @@ use aquy\thumbnail\Thumbnail;
                   <?= Thumbnail::thumbnailImg(
                       Yii::getAlias('@statics/uploads/dishes/' . $dish->id . '/' . $dish->pic),
                       500,
-                      400,
+                      300,
                       Thumbnail::THUMBNAIL_OUTBOUND
                   ); ?>
                 <?php else:?>

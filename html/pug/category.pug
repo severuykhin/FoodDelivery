@@ -12,12 +12,16 @@ html(lang="ru")
 
     body
         include ../blocks/header/header
-        .content__block(style="background: url(images/wood-background-2940.jpeg); background-size: cover;")
+        .content
             .container
-                include ../blocks/actions/actions
-        include ../blocks/best/best
-        .content__block
-            include ../blocks/about/about
+                .content__title-h1
+                    h1 Пицца
+                .best__inner
+                    each i in [1,2,3,4,5,6]
+                        .best__item
+                            include ../blocks/dish/dish 
+            .container
+                .content__description Бесплатная доставка вкусной и полезной еды на дом и в офис. Шумовка - свежайшие ингредиенты, большой выбор и выгодные цены!
 
         //- .content Контьент
 

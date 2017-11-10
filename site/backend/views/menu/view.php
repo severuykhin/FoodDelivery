@@ -60,6 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                 ]) ?>
             </div>
+            <?php if(!empty($model->pic)):?>
             <div class="col-lg-5">
                 <?= Thumbnail::thumbnailImg(
                     Yii::getAlias('@statics/uploads/dishes/' . $model->id . '/' . $model->pic),
@@ -68,6 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     Thumbnail::THUMBNAIL_OUTBOUND
                 ); ?>
             </div>
+            <?php endif;?>
         </div>
     </div>
 </div>

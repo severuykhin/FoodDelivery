@@ -43,7 +43,8 @@ return [
             'class' => 'yii\web\urlManager',
             'rules' => [
                 '/category/<action>' => 'category/<action>',
-                'menu/<action>'      => 'menu/<action>'
+                'menu/<action>'      => 'menu/<action>',
+                'reviews/<action>'   => 'reviews/<action>'
             ]
         ],
         'frontendUrlManager' => [

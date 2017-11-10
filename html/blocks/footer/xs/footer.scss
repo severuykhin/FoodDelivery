@@ -1,8 +1,37 @@
-@include media-breakpoint-up(xs) {
-  .footer {
+.footer {
+  padding: 15px 0;
+  background-color: #ececec;
+  border-top: 1px solid #ccc;
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
-}
+  &__logo {
+    width: 100px;
 
-@include media-breakpoint-down(xs) {
+    img {
+      width: 100%;
+    }
+  }
+  &__menu {
+    &-item {
+      display: inline-block;
+      font-size: 14px;
+      color: #333;
 
+      &:not(:last-child) {
+        margin-right: 20px;
+      }
+
+      &:hover {
+        color: rgb(83, 161, 0);
+        text-decoration: none;
+      }
+      &:focus {
+        color: rgb(83, 161, 0);
+        text-decoration: none;
+      }
+    }
+  }
 }
