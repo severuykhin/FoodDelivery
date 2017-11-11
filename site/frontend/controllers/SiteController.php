@@ -5,6 +5,8 @@ namespace frontend\controllers;
 use Yii;
 use common\models\Category;
 use common\models\Dish;
+use common\models\Review;
+use common\models\Photo;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
 use yii\web\Controller;
@@ -53,11 +55,31 @@ class SiteController extends Controller
      */
     public function actionIndex()
 	{
-        $actionDishes = Dish::find()->where(['action' => Dish::STATUS_ACTIVE])->all();
+        $actionDishes = Dish::find()
+            ->where(['action' => Dish::STATUS_ACTIVE])
+            ->all();
+
+        $reviews = Review::getBest();
+
+        $aboutPhotos = Photo::find()
+            ->where(['main' => Photo::ON_MAIN])
+            ->limit(9)
+            ->all();
 
         return $this->render('index', [
-            'actionDishes' => $actionDishes
+            'actionDishes' => $actionDishes,
+            'reviews'      => $reviews,
+            'aboutPhotos'  => $aboutPhotos
         ]);
-	}
+    }
+    
+    public function actionReviews()
+    {
+        $reviews = Review::find()->all();
+
+        return $this->render('reviews', [
+            'reviews' => $reviews
+        ]);
+    }
 
 }

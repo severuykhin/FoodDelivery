@@ -17,15 +17,26 @@ $this->params['breadcrumbs'][] = $this->title;
 //            ['class' => 'yii\grid\SerialColumn'],
             'name',
             'date',
-            'text',
             [
-                'attribute' => 'active',
+                'attribute'      => 'text',
                 'contentOptions' => ['class' => ''],
-                'content' => function ($data) {
+                'content'        => function ($data) {
+                    return !empty($data->pic) ? 'Фото-отзыв' : $data->text;
+                }
+            ],
+            [
+                'attribute'      => 'active',
+                'contentOptions' => ['class' => ''],
+                'content'        => function ($data) {
                     return $data->active == 1 ? 'Да' : 'Нет';
                 }
             ],
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class'         => 'yii\grid\ActionColumn',
+                'header'        =>'Действия', 
+                'headerOptions' => ['width' => '80'],
+                'template'      => '{update} {delete}',
+            ],
         ],
     ]); ?>
 

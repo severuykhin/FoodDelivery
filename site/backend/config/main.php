@@ -42,9 +42,10 @@ return [
             'baseUrl' => '/backend',
             'class' => 'yii\web\urlManager',
             'rules' => [
+                'photos/<action>'    => 'photos/<action>',
                 '/category/<action>' => 'category/<action>',
                 'menu/<action>'      => 'menu/<action>',
-                'reviews/<action>'   => 'reviews/<action>'
+                'reviews/<action>'   => 'reviews/<action>',
             ]
         ],
         'frontendUrlManager' => [

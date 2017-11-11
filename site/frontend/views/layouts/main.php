@@ -17,6 +17,7 @@ $categories = Category::find()->orderBy(['sort' => SORT_DESC])->asArray()->all()
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.0/jquery.fancybox.min.css">
     <link rel="stylesheet" href="/statics/styles.css">
     <title>Шумовка - еда на вынос</title>
     <?= Html::csrfMetaTags() ?>
@@ -106,6 +107,7 @@ $categories = Category::find()->orderBy(['sort' => SORT_DESC])->asArray()->all()
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.0/jquery.fancybox.min.js"></script>
     <script>
       !function (i,s,o,g,r,a,m) {
           if (typeof window[g] === "undefined") {

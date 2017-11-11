@@ -135,6 +135,9 @@ class MenuController extends Controller
         $model = Dish::findOne($id);
         
         if ($model) {
+
+            $delPic = Image::deleteDish($model->pic, $model->id);
+
             if ($model->delete()) {
                 $this->redirect(['/menu']);
             }

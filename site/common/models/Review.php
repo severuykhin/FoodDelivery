@@ -12,6 +12,8 @@ use common\models\Image;
 class Review extends ActiveRecord
 {
     const STATUS_ACTIVE = 1;
+    const INDEX_LIMIT   = 3;
+    const UPLOAD_DIR    = 'reviews';   
 
     public $image;
 
@@ -20,7 +22,7 @@ class Review extends ActiveRecord
         return '{{%review}}';
     } 
 
-    public function behaviours()
+    public function behaviors()
     {
         return [
             TimestampBehavior::className(),
@@ -46,5 +48,14 @@ class Review extends ActiveRecord
             'pic'    => 'Изображение',
             'image'  => 'Изображение'
         ];
+    }
+
+    public static function getBest()
+    {
+        return self::find()
+            ->where(['active' => self::STATUS_ACTIVE])
+            ->limit(self::INDEX_LIMIT)
+            ->orderBy(['created_at' => SORT_DESC])
+            ->all();
     }
 }

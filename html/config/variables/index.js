@@ -32,7 +32,9 @@ module.exports = {
             "app",
             "modal",
             "overlay",
-            "social"
+            "social",
+            "reviews",
+            "zoompic"
         ],
         js: ['../node_modules/slick-carousel/slick/slick.min.js'],
         json: "blocks/**/*.json",

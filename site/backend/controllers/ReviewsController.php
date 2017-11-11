@@ -45,7 +45,7 @@ class ReviewsController extends Controller
             $file = UploadedFile::getInstance($model, 'image');
 
             if ($file) {
-                $tempImg = Image::uploadReview($file);
+                $tempImg = Image::uploadFile($file, Review::UPLOAD_DIR);
                 $model->pic = $tempImg;
             }
 
@@ -71,7 +71,7 @@ class ReviewsController extends Controller
 
             if ($file) {
                 $oldFile = !empty($model->pic) ? $model->pic : null;
-                $tempImg = Image::uploadReview($file, $oldFile);
+                $tempImg = Image::uploadFile($file, Review::UPLOAD_DIR, $oldFile);
                 $model->pic = $tempImg;
             }
 
@@ -85,6 +85,22 @@ class ReviewsController extends Controller
         return $this->render('update', [
             'model' => $model
         ]);
+    }
+
+    public function actionDelete($id)
+    {
+        if (Yii::$app->request->isPost) {
+            $model = Review::findOne($id);
+            $delPic = true;
+
+            if (!empty($model->pic)) {
+                $delPic = Image::deleteFile($model->pic, Review::UPLOAD_DIR);
+            }
+
+            if ($delPic && $model->delete()) {
+                $this->redirect(['index']);
+            }
+        }
     }
 }
 

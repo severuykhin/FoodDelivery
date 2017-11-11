@@ -50,6 +50,11 @@ AppAsset::register($this);
                 'visible' => Yii::$app->user->can('admin')
             ],
             [
+                'label' => 'Фотолента',
+                'url' => ['/photos/index'],
+                'visible' => Yii::$app->user->can('admin')
+            ],
+            [
                 'label' => 'Акции',
                 'url' => ['/actions/index'],
                 'visible' => Yii::$app->user->can('admin')

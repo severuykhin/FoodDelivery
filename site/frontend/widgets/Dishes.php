@@ -13,7 +13,7 @@ class Dishes extends Widget
     {
         parent::init();
         if ($this->items === null) {
-            $this->items = 'Hello World';
+            $this->items = 'Ничего не нашлось :(';
         }
     }
 
