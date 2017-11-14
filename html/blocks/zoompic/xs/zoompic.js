@@ -5,7 +5,7 @@ $(function () {
         loop            : true,
         keyboard        : true,
         toolbar         : true,
-        animationEffect : true,
+        animationEffect : "fade",
         arrows          : true,
         clickContent    : false
       });

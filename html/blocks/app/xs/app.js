@@ -65,8 +65,8 @@
         },
         removeModal  : function () {
             if (
-                document.querySelector('.overlay') !== null && 
-                document.querySelector('.modal') !== null
+                this.getElem('.overlay') !== null && 
+                this.getElem('.modal') !== null
             ) {
                 let modal   = document.querySelector('.modal');
                 let overlay = document.querySelector('.overlay');
@@ -79,7 +79,33 @@
                     overlay.remove();
                 }, 300);
             }
+        },
+
+        cache    : function (key, value) {
+            if (typeof value == 'undefined') {
+                return this.cache[key];
+            }
+
+            this.cache[key] = value;
+        },
+
+        getElem  :  function (selector) {
+            if (!this.cache(selector)) {
+                this.cache(selector, d.querySelector(selector));
+            }
+
+            return this.cache(selector);
+        },
+
+        getAll   : function (selector) {
+            if (!this.cache(selector)) {
+                this.cache(selector, d.querySelectorAll(selector));
+            }
+
+            return this.cache(selector);
         }
     };
 
  })(document, window, document.body);
+
+ window._ = App;

@@ -1,8 +1,8 @@
 .button {
   &__primary {
     color: $white;
-    border: 2px solid #A1C834;
-    background-color: #A1C834;
+    border: 2px solid #88bd4b;
+    background-color: #88bd4b;
     border-radius: 4px;
     padding: 5px 25px;
     font-weight: 700;
@@ -10,17 +10,18 @@
     display: inline-block;
     transition: all, .2s;
     cursor: pointer;
+    font-family: 'a_futuraroundbold', 'Open Sans', sans-serif;
 
     &:hover {
       background-color: $white;
-      color: #A1C834; 
+      color: #88bd4b; 
       text-decoration: none;
       box-shadow: none;
     }
 
     &:focus {
       background-color: $white;
-      color: #A1C834; 
+      color: #88bd4b; 
       text-decoration: none;
     }
 
@@ -35,14 +36,16 @@
   &__reverse {
     display: inline-block;
     background: transparent;
-    border: 3px solid #A1C834;
-    color: #A1C834;
+    border: 2px solid #88bd4b;
+    color: #88bd4b;
     padding:  9px 35px;
     font-weight: 700;
-    border-radius: 40px;
+    font-size: 14px;
+    border-radius: 5px;
     transition: all, .1s;
+    font-family: 'a_futuraroundbold', 'Open Sans', sans-serif;
     &:hover {
-      background: #A1C834;
+      background: #88bd4b;
       color: $white;
       text-decoration: none;
     }

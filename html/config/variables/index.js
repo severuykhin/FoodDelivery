@@ -10,7 +10,8 @@ module.exports = {
         htmlSrc: [
             "pug/index.pug",
             "pug/contacts.pug",
-            "pug/category.pug"
+            "pug/category.pug",
+            "pug/menu.pug"
         ],
         levels: ["xs", "sm", "md", "lg", "xl"],
         html: ["pug/*.pug", "blocks/**/*.pug"],
@@ -34,7 +35,10 @@ module.exports = {
             "overlay",
             "social",
             "reviews",
-            "zoompic"
+            "zoompic",
+            "store",
+            "filter",
+            "app"
         ],
         js: ['../node_modules/slick-carousel/slick/slick.min.js'],
         json: "blocks/**/*.json",
@@ -44,6 +48,7 @@ module.exports = {
             "setting.block/custom.scss"
         ],
         images: [],
+        fonts : 'fonts/**/*',
         type: {
             css   : "blocks/**/**/*.css",
             sass  : "blocks/**/**/*.scss",

@@ -12,6 +12,7 @@ const tasks = [
     [ "server" ],
     [ "json-clean" ],
     [ "json", ["json-clean"] ],
+    [ "fonts" ],
     [ "html", ["json"] ],
     [ "htmlReload", ["html"] ],
     [ "preCss" ],
@@ -25,7 +26,7 @@ const tasks = [
 
 gulp.task("default", ["server", "build"]);
 
-gulp.task("build", ["html", "css", "images", "js", "jquery"]);
+gulp.task("build", ["fonts", "html", "css", "images", "js", "jquery"]);
 
 for( let taskName of tasks ) {
     createTask(...taskName);

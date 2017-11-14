@@ -1,6 +1,12 @@
 .reviews {
+  &-index {
+    
+  }
   &__title {
     margin-bottom: 30px;
+    h1 {
+      font-weight: 700;
+    }
     h2 {
       text-align: center;
       font-weight: 700;
@@ -17,7 +23,7 @@
   }
   &__inner {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
     margin-right: -15px;
     margin-left: - 15px;
@@ -27,6 +33,34 @@
     margin: 15px;
     background-color: #f8f8f8;
     min-height: 350px;
+    &-feedback {
+      border: 2px dashed #a1c834;
+      padding: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      align-content: center;
+      justify-content: center;
+      background: #fff;
+      background-size: 220px;
+      transition: opacity, .2s;
+      &:hover {
+        text-decoration: none;
+        opacity: .8;
+      }
+      &:focus {
+        text-decoration: none;
+      }
+    }
+    &-vk {
+      width: 70px;
+    }
+    &-feed {
+      text-align: center;
+      color: #444;
+      font-weight: 700;
+      width: 100%;
+    }
   }
   &__info {
     display: flex;
@@ -58,12 +92,13 @@
   }
   &__watch {
     display: inline-block;
-    background: url('like-rev.svg') no-repeat 15px 45%, #a1c834;
+    background: url('like-rev.svg') no-repeat 15px 45%, #88bd4b;
     background-size: 20px;
     color: #fff;
     font-weight: 700;
     padding: 15px 25px 15px 50px;
     border-radius: 3px;
+    font-family: 'a_futuraroundbold', 'Open Sans', sans-serif;
     &:hover {
       opacity: .8;
       color: #fff;
