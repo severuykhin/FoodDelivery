@@ -14,8 +14,24 @@ html(lang="ru")
             //-     .container
             //-         .title
             //-             h1 Меню
+            .content__block-s
+                .container-fluide
+                    .store__info
+                        .store__info-item
+                            | Чтобы сделать заказ позвоните по телефону:
+                            br 
+                            a(href="tel:+78332416646") 
+                                b 41-66-46
+                        .store__info-item
+                            | Бесплатная доставка при сумме заказа от 
+                            b 450 Р
+                        .store__info-item
+                            | Режим работы - ежедневно 
+                            b 10:00 - 22:00 в пределах города
+                        .store__info-item
+                            | Время доставки уточнит менеджер при заказе
             .content__block
-                .container
+                .container-fluide
                     include ../blocks/store/store
 
         script(src="https://api-maps.yandex.ru/2.1/?lang=ru_RU")

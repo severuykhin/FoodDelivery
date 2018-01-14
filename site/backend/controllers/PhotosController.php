@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 
 use common\models\Photo;
 use common\models\Image;
+use common\models\Page;
 
 use yii\helpers\VarDumper;
 
@@ -20,7 +21,7 @@ class PhotosController extends Controller
 {
     public function actionIndex()
     {
-        $photos = Photo::find()->orderBy(['main' => SORT_DESC])->all();
+        $photos = Photo::find()->orderBy(['created_at' => SORT_DESC])->all();
 
         return $this->render('index', [
             'photos' => $photos
@@ -30,6 +31,7 @@ class PhotosController extends Controller
     public function actionCreate()
     {
         $model = new Photo();
+        $pages = Page::getPages();
 
         if (Yii::$app->request->isPost) {
             $model->load(Yii::$app->request->post());
@@ -48,13 +50,15 @@ class PhotosController extends Controller
         }
 
         return $this->render('create', [
-            'model' => $model
+            'model' => $model,
+            'pages' => $pages
         ]);
     }
 
     public function actionUpdate($id)
     {
         $model = Photo::findOne($id);
+        $pages = Page::getPages();
 
         if (!$model) {
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -81,7 +85,8 @@ class PhotosController extends Controller
         $model->getDate();
 
         return $this->render('update', [
-            'model' => $model
+            'model' => $model,
+            'pages' => $pages
         ]);
     }
 

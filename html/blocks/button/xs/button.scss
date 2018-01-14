@@ -1,4 +1,82 @@
 .button {
+  &-secondary {
+    position: relative;
+    font-family: 'Montserrat', sans-serif;
+    display: inline-block;
+    padding: 7px 35px 7px 10px;
+    font-size: 14px;
+    vertical-align: middle;
+    border: 2px solid #88bd4b;
+    border-radius: 20px;
+    margin-left: 20px;
+    color: #88bd4b;
+    &-about {
+      font-weight: 700;
+      line-height: 15px;
+      margin: 30px 0 0 0;
+
+      &-hovered {
+        background-color: #88bd4b;
+        color: $white;
+        margin-left: 20px;  
+      }
+    }
+    &::after {
+      position: absolute;
+      content: '';
+      width: 20px;
+      height: 20px;
+      top: 4px;
+      right: 6px;
+      background-color: #88bd4b;
+      border-radius: 50%;
+      background-image: url('arrow-button.svg');
+      background-repeat: no-repeat;
+      background-size: 12px;
+      background-position: 4px 4px;
+      transform: rotate(-180deg);
+    }
+    &:hover {
+      background-color: #88bd4b;
+      color: $white;
+      transition: all, .2s;
+      text-decoration: none;
+    }
+    &:focus {
+      background-color: #88bd4b;
+      color: $white;
+      transition: all, .2s;
+      text-decoration: none;
+    }
+  }
+  &__menu {
+    display: none;
+    cursor: pointer;
+    width: 20px;
+    div {
+      height: 2px;
+      background-color: #444;
+      transition: all, .3s;
+      transform-origin: center;
+      &:not(:last-child) {
+        margin-bottom: 3px;
+      }
+    }
+
+    &-active {
+      div {
+        &:first-child {
+          transform: rotate(-45deg) translate(-1px, 4px);
+        }
+        &:nth-child(2) {
+          opacity: 0;
+        }
+        &:last-child {
+          transform: rotate(45deg) translate(-3px, -6px);
+        }
+      }
+    }
+  }
   &__primary {
     color: $white;
     border: 2px solid #88bd4b;
@@ -49,6 +127,11 @@
       color: $white;
       text-decoration: none;
     }
+    &:focus {
+      background: #88bd4b;
+      color: $white;
+      text-decoration: none;
+    }
   }
 }
 
@@ -56,6 +139,17 @@
   &__container {
     &-center {
       text-align: center;
+    }
+  }
+}
+
+@media (max-width: 780px) {
+  .button {
+    &__menu {
+      display: block;
+    }
+    &-secondary {
+      margin-left: 0;
     }
   }
 }

@@ -62,7 +62,7 @@ class CategoryController extends Controller
             ],
             'image-upload' => [
                 'class' => 'vova07\imperavi\actions\UploadAction',
-                'url' => Yii::$app->urlManager->hostInfo . '/statics/images/categories',
+                'url'  => '/statics/images/categories',
 				'path' => '@statics/images/categories' 
             ],
         ];

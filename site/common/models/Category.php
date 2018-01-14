@@ -15,6 +15,8 @@ use himiklab\sortablegrid\SortableGridBehavior;
 
 class Category extends ActiveRecord
 {
+    const ROOT_MENU = 'menu#all';
+    
     public function behaviors()
     {
         return [

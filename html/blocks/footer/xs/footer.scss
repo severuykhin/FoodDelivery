@@ -35,3 +35,17 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .footer__menu {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    .social__caption {
+      display: none;
+    }
+  }
+}

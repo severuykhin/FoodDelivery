@@ -7,3 +7,22 @@
 		width: 90%;
 	} 
 }
+
+@media (max-width: 920px) {
+	.logo {
+		width: 100px;
+		img {
+			width: 90%;
+		}
+	}
+}
+
+@media (max-width: 560px) {
+	.logo {
+		width: 70px;
+
+		img {
+			margin-top: -5px;
+		}
+	}
+}

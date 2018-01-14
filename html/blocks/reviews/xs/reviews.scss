@@ -4,18 +4,29 @@
   }
   &__title {
     margin-bottom: 30px;
+    margin-top: 40px;
     h1 {
       font-weight: 700;
+      text-align: left;
     }
     h2 {
-      text-align: center;
+      text-align: left;
       font-weight: 700;
     }
   }
   &__img {
-
-    padding: 15px;
-    background-color: #f8f8f8;
+    
+    a {
+      font-weight: 600;
+      margin-top: 20px;
+      display: inline-block;
+      color: #88bd4b;
+      padding-left: 27px;
+      background: url('pict.svg') no-repeat;
+      background-size: 19px;
+      background-position: 0px 1px;
+      outline: none;
+    }
 
     img {
       width: 100%;
@@ -31,8 +42,9 @@
   &__item {
     width: calc(33.33% - 30px);
     margin: 15px;
-    background-color: #f8f8f8;
-    min-height: 350px;
+    border-radius: 4px;
+    // background-color: #f8f8f8;
+    position: relative;
     &-feedback {
       border: 2px dashed #a1c834;
       padding: 15px;
@@ -44,6 +56,7 @@
       background: #fff;
       background-size: 220px;
       transition: opacity, .2s;
+      box-shadow: none;
       &:hover {
         text-decoration: none;
         opacity: .8;
@@ -67,7 +80,7 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #e2e2e2;
-    background: url('like.svg') no-repeat;
+    background: url('like.svg') no-repeat, #f8f8f8;
     background-position: 15px 45%;
     background-size: 15px;
     padding: 15px 15px 15px 40px;
@@ -84,7 +97,8 @@
     font-size: 14px;
     color: #222;
     padding: 15px;
-    background-color: #F8F8F8;
+    line-height: 23px;
+    // background-color: #F8F8F8;
   }
   &__button {
     padding: 25px;
@@ -107,6 +121,31 @@
     &:focus {
       color: #fff;
       text-decoration: none;
+    }
+  }
+}
+
+@media (max-width: 990px) {
+  .reviews {
+    &_inner {
+
+    }
+    &__title {
+      margin-top: 30px;
+    }
+    &__item {
+      width: calc(50% - 30px);
+    }
+  }
+}
+
+@media (max-width: 560px) {
+  .reviews {
+    &_inner {
+
+    }
+    &__item {
+      width: calc(100% - 30px);
     }
   }
 }

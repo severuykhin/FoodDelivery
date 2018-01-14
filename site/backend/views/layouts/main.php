@@ -54,14 +54,19 @@ AppAsset::register($this);
                 'url' => ['/photos/index'],
                 'visible' => Yii::$app->user->can('admin')
             ],
-            [
-                'label' => 'Акции',
-                'url' => ['/actions/index'],
-                'visible' => Yii::$app->user->can('admin')
-            ],
+            // [
+            //     'label' => 'Акции',
+            //     'url' => ['/actions/index'],
+            //     'visible' => Yii::$app->user->can('admin')
+            // ],
             [
                 'label' => 'Отзывы',
                 'url' => ['/reviews/index'],
+                'visible' => Yii::$app->user->can('admin')
+            ],
+            [
+                'label' => 'Страницы',
+                'url' => ['/pages/index'],
                 'visible' => Yii::$app->user->can('admin')
             ],
             [

@@ -1,0 +1,75 @@
+.banners {
+	padding: 30px 0;
+	&__left {
+		position: relative;
+		padding: 30px;
+		min-height: 340px;
+		background: #54a101;
+		overflow: hidden;
+		box-shadow: 0 0 25px rgba(0,0,0,.1), 0 5px 10px rgba(0,0,0,.1);
+		border-radius: 4px;
+
+		&-title {
+			 color: $white;
+			 font-size: 30px;
+			 margin-bottom: 30px;
+		}
+		&-info {
+			color: $white;
+		}
+	}
+	&__right {
+		box-shadow: 0 7px 28px rgba(0,0,0,.1), 0 5px 10px rgba(0,0,0,.1);
+		padding: 30px;
+		color: $white;
+		min-height: 340px;
+		background: url('blackboard.jpg');
+		background-size: 104%;
+		border-radius: 4px;
+		&-title {
+			font-size: 30px;
+			font-family: 'a_futuraroundbold','Open Sans',sans-serif;
+			margin-bottom: 15px;
+			line-height: 30px;
+
+		}
+		&-subtitle {
+			font-family: 'a_futuraroundbold','Open Sans',sans-serif;
+			font-size: 22px;
+			line-height: 24px;
+			margin-bottom: 20px;			
+		}
+		&-price {
+			font-family: 'a_futuraroundregular','Open Sans',sans-serif;
+			&-num {
+				font-family: 'a_futuraroundbold','Open Sans',sans-serif;
+				font-size: 60px;
+				color: rgba(255, 255, 255, .9);
+				margin-left: 16px;
+				line-height: 60px;
+				margin-bottom: 45px;
+			}
+		}
+		&-more {
+			color: $white;
+			font-family: 'a_futuraroundbold', 'Open Sans', sans-serif;
+			font-size: 18px;
+			display: inline-block;
+			border-bottom: 1px solid $white;
+			padding: 3px 0;
+			letter-spacing: 1px;
+			transition: all, .3s;
+			&:hover {
+				text-decoration: none;
+				color: $white;
+				border-color: transparent;
+				padding-bottom: 6px;
+			}
+			&:focus {
+				text-decoration: none;
+				color: $white;
+				border-color: transparent;
+			}
+		}
+	}
+}

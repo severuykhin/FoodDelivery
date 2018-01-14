@@ -4,6 +4,7 @@ var Dish = (function (d, w) {
 
     const roleOrder   = 'dish-order';
     const roleOverlay = 'overlay';
+    const roleClose   = 'modal-close';
     const tpl         = `<div class="dish__modal-tpl">
                             <div class="dish__modal-title">
                                 В настоящее время заказ доставки возможен только по телефону
@@ -30,7 +31,7 @@ var Dish = (function (d, w) {
 
                 if (target === roleOrder) {
                     obj.showDishModal();
-                } else if (target === roleOverlay) {
+                } else if (target === roleOverlay || target === roleClose) {
                     obj.closeDishModal();
                 }
                 

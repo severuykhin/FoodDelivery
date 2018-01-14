@@ -17,9 +17,17 @@ var Filter = (function (w,d,$) {
 					i.classList.remove(active);
 				}
 			});
+
+			return this;
 		},
 		getUrl : function () {
 			return w.location.hash.substring(1);
+		},
+		setUrl : function (hash) {
+			w.location.hash = hash;
+			
+			
+			return this;
 		}
 	};
 

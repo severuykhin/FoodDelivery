@@ -1,0 +1,159 @@
+.photo {
+	&__desc {
+		p {
+			color: #444;
+		}
+	}
+	&__row {
+		display: flex;
+		justify-content: space-between;
+		&:not(:last-child) {
+			margin-bottom: 40px;
+		}
+
+		.photo__image {
+			position: relative;
+			width: 58%;
+			border-radius: 4px;
+			box-shadow: 0 2px 20px 0 #ddd;
+			img {
+				width: 100%;
+				border-radius: 4px;
+			}
+
+			&::before {
+				position: absolute;
+				content: '';
+				width: 2px;
+				height: 100%;
+				top: 0;
+				left: -10px;
+				background-color: #88bd4b;
+			}
+		}
+
+		.photo__desc {
+			width: 37%;
+			position: relative;
+			padding-right: 30px;
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			align-content: center;
+
+			h4 {
+				width: 100%;
+				position: relative;
+
+				&::after {
+					content: attr(data-num);
+					position: absolute;
+					font-size: 120px;
+					top: -70px;
+					left: -20px;
+					color: rgba(173, 240, 2, 0.144);
+					font-family: 'a_futuraroundbold','Open Sans',sans-serif;
+					z-index: -1;
+				}
+			}
+		}
+
+		&:nth-child(2n) {
+			.photo__image {
+				width: 37%;
+				img {
+					width: 100%;
+				}
+
+				&::before {
+					right: -20px;
+					left: 102%;
+				}
+			}
+
+			.photo__desc {
+				width: 58%;
+				padding: 0 0 0 30px;
+			}
+		}
+	}
+}
+
+@media (max-width: 1200px) {
+	.photo {
+		&__row {
+			&:not(:last-child) {
+				margin-bottom: 50px;
+			}
+		}
+	}
+}
+
+@media (max-width: 990px) {
+	.photo {
+		&__row {
+			align-content: center;
+			align-items: center;
+			.photo__desc h4::after {
+				font-size: 70px;
+				top: -10px;
+			}
+
+			&:nth-child(2n) {
+				.photo__image::before {
+					left: 103%;
+				}
+			}
+		}
+		&__desc {
+			h4 {
+				font-size: 20px;
+			}
+
+			p {
+				font-size: 13px;
+			}
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	.photo {
+		&__row {
+			flex-wrap: wrap;
+			.photo__desc {
+				width: 100%;
+
+				h4 {
+					&::after {
+						color: rgb(241, 241, 241);
+						left: 0;
+					}
+				}
+			}
+			.photo__image {
+				width: 100%;
+				&::before {
+					display: none;
+				}
+			}
+
+			&:nth-child(2n) {
+				.photo__image {
+					width: 100%;
+					order: 1;
+	
+					&::before {
+						display: none;
+					}
+				}
+	
+				.photo__desc {
+					order: 0;
+					width: 100%;
+					padding: 0;
+				}
+			}
+		}
+	}
+}

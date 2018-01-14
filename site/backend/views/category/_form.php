@@ -23,7 +23,7 @@ use yii\helpers\Url;
     'settings' => [
         'lang' => 'ru',
         'minHeight' => 200,
-        'imageUpload' => Url::to(['../statics/images/categories']),
+        'imageUpload' => Url::to(['/category/image-upload']),
         'plugins' => [
             'clips',
             'fullscreen'

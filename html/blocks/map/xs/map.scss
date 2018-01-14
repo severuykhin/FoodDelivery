@@ -1,8 +1,23 @@
-@include media-breakpoint-up(xs) {
-  .map {
-  }
+.map {
+	#ymap {
+      width: 555px;
+      height: 555px;
+    }
 }
 
-@include media-breakpoint-down(xs) {
+@media (max-width: 1200px) {
+	.map {
+		#ymap {
+			width: 450px;
+			height: 450px;
+		}
+	}
+}
 
+@media (max-width: 990px) {
+	.map {
+		#ymap {
+			width: 100%;
+		}
+	}
 }

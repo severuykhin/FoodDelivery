@@ -6,24 +6,26 @@ html(lang="ru")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
         title Document
         link(rel="stylesheet" href="styles.css")
+        script(src="https://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript")
+        script(type="text/javascript" src="//vk.com/js/api/openapi.js?150")
+
 
     body
         include ../blocks/header/header
         .content
             .content__block
                 .container
-                    .title
-                        h1 Контакты
-            .content__block
-                .container
-                    .grid
-                        .grid__item
-                            include ../blocks/contacts/contacts
-                        .grid__item
+                    .row.contacts-map
+                        .col-lg-6.orderFirst
                             include ../blocks/map/map
+                        .col-lg-6.orderLast
+                            include ../blocks/contact/contact
 
         script(src="https://api-maps.yandex.ru/2.1/?lang=ru_RU")
         script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js")
+        script.
+            VK.Widgets.Group("vk_groups", {mode: 3}, 124087268);
+        
         script.
             !function (i,s,o,g,r,a,m) {
                 if (typeof window[g] === "undefined") {

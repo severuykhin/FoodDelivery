@@ -1,6 +1,7 @@
 .filter {
 	&__inner {
 		display: flex;
+		flex-wrap: wrap;
 		justify-content: center;
 		align-content: center;
 		align-items: center;
@@ -61,6 +62,21 @@
 				span {
 					border-bottom: none; 
 				}
+			}
+		}
+	}
+}
+
+@media (max-width: 990px) {
+	.filter {
+		&__inner {
+			justify-content: flex-start;
+		}
+		&__item {
+			margin: 0 0 5px 0;
+			padding: 4px 14px;
+			&:not(:last-child) {
+				margin-right: 0;
 			}
 		}
 	}

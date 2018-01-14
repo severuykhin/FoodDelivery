@@ -55,21 +55,29 @@ class SiteController extends Controller
      */
     public function actionIndex()
 	{
-        $actionDishes = Dish::find()
-            ->where(['action' => Dish::STATUS_ACTIVE])
-            ->all();
+        // $actionDishes = Dish::find()
+        //     ->where(['action' => Dish::STATUS_ACTIVE])
+        //     ->all();
 
-        $reviews = Review::getBest();
+        $reviews    = Review::getBest();
+        $bestDishes = Dish::getBest();
+        $banners    = Photo::find()
+                        ->where(['banner' => Photo::STATUS_ACTIVE])
+                        ->orderBy(['created_at' => SORT_ASC])
+                        ->asArray()
+                        ->all();
 
         $aboutPhotos = Photo::find()
-            ->where(['main' => Photo::ON_MAIN])
-            ->limit(9)
-            ->all();
+                        ->where(['main' => Photo::ON_MAIN])
+                        ->limit(10)
+                        ->asArray()
+                        ->all();
 
         return $this->render('index', [
-            'actionDishes' => $actionDishes,
+            'banners'      => $banners,
             'reviews'      => $reviews,
-            'aboutPhotos'  => $aboutPhotos
+            'aboutPhotos'  => $aboutPhotos,
+            'bestDishes'   => $bestDishes
         ]);
     }
     
@@ -79,6 +87,21 @@ class SiteController extends Controller
 
         return $this->render('reviews', [
             'reviews' => $reviews
+        ]);
+    }
+
+    public function actionContacts()
+    {
+        return $this->render('contacts');
+    }
+
+    public function actionAbout()
+    {
+        $about = Photo::find()->where(['about__block' => Photo::STATUS_ACTIVE])->all();
+        $feed = Photo::find()->where(['feed' => Photo::STATUS_ACTIVE])->all();
+        return $this->render('about', [
+            'about' => $about,
+            'feed'  => $feed
         ]);
     }
 

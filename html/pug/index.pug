@@ -13,15 +13,18 @@ html(lang="ru")
 
     body
         include ../blocks/header/header
-        .content__block(style="background: url(images/wood-background-2940.jpeg); background-size: cover;")
-            .container
+        .content__block.content__block-padding-top
+            .container-fluide
                 include ../blocks/actions/actions
+        .content__block
+            include ../blocks/adv/adv
         include ../blocks/best/best
         .content__block
             .container
                 include ../blocks/reviews/reviews
         .content__block
-            include ../blocks/about/about
+            .container-fluide
+                include ../blocks/about/about
 
         //- .content Контьент
 

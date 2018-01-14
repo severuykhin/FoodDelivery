@@ -1,6 +1,7 @@
 .reviews
     .reviews__title
-        h2 Отзывы наших гостей
+        h2 Отзывы наших гостей 
+            a(href="#").button-secondary Смотреть все отзывы
     .reviews__inner
         .reviews__item
             .reviews__info
@@ -11,16 +12,17 @@
             .reviews__info
                 .reviews__name Людмила Буторина
                 .reviews__date 11.11.2017
-            .reviews__img
-                a.zoompic(data-fancybox href="images/review1.jpg")
-                    img(src="images/review1.jpg")
+            .reviews__text Ребята СПАСИБО! Очень уютно, очень душевно и, как всегда, у вас очень вкусно!
+                .reviews__img
+                    a(data-fancybox href="images/review1.jpg") Смотреть отзыв
         .reviews__item
             .reviews__info
                 .reviews__name Александр Петров
                 .reviews__date 11.11.2017
-            .reviews__img
-                a.zoompic(data-fancybox href="images/review2.jpg")
-                    img(src="images/review2.jpg")
+            .reviews__text Покупал у вас пиццу - очень вкусно и сытно. Остался доволен. Так держать
+            //- .reviews__img
+            //-     a.zoompic(data-fancybox href="images/review2.jpg")
+            //-         img(src="images/review2.jpg")
         .reviews__item
             .reviews__info
                 .reviews__name Александр Петров
@@ -34,6 +36,3 @@
         a(href="#").reviews__item.reviews__item-feedback
             .reviews__item-feed Оставте свой отзыв в нашей группе ВКонтакте
             img(src="images/vk.svg").reviews__item-vk
-            
-    .reviews__button
-        a(href="#").reviews__watch Смотреть все отзывы

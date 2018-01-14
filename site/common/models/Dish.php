@@ -76,4 +76,12 @@ class Dish extends ActiveRecord
 
         return $this->save(false);
     }
+
+    public static function getBest()
+    {
+        return self::find()
+                ->where(['best' => self::STATUS_ACTIVE])
+                ->with(['category'])
+                ->all();
+    }
 }

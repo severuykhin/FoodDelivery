@@ -26,10 +26,13 @@ return [
             'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
-                ''            => 'site/index',
-                '/reviews'    => 'site/reviews',
-                'menu/<slug>' => 'menu/category',
-                'menu'        => 'menu/index',
+                ''             => 'site/index',
+                '/reviews'     => 'site/reviews',
+                '/contacts'    => 'site/contacts',
+                '/about'       => 'site/about', 
+                'menu/<slug>'  => 'menu/category',
+                'menu'         => 'menu/index',
+                '/<slug>'      => 'pages/page' 
             ]
         ],
         'errorHandler' => [

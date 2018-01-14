@@ -1,31 +1,36 @@
 var Store = (function (w,d,$) {
 
 	var block 	  = '[data-role="store-category"]',
-		routeAttr = 'data-route'; 
+		routeAttr = 'data-route',
+		mainButon = '[data-role="filter-main"]';
 
 	return {
 		filterBlocks     : function (route) {
 			var blocks = _.getAll(block),
 				len    =  blocks.length;
 
-			if (route == '') {
+			if (route == '' || route == 'all') {
 				Store._showAll(blocks);
-				return;
+				return false;
 			}  
 
 			for (var i = 0; i < len; i++) {
 				var thisRoute = blocks[i].getAttribute(routeAttr);
-				blocks[i].style.display = route === thisRoute ? 'block' : 'none';
+
+				if (thisRoute === route) {
+					_.showElement(blocks[i]);
+				} else {
+					_.hideElement(blocks[i]);
+				}
 			}
 
 			return false;
 		},
 		_showAll         : function (blocks) {
-			console.log(blocks);
 			var len = blocks.length;
 
 			for (var i = 0; i < len; i++) {
-				blocks[i].style.display = 'block';
+				_.showElement(blocks[i]);
 			}
 
 			return false;
@@ -42,6 +47,8 @@ var Store = (function (w,d,$) {
 			w.addEventListener('DOMContentLoaded', function () {
 				Store.renderRoute( Filter.getUrl() );
 			});
+
+			return false;
 		},
 
 		init : function () {

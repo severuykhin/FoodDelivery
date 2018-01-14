@@ -1,0 +1,72 @@
+doctype html
+html(lang="ru")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+
+        link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css")
+        link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.0/jquery.fancybox.min.css")
+        link(rel="stylesheet" href="styles.css")
+
+        title Document
+
+    body
+        include ../blocks/header/header
+        .content
+            .content__block.content__block-about
+                .container
+                    .content__block-title
+                        h1 Немного о нас
+                    .photo
+                        .photo__row
+                            .photo__desc 
+                                h4(data-num="1") Заголовок секции
+                                p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac lorem eget libero venenatis pharetra mattis id est. Quisque pulvinar iaculis nibh ut imperdiet. Proin semper suscipit tellus, vitae convallis arcu placerat a. In condimentum ligula nisi, vel volutpat enim mattis sed. Pellentesque rhoncus accumsan lobortis.
+                            .photo__image
+                                img(src="images/about1.jpg")
+                        .photo__row
+                            .photo__image
+                                img(src="images/about2.jpg")
+                            .photo__desc
+                                h4(data-num="2") Заголовок секции
+                                p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac lorem eget libero venenatis pharetra mattis id est. Quisque pulvinar iaculis nibh ut imperdiet. Proin semper suscipit tellus, vitae convallis arcu placerat a. In condimentum ligula nisi, vel volutpat enim mattis sed. Pellentesque rhoncus accumsan lobortis.
+                        .photo__row
+                            .photo__desc
+                                h4(data-num="3") Заголовок секции
+                                p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac lorem eget libero venenatis pharetra mattis id est. Quisque pulvinar iaculis nibh ut imperdiet. Proin semper suscipit tellus, vitae convallis arcu placerat a. In condimentum ligula nisi, vel volutpat enim mattis sed. Pellentesque rhoncus accumsan lobortis.
+                            .photo__image
+                                img(src="images/about3.jpg")
+                        .photo__row
+                            .photo__image
+                                img(src="images/about4.jpg")
+                            .photo__desc
+                                h4(data-num="4") Заголовок секции
+                                p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac lorem eget libero venenatis pharetra mattis id est. Quisque pulvinar iaculis nibh ut imperdiet. Proin semper suscipit tellus, vitae convallis arcu placerat a. In condimentum ligula nisi, vel volutpat enim mattis sed. Pellentesque rhoncus accumsan lobortis.
+                        .photo__row
+                            .photo__desc
+                                h4(data-num="5") Заголовок секции
+                                p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac lorem eget libero venenatis pharetra mattis id est. Quisque pulvinar iaculis nibh ut imperdiet. Proin semper suscipit tellus, vitae convallis arcu placerat a. In condimentum ligula nisi, vel volutpat enim mattis sed. Pellentesque rhoncus accumsan lobortis.
+                            .photo__image
+                                img(src="images/about5.jpg") 
+            .content__block.content__block-woodback
+                    include ../blocks/feed/feed
+                
+
+
+        script(src="https://api-maps.yandex.ru/2.1/?lang=ru_RU")
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.0/jquery.fancybox.min.js")
+        script.
+            !function (i,s,o,g,r,a,m) {
+                if (typeof window[g] === "undefined") {
+                    var script = s.createElement("script");
+                    var node   = s.getElementsByTagName("script")[0];
+                    script.src = o;
+                    script.type = "text/javascript";
+                    node.parentNode.insertBefore(script, node);
+                }
+            }(window, document, "js/jquery.min.js", "jQuery");
+        // /подключение jquery
+        script(src="/main.js")

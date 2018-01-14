@@ -4,40 +4,44 @@ use yii\helpers\Html;
 use aquy\thumbnail\Thumbnail;
 
 ?>
+<div class="content__block content__block-l">
+  <div class="container-fluide">
+    <div class="about">
+      <div class="about__info">
+        <div class="about__image">
+            <div class="about__image-inner">
+                <?php $src = Yii::getAlias('@statics/images/about1.jpg'); ?>
 
-<div class="about">
-    <div class="about__info">
-        <div class="about__info-inner">
-            <div class="about__title">
-                <h2>Немного о нас</h2>
+                    <a href="<?= '/statics/images/about1.jpg' ?>" data-fancybox class="zoompic zoompic-dark">
+
+                        <?php if(file_exists($src)): ?>
+                            <?= Thumbnail::thumbnailImg(
+                                $src,
+                                600,
+                                400,
+                                Thumbnail::THUMBNAIL_OUTBOUND,
+                                [
+                                    'alt' => 'Шумовка - доставка вкусной еды в Кирове'
+                                ]
+                            ); ?>
+                        <?php endif;?>
+
+                    </a>
             </div>
-            <div class="about__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis posuere massa. Fusce interdum porttitor tempor. Proin sit amet massa lacus. Nam venenatis lorem ac nulla euismod, et rutrum erat aliquet. Aenean vel magna vestibulum ex volutpat tincidunt. Nunc interdum orci id mollis ultricies. Donec a est non sem varius condimentum ac eget dolor. Nulla lacinia nisi ante, vel dignissim nisl maximus non. Nulla facilisi. Vivamus rhoncus ultrices elit.</div>
-            <div class="about__button">
-                <?= Html::a('Читать дальше', ['/about'], ['class' => 'about__read']); ?>
-            </div>
-            <div class="about__socials"></div>
         </div>
-    </div>
-    <div class="about__images">
-        <?php foreach($aboutPhotos as $photo):?>
-        <?php $src = Yii::getAlias('@statics/uploads/photos/' . $photo->src); ?>
-            <div class="about__image">
-                <a href="<?= '/statics/uploads/photos/' . $photo->src ?>" data-fancybox class="zoompic zoompic-colored">
-
-                    <?php if(file_exists($src)): ?>
-                        <?= Thumbnail::thumbnailImg(
-                            $src,
-                            400,
-                            400,
-                            Thumbnail::THUMBNAIL_OUTBOUND,
-                            [
-                                'alt' => 'Шумовка - доставка вкусной еды в Кирове'
-                            ]
-                        ); ?>
-                    <?php endif;?>
-
-                </a>
+        <div class="about__info-inner">
+          <div class="about__title">Немного о нас</div>
+          <div class="about__content">
+            <div class="about__subtitle"> 
+              <h2>«Шумовка» - это свежая еда <br> и прекрасный сервис</h2>
             </div>
-        <?php endforeach; ?>
+            <div class="about__text">Integer a dolor eu eros sodales posuere. Nam tempus lacus pulvinar purus faucibus ultricies sed ac dolor. Aenean vitae sapien eget risus posuere cursus. Donec accumsan erat erat, vel fermentum lectus iaculis ut.</div>
+            <div class="about__buttons">
+                <?= Html::a('Наша фотолента', ['/about'], ['class' => 'button-secondary button-secondary-about']);?>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

@@ -15,9 +15,10 @@ class Photo extends ActiveRecord
     public $image;
     public $tempDate;
 
-    const ON_MAIN     = 1;
-    const UPLOAD_DIR  = 'photos';
-    const DATE_FORMAT = 'd.m.Y'; 
+    const ON_MAIN       = 1;
+    const STATUS_ACTIVE = 1;
+    const UPLOAD_DIR    = 'photos';
+    const DATE_FORMAT   = 'd.m.Y'; 
 
     public static function tableName()
     {
@@ -28,9 +29,9 @@ class Photo extends ActiveRecord
     {
         return [
             [['src', 'date', 'tempDate'], 'required'],
-            [['desc', 'src'], 'string'],
+            [['desc', 'src', 'url', 'title'], 'string'],
             [['date'], 'integer'],
-            [['main'], 'boolean']
+            [['main', 'banner', 'feed', 'about__block'], 'boolean']
         ];
     }
 
@@ -44,12 +45,17 @@ class Photo extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'desc'     => 'Краткое описание',
-            'date'     => 'Дата',
-            'src'      => 'Фото',
-            'image'    => 'Фото',
-            'main'     => 'Выводить на главной',
-            'tempDate' => 'Дата'
+            'desc'         => 'Краткое описание',
+            'title'        => 'Заголовок', 
+            'date'         => 'Дата',
+            'src'          => 'Фото',
+            'image'        => 'Фото',
+            'main'         => 'Выводить на главной',
+            'banner'       => 'Выводить в баннер',
+            'about__block' => 'Выводить в верхний блок на странице о нас',
+            'feed'         => 'Выводить в фото-ленту',
+            'url'          => 'Связанная страница',
+            'tempDate'     => 'Дата'
         ];
     }
 

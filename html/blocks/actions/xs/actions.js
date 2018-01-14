@@ -1,7 +1,7 @@
 !function ($) {
 
-	if ($('[data-role="actions"]').length > 0) {
-		$('[data-role="actions"]').slick({
+	if ($('[data-role="slider"]').length > 0) {
+		$('[data-role="slider"]').slick({
         dots           : true,
         adaptiveHeight : true,
         fade           : true,
@@ -9,4 +9,4 @@
         nextArrow      : ''
     });
 	}
-}(jQuery)
+}(jQuery);

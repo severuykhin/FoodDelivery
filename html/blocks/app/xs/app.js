@@ -7,7 +7,35 @@
 
  const App = (function (d,w,b) {
 
+    var roleLazyLoad = '[data-lazy]';
+
     return {
+
+        lazyLoad : {
+            showVisible  :  function () {
+                var allImages = App.getAll(roleLazyLoad),
+                    len       = allImages.length;
+
+                    for (var i = 0; i < len; i++) {
+
+                        var img = allImages[i];
+
+                        var realSrc = img.getAttribute('data-lazy');
+
+                        if (!realSrc) continue;
+
+                        img.src = realSrc;
+
+                        img.removeAttribute('data-lazy');
+                    } 
+
+                    return false;
+            },
+
+            init : function () {
+                App.lazyLoad.showVisible();
+            }
+        },
 
         _createElem : function (type, className, role) {
             let elem = d.createElement(type);
@@ -23,13 +51,13 @@
             return elem;
         },
 
-        _append    : function (elems) {
+        _append    : function (parent, elems) {
             
             if (elems) {
                 let len = elems.length;
 
                 for (let i = 0; i < len; i++) {
-                    b.appendChild(elems[i]);
+                    parent.appendChild(elems[i]);
                 }
             }
 
@@ -39,6 +67,7 @@
         showModal  :  function (template) {
             let overlay = this._createElem('div', 'overlay', 'overlay');
             let modal   = this._createElem('div', 'modal', 'dish-modal'); 
+            let close   = this._createElem('div', 'modal-close', 'modal-close');
 
             if (template) {
 
@@ -50,8 +79,8 @@
             } else {
                 modal.textContent = 'Ой, что то пошло не так';
             }
-
-            this._append([overlay, modal]);
+            this._append(modal, [close]);
+            this._append(b, [overlay, modal]);
 
             overlay.style.display = 'block';
             modal.style.display   = 'block';
@@ -79,6 +108,8 @@
                     overlay.remove();
                 }, 300);
             }
+
+            return false;
         },
 
         cache    : function (key, value) {
@@ -87,6 +118,8 @@
             }
 
             this.cache[key] = value;
+
+            return false;
         },
 
         getElem  :  function (selector) {
@@ -103,9 +136,29 @@
             }
 
             return this.cache(selector);
+        },
+
+        showElement : function (element) {
+            element.style.display = 'block';
+
+            return setTimeout(function () {
+                element.style.opacity = 1;
+                element.style.transform = 'translateY(0)';
+            }, 200);
+        },
+
+        hideElement : function (element) {
+            element.style.opacity = 0;
+            element.style.transform = 'translateY(4px)';
+
+            return setTimeout(function () {
+                element.style.display = 'none';
+            }, 200);
         }
     };
 
  })(document, window, document.body);
 
  window._ = App;
+
+ window.addEventListener('load', _.lazyLoad.init);

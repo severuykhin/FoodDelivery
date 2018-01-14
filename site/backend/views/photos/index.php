@@ -29,6 +29,16 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <?php if($model->main == 1): ?>
                                     <span class="label label-primary">На главной</span>
                                 <?php endif;?>
+                                <?php if($model->about__block == 1): ?>
+                                    <span class="label label-primary">О нас</span>
+                                <?php endif;?>
+                                <?php if($model->feed == 1): ?>
+                                    <span class="label label-primary">Фото-лента</span>
+                                <?php endif;?>
+                                <?php if($model->banner == 1): ?>
+                                    <span class="label label-primary">Баннер</span>
+                                <?php endif;?>
+
                             </p>
                             <p>
                                 <?= Html::a('Редактировать', 

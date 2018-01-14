@@ -2,66 +2,64 @@
 
 use yii\helpers\Html;
 
+$this->registerMetaTag([
+  'name'    => 'description',
+  'content' => 'Кафе Шумовка - доставка домашней еды, доставка пиццы, доставка роллов в Кирове' 
+]);
+
+$this->registerMetaTag([
+  'name'    => 'keywords',
+  'content' => 'Доставка еды Киров, роллы, пицца, доставка, кафе киров, домашня еда'
+]);
+
 ?>
 
-<?=  $this->render('_actions', [
-  'actionDishes' => $actionDishes
-]); ?>
+<!-- Actions -->
+<?= $this->render('_actions', [
+  'banners' => $banners
+]);?>
+<!-- Actions end -->
 
+<!-- Advantages -->
+<?= $this->render('_adv');?>
+<!-- Advantages end -->
 
-<div class="best">
-      <div class="best__title">
-        <h2>Любимые блюда наших гостей</h2>
-      </div>
-      <div class="container">
-        <div class="best__inner">
-          <?php  for ($i = 0; $i < 6; $i++) {  ?>
-            <div class="best__item">
-              <div class="dish">
-                <div class="dish__image"><img src="/statics/images/dish.jpg"></div>
-                <div class="dish__info">
-                  <div class="dish__title">Пивная тарелка</div>
-                  <div class="dish__weight">300 г</div>
-                  <div class="dish__text">Классическая пивная тарелка с картофелем, сыром и копченостями прекрасно подойдет к пенному напитку</div>
-                </div>
-                <div class="dish__order">
-                  <div data-role="dish-order" class="button button__primary">Хочу</div>
-                  <div class="dish__price">350 руб
-                    <div class="dish__old">450 руб</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          <?php } ?>
-        </div>
+<!-- Блок с фото -->
+<?= $this->render('_photoblock', [
+  'photos' => array_slice($aboutPhotos, 0, 4)
+]);?>
+<!-- Блок с фото END -->
 
-    <div class="buttons__container buttons__container-center"><a class="button button__primary button__primary-big" href="#">Смотреть меню</a></div>
-  </div>
-</div>
+<!-- Блок Любимые блюда -->
+<?= $this->render('_best', [
+  'bestDishes' => $bestDishes
+]);?>
+<!-- Блок Любимые блюда END -->
+
+<!-- Блок о нас -->
+<?= $this->render('_about'); ?>
+<!-- Блок о нас END -->
+
+<!-- Блок с фото -->
+<?= $this->render('_photoblock', [
+  'photos' => array_slice($aboutPhotos, 5, 9)
+]);?>
+<!-- Блок с фото END -->
+
 
 <div class="content__block">
     <div class="container">
-        <div class="reviews">
+        <div class="reviews reviews-index">
             <div class="reviews__title">
-                <h2>Отзывы наших гостей</h2>
+                <h2><span>Отзывы наших гостей</span>  
+                  <?= Html::a('Смотреть все отзывы', ['site/reviews'], ['class' => 'button-secondary']); ?> 
+                </h2>
             </div>
-
-            <?= $this->render('_reviews', [
-                'reviews' => $reviews
-            ]);?>
-
-            <div class="reviews__button">
-              <?= Html::a('Смотреть все отзывы', ['/reviews'], [
-                'title' => 'Смотреть отзывы о работе Кафе «Шумовка»',
-                'class' => 'reviews__watch'
+            <div class="reviews__inner">
+              <?= $this->render('_reviews', [
+                  'reviews' => $reviews
               ]);?>
             </div>
-
         </div>
     </div>
-</div>
-<div class="content__block">
-  <?= $this->render('_about', [
-    'aboutPhotos' => $aboutPhotos
-  ]); ?>
 </div>

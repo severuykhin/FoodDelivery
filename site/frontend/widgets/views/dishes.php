@@ -21,7 +21,7 @@ use aquy\thumbnail\Thumbnail;
                         ]
                     ); ?>
                     <?php else:?>
-                    <img src="/statics/images/dish-placeholder.jpg"></div>
+                    <img src="/statics/images/dishplaceholder.jpg"></div>
                     <?php endif;?>
                 </div>
                     <div class="dish__info">

@@ -12,7 +12,14 @@ class MenuController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        $categories = Category::find()
+            ->with(['dishes'])
+            ->orderBy(['sort' => SORT_DESC])
+            ->all();
+
+        return $this->render('index', [
+            'categories' => $categories
+        ]);
     }
 
     public function actionCategory($slug)

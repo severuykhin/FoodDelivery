@@ -1,0 +1,140 @@
+.feed {
+	max-width: 1140px;
+	padding: 0 15px;
+	margin: auto;
+	&__title {
+		margin-bottom: 60px;
+		h2 {
+			font-size: 40px;
+		}
+	}
+	&__content {
+		padding: 20px 0;
+	}
+	&__row {	
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		align-content: flex-start;
+		position: relative;
+		&:not(:last-child) {
+			margin-bottom: 30px;
+		}
+		&:nth-child(odd) {
+			.feed__item:first-child {
+				transform: rotate(-5deg) translate(0px, 0);
+			}
+			.feed__item:last-child {
+				transform: rotate(5deg) translate(0px, 0);
+			}
+		}
+		&:nth-child(even) {
+			.feed__item:first-child {
+				transform: rotate(4deg) translate(50px, 0);
+			}
+			.feed__item:last-child {
+				transform: rotate(-2deg) translate(0px, 0);
+			}
+		}
+		&:nth-child(3n+2) {
+			.feed__item:first-child {
+				transform: rotate(-3deg);
+			}
+			.feed__item:last-child {
+				transform: rotate(-7deg);
+			}
+			&::after {
+				z-index: 1;
+				position: absolute;
+				content: '';
+				width: 300px;
+				height: 300px;
+				left: 0;
+				top: 0;
+				background: url('napkin.jpg');
+				transform: rotate(-10deg);
+				box-shadow: 0 2px 10px 0 rgba(105, 105, 105, 0.541);
+			}
+		}
+		&:nth-child(3n+4) {
+			.feed__item:first-child {
+				transform: rotate(3deg);
+			}
+			.feed__item:last-child {
+				transform: rotate(-10deg);
+			}
+		}
+	}
+	&__item {
+		width: 500px;
+		border-radius: 4px;
+		background-color: $white;
+		box-shadow: 0 2px 10px 0 rgba(105, 105, 105, 0.541);	
+		z-index: 2;
+	}
+	&__img {
+		padding: 20px;
+		img {
+			width: 100%;
+			border-radius: 4px;
+		}
+	}
+	&__desc {
+		position: relative;
+		padding: 0 20px 40px 80px;
+		background: url('photo.svg') no-repeat;
+		background-size: 30px;
+		background-position: 28px 0px;
+	}
+	&__data {
+		position: absolute;
+		bottom: 15px;
+		right: 34px;
+		color: #777;
+		font-size: 13px;
+	}
+}
+
+@media (max-width: 1100px) {
+	.feed {
+		overflow: hidden;
+	}
+}
+
+@media (max-width: 768px) {
+	.feed {
+		&__title {
+			margin-top: 40px;
+		}
+		&__desc {
+			font-size: 13px;
+		}
+		&__img {
+			padding: 15px;
+		}
+	}
+}
+
+@media (max-width: 640px) {
+	.feed {
+		&__row {
+			flex-wrap: wrap;
+		}
+		&__img {
+			padding: 10px;
+		}
+		&__item {
+			width: 90%;
+		}
+		&__desc {
+			font-size: 12px;
+			background-size: 23px;
+			background-position: 15px 0;
+			padding: 0 15px 30px 50px;
+		}
+		&__data {
+			font-size: 11px;
+			bottom: 10px;
+		}
+	}
+}

@@ -11,7 +11,8 @@ module.exports = {
             "pug/index.pug",
             "pug/contacts.pug",
             "pug/category.pug",
-            "pug/menu.pug"
+            "pug/menu.pug",
+            "pug/about.pug"
         ],
         levels: ["xs", "sm", "md", "lg", "xl"],
         html: ["pug/*.pug", "blocks/**/*.pug"],
@@ -22,6 +23,7 @@ module.exports = {
             "logo",
             "menu",
             "contacts",
+            "contact",
             "map",
             "grid",
             "actions",
@@ -38,7 +40,13 @@ module.exports = {
             "zoompic",
             "store",
             "filter",
-            "app"
+            "app",
+            "headline",
+            "vkgroup",
+            "banners",
+            "feed",
+            "photo",
+            "photoblock",
         ],
         js: ['../node_modules/slick-carousel/slick/slick.min.js'],
         json: "blocks/**/*.json",
