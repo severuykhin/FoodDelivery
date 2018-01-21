@@ -29,7 +29,7 @@
   &__info {
     position: relative;
     padding: 14px 0;
-    height: 160px;
+    // height: 160px;
     overflow: hidden;
     &::after {
       position: absolute;
@@ -44,6 +44,7 @@
   &__title {
     font-weight: 700;
     margin-bottom: -8px;
+    line-height: 20px;
   }
   &__weight {
     color: #888;
@@ -133,7 +134,7 @@
 @media screen and (max-width: 1220px) {
     .dish {
       &__image {
-        height: 193px;
+        // height: 193px;
         overflow: hidden;
       }
     }
@@ -142,7 +143,7 @@
 @media screen and (max-width: 990px) {
   .dish {
     &__image {
-      height: 140px;
+      // height: 140px;
     }
     &__info {
       padding: 10px;
