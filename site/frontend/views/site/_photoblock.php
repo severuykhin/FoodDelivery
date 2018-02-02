@@ -10,8 +10,8 @@
                 <?php if(file_exists($src)): ?>
                     <?php $file = Thumbnail::thumbnailFileUrl(
                         $src,
-                        700,
-                        400,
+                        455,
+                        260,
                         Thumbnail::THUMBNAIL_OUTBOUND,
                         false
                     ); ?>

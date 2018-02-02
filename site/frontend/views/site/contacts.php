@@ -20,7 +20,7 @@
               <div>Воскресенье - Понедельник <span>10.00 - 22.00</span></div>
               <div>Пятница - Суббота <span>10.00 - 23.00</span></div>
             </div>
-            <div class="social"><span class="social__caption">Мы с социальных сетях:</span><a class="social__button social__button-vk" href="https://vk.com/shymovka_cafe"></a><a class="social__button social__button-inst" href="https://www.instagram.com/shymovka_cafe/?hl=ru"></a></div>
+            <div class="social"><span class="social__caption">Мы с социальных сетях:</span><a class="social__button social__button-vk" target="_blank" rel="noopener nofollow" href="https://vk.com/shymovka_cafe"></a><a class="social__button social__button-inst" target="_blank" rel="noopener nofollow" href="https://www.instagram.com/shymovka_cafe/?hl=ru"></a></div>
           </div>
         </div>
       </div>

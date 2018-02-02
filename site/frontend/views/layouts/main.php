@@ -124,8 +124,8 @@ $categories = Category::find()->orderBy(['sort' => SORT_DESC])->asArray()->all()
           </div>
           <div class="social">
             <span class="social__caption">Мы с социальных сетях:</span>
-            <a class="social__button social__button-vk" href=""></a>
-            <a class="social__button social__button-inst" href=""></a>
+            <a class="social__button social__button-vk" target="_blank" rel="noopener nofollow" href="https://vk.com/shymovka_cafe"></a>
+            <a class="social__button social__button-inst" target="_blank" rel="noopener nofollow" href="https://www.instagram.com/shymovka_cafe/?hl=ru"></a>
           </div>
         </div>
       </div>

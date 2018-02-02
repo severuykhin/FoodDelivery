@@ -35,7 +35,7 @@ use aquy\thumbnail\Thumbnail;
             <div class="about__subtitle"> 
               <h2>«Шумовка» - это свежая еда <br> и прекрасный сервис</h2>
             </div>
-            <div class="about__text">Integer a dolor eu eros sodales posuere. Nam tempus lacus pulvinar purus faucibus ultricies sed ac dolor. Aenean vitae sapien eget risus posuere cursus. Donec accumsan erat erat, vel fermentum lectus iaculis ut.</div>
+            <div class="about__text">Дорогие гости, приглашаем в мир гастрономических удовольствий, где царит качество и отличный вкус! Мы стараемся не только порадовать вас вкусной кухней, но и создать атмосферу, чтобы вы хотели возвращаться вновь и вновь!</div>
             <div class="about__buttons">
                 <?= Html::a('Наша фотолента', ['/about'], ['class' => 'button-secondary button-secondary-about']);?>
             </div>
