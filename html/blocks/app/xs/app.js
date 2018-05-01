@@ -11,6 +11,14 @@
 
     return {
 
+        sendMetrika : function(goal) {
+            if (typeof yaCounter47772808 !== 'undefined') {
+                yaCounter47772808.reachGoal(goal);
+            }
+
+            return true;
+        },
+
         lazyLoad : {
             showVisible  :  function () {
                 var allImages = App.getAll(roleLazyLoad),

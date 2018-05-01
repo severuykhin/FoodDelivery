@@ -15,6 +15,7 @@ $this->registerMetaTag([
 ?>
 <div class="content__block-s">
         <div class="container-fluide">
+					<h1 class="menu__title">Шумовка - доставка вкусной, домашней еды в Кирове</h1>
           <div class="store__info">
             <div class="store__info-item">Чтобы сделать заказ позвоните по телефону:<br><a href="tel:+78332416646"> <b>41-66-46</b></a></div>
             <div class="store__info-item">Бесплатная доставка при сумме заказа от <b>450 Р</b></div>

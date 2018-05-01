@@ -33,7 +33,9 @@ use yii\helpers\Html;
 			<div class="dish__title"><?= $item->title ?></div>
 			<?= Html::a($categoryTitle, ['/menu#' . $categorySlug], ['class' => 'dish__category']) ?>
 			<div class="dish__weight"><?= $item->weight ?></div>
-			<div class="dish__text"><?= $item->description?></div>
+			<?php if(!empty($item->description)):  ?>
+				<div class="dish__text"><?= $item->description?></div>				
+			<?php endif; ?>
 		</div>
 		<div class="dish__order">
 			<div class="button button__primary" data-role="dish-order">Заказать</div>

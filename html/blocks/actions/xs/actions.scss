@@ -1,9 +1,10 @@
 .actions {
   &__inner {
-
+    position: relative;
   }
 
   &__item {
+    position: absolute;
     img {
       width: 100%;
     }

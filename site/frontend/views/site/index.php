@@ -2,15 +2,15 @@
 
 use yii\helpers\Html;
 
-$this->registerMetaTag([
-  'name'    => 'description',
-  'content' => 'Кафе Шумовка - доставка домашней еды, доставка пиццы, доставка роллов в Кирове' 
-]);
+// $this->registerMetaTag([
+//   'name'    => 'description',
+//   'content' => 'Кафе Шумовка - доставка домашней еды, доставка пиццы, доставка роллов в Кирове' 
+// ]);
 
-$this->registerMetaTag([
-  'name'    => 'keywords',
-  'content' => 'Доставка еды Киров, роллы, пицца, доставка, кафе киров, домашня еда'
-]);
+// $this->registerMetaTag([
+//   'name'    => 'keywords',
+//   'content' => 'Доставка еды Киров, роллы, пицца, доставка, кафе киров, домашня еда'
+// ]);
 
 ?>
 

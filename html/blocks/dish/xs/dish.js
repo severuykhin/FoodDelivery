@@ -31,6 +31,7 @@ var Dish = (function (d, w) {
 
                 if (target === roleOrder) {
                     obj.showDishModal();
+                    _.sendMetrika('dish_order');
                 } else if (target === roleOverlay || target === roleClose) {
                     obj.closeDishModal();
                 }

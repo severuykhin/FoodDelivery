@@ -36,7 +36,7 @@ class Dish extends ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'description', 'weight', 'price_actual', 'category_id'], 'required'],
+            [['title', 'weight', 'price_actual', 'category_id'], 'required'],
             [['title', 'description', 'weight', 'price_actual', 'price_old'], 'string'],
             [['active', 'action', 'best'], 'boolean']
         ];

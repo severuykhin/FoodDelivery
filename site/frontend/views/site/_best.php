@@ -9,7 +9,7 @@ use yii\helpers\Html;
     <div class="container-fluide">
         <div class="best__title">
             <h2><span>Любимые блюда наших гостей</span>
-                <?= Html::a('Всё меню', ['/menu'], ['class' => 'button-secondary']); ?>
+                <?= Html::a('Всё меню', ['/menu#all'], ['class' => 'button-secondary']); ?>
             </h2>
         </div>
         <div class="best__inner">
@@ -43,7 +43,9 @@ use yii\helpers\Html;
                         <div class="dish__title"><?= $item->title ?></div>
                         <?= Html::a($item->category->title, ['/menu#' . $item->category->slug], ['class' => 'dish__category']) ?>
                         <div class="dish__weight"><?= $item->weight ?></div>
-                        <div class="dish__text"><?= $item->description ?></div>
+                        <?php if(!empty($item->description)):  ?>
+                            <div class="dish__text"><?= $item->description?></div>				
+                        <?php endif; ?>
                     </div>
                     <div class="dish__order">
                         <div class="button button__primary" data-role="dish-order">Заказать</div>

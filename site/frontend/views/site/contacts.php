@@ -1,4 +1,4 @@
-<div class="content__block">
+<div class="content__block content__block_contacts">
   <div class="container">
     <div class="row contacts-map">
       <div class="col-lg-6 orderFirst">

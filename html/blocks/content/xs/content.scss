@@ -3,6 +3,9 @@
   &__block {
     padding: 40px 0;
     position: relative;
+    &_contacts {
+      min-height: 100vh;
+    }
     &-padding {
       &-top {
         padding-bottom: 0;
