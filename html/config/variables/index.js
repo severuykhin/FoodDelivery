@@ -48,12 +48,20 @@ module.exports = {
             "photo",
             "photoblock",
         ],
-        js: ['../node_modules/slick-carousel/slick/slick.min.js'],
+        js: [
+            '../site/vendor/yiisoft/yii2/assets/yii.js',
+            '../site/vendor/yiisoft/yii2/assets/yii.validation.js',
+            '../site/vendor/yiisoft/yii2/assets/yii.activeForm.js',
+            'node_modules/slick-carousel/slick/slick.min.js',
+            'node_modules/simplebar/dist/simplebar.min.js',
+            'node_modules/inputmask/dist/inputmask/inputmask.js'
+        ],
         json: "blocks/**/*.json",
         css: [],
         sass: [
             "setting.block/bootstrap.scss",
-            "setting.block/custom.scss"
+            "setting.block/custom.scss",
+            "node_modules/simplebar/dist/simplebar.min.css"
         ],
         images: [],
         fonts : 'fonts/**/*',
@@ -85,6 +93,9 @@ module.exports = {
         htmlmin      : require("gulp-htmlmin"),
         csso         : require("postcss-csso"),
         bs           : bs,
-        reload       : reload
+        reload       : reload,
+        webpack       : require("webpack"),
+        webpackConfig : require("../../webpack.config"),
+        webpackGulp   : require("webpack-stream")
     }
 };

@@ -16,6 +16,11 @@ AppAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/statics/favicon.ico">
+    <link rel="apple-touch-icon" sizes="60x60" href="/statics/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/statics/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/statics/favicon-16x16.png">
+    <link rel="icon" type="image/png" href="/statics/favicon.png" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.min.css">
 
@@ -39,6 +44,16 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
+            [
+                'label' => 'Заказы',
+                'url' => ['/order/index'],
+                'visible' => Yii::$app->user->can('admin')
+            ],
+            [
+                'label' => 'Активные корзины',
+                'url' => ['/cart/index'],
+                'visible' => Yii::$app->user->can('admin')
+            ],
             [
                 'label' => 'Категории меню',
                 'url' => ['/category/index'],

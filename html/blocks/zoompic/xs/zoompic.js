@@ -1,4 +1,5 @@
-$(function () {
+export default function initFancy()
+{
     $("[data-fancybox]").fancybox({
         thumbs          : false,
         hash            : false,
@@ -8,5 +9,5 @@ $(function () {
         animationEffect : "fade",
         arrows          : true,
         clickContent    : false
-      });
-});
+    });
+}

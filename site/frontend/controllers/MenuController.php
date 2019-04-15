@@ -24,21 +24,15 @@ class MenuController extends Controller
 
     public function actionCategory($slug)
     {
-        $category = Category::findBySlug($slug);
+        if ($slug === 'all') {
+            $categories = Category::find()->with(['dishes'])->all();
+        } else {
+            $categories = Category::find()->where(['slug' => $slug])->with(['dishes'])->all();
+        } 
+            
 
-        if (!$category) {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
-
-        $dishes = Dish::find()
-            ->where(['category_id' => $category->id])
-            ->andWhere(['active' => Dish::STATUS_ACTIVE])
-            ->all();
-
-        return $this->render('category', [
-            'category' => $category,
-            'dishes'   => $dishes
+        return $this->render('index', [
+            'categories' => $categories
         ]);
     }
-
 }

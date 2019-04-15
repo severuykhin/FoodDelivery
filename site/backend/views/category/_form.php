@@ -15,9 +15,9 @@ use yii\helpers\Url;
     'placeholder' => 'Например - Пицца'
 ]);?>
 
-<?= $form->field($model, 'slug')->textinput([
-    'placeholder' => 'Название транслитом для сылок'
-])->label('Slug для ссылок - заполнится атоматически при сохранении');?>
+<?= $form->field($model, 'seo_title')->textInput([
+    'placeholder' => 'Доставка еды в кирове'
+]);?>
 
 <?= $form->field($model, 'description')->widget(Widget::className(), [
     'settings' => [

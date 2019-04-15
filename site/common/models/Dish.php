@@ -9,6 +9,7 @@ use yii\behaviors\SluggableBehavior;
 use yii\db\ActiveRecord;
 use yii\helpers\VarDumper;
 use common\models\Category;
+use common\models\DishModification;
 
 class Dish extends ActiveRecord
 {
@@ -70,6 +71,11 @@ class Dish extends ActiveRecord
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 
+    public function getModifications()
+    {
+        return $this->hasMany(DishModification::class, ['dish_id' => 'id']);
+    }
+
     public function saveImage($fileName)
     {
         $this->pic = $fileName;
@@ -81,7 +87,7 @@ class Dish extends ActiveRecord
     {
         return self::find()
                 ->where(['best' => self::STATUS_ACTIVE])
-                ->with(['category'])
+                ->with(['category', 'modifications'])
                 ->all();
     }
 }

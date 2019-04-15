@@ -2,10 +2,12 @@
 
 use yii\helpers\Html;
 
-// $this->registerMetaTag([
-//   'name'    => 'description',
-//   'content' => 'Кафе Шумовка - доставка домашней еды, доставка пиццы, доставка роллов в Кирове' 
-// ]);
+$this->title = 'Доставка еды в Кирове | Шумовка';
+
+$this->registerMetaTag([
+  'name'    => 'description',
+  'content' => 'Кафе Шумовка - доставка домашней еды, доставка пиццы, доставка роллов в Кирове' 
+]);
 
 // $this->registerMetaTag([
 //   'name'    => 'keywords',
@@ -15,26 +17,26 @@ use yii\helpers\Html;
 ?>
 
 <!-- Actions -->
-<?= $this->render('_actions', [
+<!-- <?= $this->render('_actions', [
   'banners' => $banners
-]);?>
+]);?> -->
 <!-- Actions end -->
 
 <!-- Advantages -->
 <?= $this->render('_adv');?>
 <!-- Advantages end -->
 
-<!-- Блок с фото -->
-<?= $this->render('_photoblock', [
-  'photos' => array_slice($aboutPhotos, 0, 4)
-]);?>
-<!-- Блок с фото END -->
-
 <!-- Блок Любимые блюда -->
 <?= $this->render('_best', [
   'bestDishes' => $bestDishes
 ]);?>
 <!-- Блок Любимые блюда END -->
+
+<!-- Блок с фото -->
+<?= $this->render('_photoblock', [
+  'photos' => array_slice($aboutPhotos, 0, 4)
+]);?>
+<!-- Блок с фото END -->
 
 <!-- Блок о нас -->
 <?= $this->render('_about'); ?>

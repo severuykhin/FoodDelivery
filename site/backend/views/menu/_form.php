@@ -5,6 +5,7 @@ use vova07\imperavi\Widget;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use kartik\select2\Select2;
+use \yii\jui\AutoComplete;
 
 ?>
 

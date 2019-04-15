@@ -105,4 +105,19 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionSpasibo()
+    {
+        $orderNumber = Yii::$app->session->getFlash('orderSuccess');
+
+        if (!$orderNumber) 
+        {
+            $this->redirect(['site/index']);
+            Yii::$app->end();
+        }
+
+        return $this->render('spasibo', [
+            'orderNumber' => $orderNumber
+        ]);
+    }
+
 }

@@ -1,6 +1,15 @@
 .header {
 	position: relative;
 	z-index: 3;
+
+	.menu_fixed {
+		position: fixed;
+		width: 100%;
+		top: 0;
+		left: 0;
+		background: #fff;
+	}
+
 	&__container {
 		padding: 15px 0;
 		display: flex;
@@ -91,9 +100,42 @@
 
 @media (max-width: 780px) {
 	.header {
-		&__container {
-			padding: 6px 0;
+		.container-fluide {
+			padding: 0;
 		}
+		&__container {
+			padding: 6px 15px;
+		}
+
+		.button__menu {
+			width: 30px;
+			height: 40px;
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: center;
+			align-content: center;
+			div {
+				height: 3px;
+				width: 24px;
+				// margin-bottom: 5px;
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+
+			&-active {
+				div {
+					&:first-child {
+						transform: rotate(-45deg) translate(-3px,5px);
+					}
+					&:last-child {
+						transform: rotate(45deg) translate(-3px,-6px);
+					}
+				}
+			}
+		}
+
 		&__menu {
 			display: block;
 		}

@@ -1,10 +1,15 @@
 <?php
 
 use yii\helpers\VarDumper;
-$this->title = 'Меню - Кафе шумовка Киров';
+use frontend\widgets\Links;
+
+$isRoot = Yii::$app->request->get('slug') === 'all'; 
+$title = $isRoot ? 'Доставка еды в Кирове' : $categories[0]->seo_title;
+
+$this->title = $title . ' | Кафе Шумовка';
 $this->registerMetaTag([
 	'name'    => 'description',
-	'content' => 'Кафе Шумовка - доставка домашней еды, доставка пиццы, доставка роллов в Кирове' 
+	'content' => 'Кафе Шумовка - ' . $title 
 ]);
 
 $this->registerMetaTag([
@@ -17,47 +22,25 @@ $this->registerMetaTag([
         <div class="container-fluide">
 					<h1 class="menu__title">Шумовка - доставка вкусной, домашней еды в Кирове</h1>
           <div class="store__info">
-            <div class="store__info-item">Чтобы сделать заказ позвоните по телефону:<br><a href="tel:+78332416646"> <b>41-66-46</b></a></div>
-            <div class="store__info-item">Бесплатная доставка при сумме заказа от <b>450 Р</b></div>
+            <div class="store__info-item"><b>Минимальная сумма заказа - 450 руб.</b></div>
             <div class="store__info-item">Режим работы - ежедневно <b>10:00 - 22:00 в пределах города</b></div>
-            <div class="store__info-item">Время доставки уточнит менеджер при заказе</div>
+            <div class="store__info-item">Время доставки уточнит менеджер <br> при заказе</div>
           </div>
         </div>
       </div>
 <div class="content__block">
         <div class="container-fluide">
           <div class="store" data-role="store">
-            <div class="filter">
-              <div class="filter__inner">
-              	<a class="filter__item" href="#all" data-role="filter-button"> 
-              		<span>Все</span>
-              	</a>
-
-              	<?php foreach($categories as $category): ?>
-	              	<a class="filter__item" href="#<?= $category->slug ?>" data-role="filter-button"> 
-	              		<span>
-	              			<?php
-	              				if ($category->id == 5) {
-	              					echo 'Пельмешки';
-	              				} else if ($category->id == 9) {
-	              					echo 'Лапша';
-	              				} else {
-	              					echo $category->title;
-	              				}
-	              			?>
-	              		</span>
-	              	</a>
-              	<?php endforeach;?>
-
-              	</div>
-            </div>
+						<?= Links::widget() ?>
             <div class="store__inner">
-
+								<div class="store__category">
+									<h1 class="title_category"><?= $title ?></h1>
+								</div>
             	<?php foreach($categories as $category):?>
-	            <div class="store__block" data-role="store-category" data-route="<?= $category->slug?>">
-	                <div class="store__category">
-	                  <h3><?= $category->title ?></h3>
-	                </div>
+							<div class="store__block" data-role="store-category" data-route="<?= $category->slug?>">
+									<?php if($isRoot): ?>
+										<h3 style="padding-top: 30px;"><?= $category->title ?></h3>	
+									<?php endif; ?>
 	                <div class="store__items">
 	                	<?php foreach($category->dishes as $item):?>
 

@@ -122,7 +122,7 @@
 		&__item {
 			&-link {
 				padding: 15px 15px;
-				font-size: 13px;
+				font-size: 16px;
 			}
 			&-dropdown {
 				&::after {
@@ -148,18 +148,40 @@
 		position: fixed;
 		display: none;
 		width: 100%;
-		height: 100vh;
+		height: calc(100% - 63px);
+		overflow-y: scroll;
 		top: 63px;
 		left: 0;
 		background-color: #fff;
 		z-index: 2;
+		padding-bottom: 50px;
 		&__item {
 			&-dropdown::after {
 					display: none;
 			}
 		}
 		&__submenu {
-		display: none;
+		// display: none;
+		position: static;
+		opacity: 1;
+		transform: translateY(0);
+		visibility: visible;
+		width: 100%;
+		padding-left: 30px;
+		background: transparent;
+		&::after {
+			display: none;
+		}
+		}
+
+		&__subitem {
+			color: #000;
+			font-size: 15px;
+			&:hover {
+				background: transparent;
+				opacity: .7;
+				color: #000;
+			}
 		}
 	}
 }

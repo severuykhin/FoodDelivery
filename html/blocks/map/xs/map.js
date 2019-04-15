@@ -1,6 +1,7 @@
-$(function () {
+export default function initMap() {
 
     if (typeof ymaps === 'object' && document.getElementById('ymap') !== null) {
+        console.log('sdf');
         var map,
             placemark;
         ymaps.ready(function () {
@@ -21,4 +22,4 @@ $(function () {
             map.geoObjects.add(placemark);
         });
     }
-});
+}

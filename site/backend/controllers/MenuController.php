@@ -5,8 +5,10 @@ use Yii;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 use common\models\Dish;
+use common\models\DishModification;
 use common\models\Category;
 use common\models\Image;
+use common\models\CartItem;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
 use yii\helpers\VarDumper;
@@ -17,7 +19,7 @@ class MenuController extends Controller
     {
         $categories = Category::getTitlesArray();
         $dataProvider = new ActiveDataProvider([
-            'query' => Dish::find()->with(['category'])->orderBy(['created_at' => SORT_DESC]),
+            'query' => Dish::find()->with(['category', 'modifications'])->orderBy(['created_at' => SORT_DESC]),
             'pagination' => [
 	            'pageSize' => 100,
             ],
@@ -63,19 +65,64 @@ class MenuController extends Controller
      * */ 
     public function actionUpdate($id)
     {
-        $model      = Dish::findOne($id);
+        $model      = Dish::find()->where(['id' => $id])->with(['category', 'modifications'])->one();
         $categories = Category::getTitlesArray();
+        $dishModification = new DishModification();
+
+        // VarDumper::dump(Yii::$app->request->post(), 10, true); die;
+
+        if (Yii::$app->request->post('DishModification')['id']) {
+            $mod = DishModification::find()->where(['id' => Yii::$app->request->post('DishModification')['id']])->one();
+            $mod->value = Yii::$app->request->post('DishModification')['value'];
+            $mod->price = Yii::$app->request->post('DishModification')['price'];
+            $mod->weight = Yii::$app->request->post('DishModification')['weight'];
+            $mod->save();
+            return $this->redirect([
+                'update',
+                'id' => $model->id,
+            ]);
+        }
+
+        if (Yii::$app->request->post('delete-param')) {
+            DishModification::deleteAll(['id' => Yii::$app->request->post('delete-param')]);
+            CartItem::deleteAll(['modification_id' => Yii::$app->request->post('delete-param')]);
+            return $this->redirect([
+                'update',
+                'id' => $model->id,
+            ]);
+        }
+
+
+        if ($dishModification->load(Yii::$app->request->post())) 
+        {
+            if ($dishModification->save()) 
+            {
+                return $this->redirect([
+                    'update',
+                    'id' => $model->id,
+                ]);
+            } else {
+                var_dump($dishModification->errors);
+            }
+        }
+
 
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post()) & $model->validate()) {
-                if ($model->save()) {
+                if($model->save()) {
                     $this->redirect(['menu/view?id=' . $model->id]);
                 }
             }
         }
 
+        $dataProvider = new ActiveDataProvider([
+            'query' => DishModification::find()->where(['dish_id' => $id])
+        ]);
+
         return $this->render('update', [
             'model'      => $model,
+            'dishModification' => $dishModification,
+            'dishModifications' => $dataProvider,
             'categories' => $categories
         ]);
     }
