@@ -22,7 +22,7 @@ class MenuController extends Controller
         ]);
     }
 
-    public function actionCategory($slug)
+    public function actionCategory($slug = 'all')
     {
         if ($slug === 'all') {
             $categories = Category::find()->with(['dishes'])->all();
@@ -32,7 +32,8 @@ class MenuController extends Controller
             
 
         return $this->render('index', [
-            'categories' => $categories
+            'categories' => $categories,
+            'slug' => $slug
         ]);
     }
 }

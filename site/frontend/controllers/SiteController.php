@@ -120,4 +120,20 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionSitemap()
+    {
+
+        Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+        $headers = Yii::$app->response->headers;
+        $headers->add('Content-Type', 'text/xml');
+
+        $this->layout = false;
+
+        $categories = Category::find()->all();
+
+        return $this->render('sitemap', [
+            'categories' => $categories
+        ]);
+    }
+
 }

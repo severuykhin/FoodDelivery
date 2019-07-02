@@ -45,6 +45,9 @@ return [
                 'photos/<action>'    => 'photos/<action>',
                 '/category/<action>' => 'category/<action>',
                 'menu/<action>'      => 'menu/<action>',
+                'crm/products'       => 'crm/index',
+                'crm/customers'      => 'crm/index',
+                'crm/orders'         => 'crm/index',
                 'reviews/<action>'   => 'reviews/<action>',
                 'pages/<action>'     => 'pages/<action>'
             ]

@@ -1,3 +1,13 @@
+<?php
+
+$this->title = "Отзывы | Шумовка";
+$this->registerMetaTag([
+    'name' => 'description',
+    'content' => 'Отзывы о работе кафе Шумовка'
+]);
+
+?>
+
 <div class="content__block">
     <div class="container">
         <div class="reviews">

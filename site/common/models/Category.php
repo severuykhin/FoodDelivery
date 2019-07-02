@@ -42,8 +42,8 @@ class Category extends ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'seo_title'], 'required'],
-            [['title', 'description', 'seo_title'], 'string']
+            [['title', 'seo_title', 'seo_page_title', 'seo_desc'], 'required'],
+            [['title', 'description', 'seo_page_title', 'seo_title', 'seo_desc'], 'string']
         ];
     }
 
@@ -51,7 +51,9 @@ class Category extends ActiveRecord
     {
         return [
             'title'       => 'Название',
-            'seo_title'   => 'Заголовок H1',
+            'seo_title'   => 'h1',
+            'seo_page_title'   => 'title',
+            'seo_desc'   => 'description',
             'description' => 'Описание',
             'created_at'  => 'Дата создания',
             'updated_at'  => 'Дата последнего обновления',

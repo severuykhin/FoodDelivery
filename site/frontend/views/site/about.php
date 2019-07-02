@@ -1,4 +1,15 @@
-<?php use aquy\thumbnail\Thumbnail; ?>
+<?php 
+
+use aquy\thumbnail\Thumbnail; 
+
+$this->title = 'О нас | Шумовка';
+
+$this->registerMetaTag([
+    'name' => 'description',
+    'content' => 'Шумовка - это доставка вкусной еды в Кирове на любой вкус и кафе для всей семьи'
+]);
+
+?>
 
 <div class="content__block">
         <div class="container">

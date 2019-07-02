@@ -50,6 +50,11 @@ AppAsset::register($this);
                 'visible' => Yii::$app->user->can('admin')
             ],
             [
+                'label' => 'Сводка',
+                'url' => ['/crm/index'],
+                'visible' => Yii::$app->user->can('admin')
+            ],
+            [
                 'label' => 'Активные корзины',
                 'url' => ['/cart/index'],
                 'visible' => Yii::$app->user->can('admin')
@@ -69,11 +74,6 @@ AppAsset::register($this);
                 'url' => ['/photos/index'],
                 'visible' => Yii::$app->user->can('admin')
             ],
-            // [
-            //     'label' => 'Акции',
-            //     'url' => ['/actions/index'],
-            //     'visible' => Yii::$app->user->can('admin')
-            // ],
             [
                 'label' => 'Отзывы',
                 'url' => ['/reviews/index'],

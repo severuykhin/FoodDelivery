@@ -1,3 +1,14 @@
+<?php
+
+$this->title = 'Контакты | Шумовка';
+
+$this->registerMetaTag([
+  'name' => 'description',
+  'content' => 'Шумовка - официальный сайт, адрес, номер телефона, режим работы в г. Киров' 
+]);
+
+?>
+
 <div class="content__block content__block_contacts">
   <div class="container">
     <div class="row contacts-map">

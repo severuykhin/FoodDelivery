@@ -182,23 +182,51 @@ $script = <<< JS
         });
     });
 
-    var player = document.getElementById('play');
 
     function checkNewOrders() {
         var orders = $('.label.label-danger');
         if (orders.length > 0) {
+        var player = document.getElementById('play');
             player.play();
+            notifyMe();
+        }
+    }
+
+    function notifyMe() {
+
+        var options = {
+            sound: '/statics/bell.mp3',
+            silent: false,
+            tag: 'renotify',
+            renotify: true
+        };
+
+        if (!("Notification" in window)) {
+            alert("This browser does not support desktop notification");
+        }
+
+        else if (Notification.permission === "granted") {
+            var notification = new Notification("Новый заказ!", options);
+        }
+
+        else if (Notification.permission !== 'denied') {
+            Notification.requestPermission(function (permission) {
+            if (permission === "granted") {
+                var notification = new Notification("Новый заказ!", options);
+            }
+            });
         }
     }
     
     setInterval(function(){ 
         $("#refreshButton").click();
         setTimeout( checkNewOrders, 2000);
-    }, 60 * 1000); // Раз в 1 минуту
+    }, 30 * 1000); // Раз в 1 минуту
 
-    setInterval(checkNewOrders, 60 * 1000);
+    setInterval(checkNewOrders, 30 * 1000);
 
     checkNewOrders();
+
 JS;
 $this->registerJs($script, yii\web\View::POS_READY);
 

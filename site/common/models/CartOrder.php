@@ -221,4 +221,118 @@ class CartOrder extends \yii\db\ActiveRecord
     {
         return $this->hasMany(CartOrderItem::class, ['order_id' => 'id']);
     }
+
+    public function countTotal()
+    {
+        $data = $this->compile();
+        $res = 0;
+
+        foreach($data as $index => $item)
+        {
+            $res += (int)$item['price'] * (int)$item['quantity'];
+        }
+
+        return $res;
+    }
+
+    public static function getOrdersSummary()
+    {
+        $orders = self::find();
+
+        $total = 0;
+        $biggestTotal = 0;
+        $biggestOrder = [
+            'details' => null,
+            'data' => null
+        ];
+
+        foreach($orders->each() as $index => $order)
+        {
+
+            if ($order['name'] == 'test') continue;
+
+            $orderData = $order->compile();
+            $orderTotal = 0;
+
+            foreach($orderData as $i => $item)
+            {
+                $orderTotal += (int)$item['price'] * (int)$item['quantity'];
+            }
+
+            $total += $orderTotal;
+            if ($biggestTotal < $orderTotal)
+            {
+                $biggestTotal = $orderTotal;
+                $biggestOrder = [
+                    'details' => $order,
+                    'data' => $orderData
+                ];
+            }
+        }
+
+        $count = (int)$orders->count();
+
+        return [
+            'ordersCount' => $count,
+            'avg' => floor($total / $count),
+            'perDay' => self::countAverageAmountPerDay($count),
+            'totalSumm' => $total,
+            'biggest' => [
+                'summ' => $biggestTotal,
+                'order' => $biggestOrder
+            ]
+        ];
+    }
+
+    public static function countAverageAmountPerDay($count = null)
+    {
+        if (!$count) 
+        {
+            $count = self::find()->count();
+        }
+
+        $firstOrder = self::findBySql("SELECT MIN(created_at) from cart_order WHERE name <> 'test'")->scalar();
+        $lastOrder = self::findBySql("SELECT MAX(created_at) from cart_order WHERE name <> 'test'")->scalar();
+
+        $days = floor(($lastOrder - $firstOrder) / 86400);
+        $perDay = $count / $days;
+
+        return number_format((float)$perDay, 1, '.', '');
+    }
+
+
+    public function getCustomerSummary()
+    {
+        $ordersQuery = self::find();
+        $ordersCountByPhone = self::findBySql("SELECT `phone`, COUNT(id) as `total_count`, `name` from `cart_order` WHERE `name` <> 'test' GROUP BY `phone` ORDER BY `total_count` DESC")->asArray()->all();
+        
+        foreach($ordersCountByPhone as $index => $customer)
+        {
+            $orders = self::find()->where(['phone' => $customer['phone']])->all();
+
+            foreach($orders as $order)  
+            {
+                $ordersCountByPhone[$index]['name'] = $order->name;
+                $ordersCountByPhone[$index]['orders'][] = $order;
+                $ordersCountByPhone[$index]['count'][] = [
+                    'order_id' => $order->id,
+                    'order_total' => $order->countTotal()
+                ];
+            }
+        }
+
+        return $ordersCountByPhone;
+    }
+
+    public function getDishSummary()
+    {
+        $data = self::findBySql("SELECT `cart_order_item`.`product_id`, `cart_order_item`.`modification_id`, COUNT(`cart_order_item`.`quantity`) as `quantity`, `dish`.`title`, `dish_modification`.`value` as `modification_name` 
+                    from `cart_order_item` 
+                        LEFT JOIN `dish` on `dish`.`id`=`cart_order_item`.`product_id` 
+                        LEFT JOIN `dish_modification` on `dish_modification`.`id`=`cart_order_item`.`modification_id` 
+                        LEFT JOIN `cart_order` on `cart_order_item`.`order_id`=`cart_order`.`id`
+                            WHERE `cart_order`.`name` <> 'test'
+                            GROUP BY `product_id`, `modification_id` ORDER BY `quantity` DESC")->asArray()->all();
+        return $data;
+    }
 }

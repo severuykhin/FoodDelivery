@@ -16,7 +16,15 @@ use yii\helpers\Url;
 ]);?>
 
 <?= $form->field($model, 'seo_title')->textInput([
-    'placeholder' => 'Доставка еды в кирове'
+    'placeholder' => 'h1 страницы'
+]);?>
+
+<?= $form->field($model, 'seo_page_title')->textInput([
+    'placeholder' => 'title страницы'
+]);?>
+
+<?= $form->field($model, 'seo_desc')->textInput([
+    'placeholder' => 'description страницы'
 ]);?>
 
 <?= $form->field($model, 'description')->widget(Widget::className(), [
