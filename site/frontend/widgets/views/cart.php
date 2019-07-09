@@ -2,9 +2,11 @@
 
 use yii\helpers\Url;
 
+$isCartPage = Yii::$app->controller->id === 'cart' && Yii::$app->controller->action->id === 'index';
+
 ?>
 
-<div class="cart-widget">
+<div class="cart-widget  <?= $isCartPage ? 'hidden' : '' ?>">
     <div class="cart-widget__summ">
         <span class="cart-widget__money" data-role="cart-widget-summ">0</span>
         ₽
@@ -29,6 +31,7 @@ use yii\helpers\Url;
         </div>
     </div>
     <a title="Сделать заказ" class="cart-widget__link" href="<?= Url::to(['cart/index']); ?>">
+        <span class="cart-widget__caption">Заказать</span>
         <span class="cart-widget__counter" data-role="cart-counter">0</span>
     </a>
 </div>

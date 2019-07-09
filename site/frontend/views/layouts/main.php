@@ -30,7 +30,7 @@ $categories = Category::find()->orderBy(['sort' => SORT_DESC])->asArray()->all()
     <link rel="icon" type="image/png" sizes="32x32" href="/statics/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/statics/favicon-16x16.png">
     <link rel="icon" type="image/png" href="/statics/favicon.png" />
-    <link rel="stylesheet" href="/statics/styles4.css">
+    <link rel="stylesheet" href="/statics/styles10.css">
     <script src="https://www.googletagmanager.com/gtag/js?id=UA-138651791-1"></script>
     <script>
         window.addEventListener('load', function () {
@@ -86,6 +86,12 @@ $categories = Category::find()->orderBy(['sort' => SORT_DESC])->asArray()->all()
 
                 <div class="menu__item"> 
                   <?= Html::a('Контакты', ['/contacts'], ['class' => 'menu__item-link'])?>
+                </div>
+                <div class="menu__item hidden-md-up"> 
+                  <a class="menu__item-link menu__item-link_accent" href="+78332416646">+7 (8332) 41-66-46</a>
+                </div>
+                <div class="menu__item  hidden-md-up"> 
+                    <span class="menu__item-link  menu__item-link_accent">ул. Калинина д. 40</span>
                 </div>
 
               </div>
@@ -150,8 +156,8 @@ $categories = Category::find()->orderBy(['sort' => SORT_DESC])->asArray()->all()
       }(window, document, "js/jquery.min.js", "jQuery");
     </script>
     <!-- /подключение jquery-->
-    <script src="/statics/libs2.js"></script>
-    <script src="/statics/main4.js"></script>
+    <script src="/statics/libs10.js"></script>
+    <script src="/statics/main10.js"></script>
 </body>
 </html>
 <?php $this->endPage() ?>

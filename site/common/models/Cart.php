@@ -5,6 +5,7 @@ namespace common\models;
 use Yii;
 use common\models\CartItem;
 use yii\helpers\VarDumper;
+use aquy\thumbnail\Thumbnail;
 
 /**
  * This is the model class for table "cart".
@@ -123,11 +124,13 @@ class Cart extends \yii\db\ActiveRecord
         {
             if ($item->modification_id) {
                 $product = $item->getProductWithModification()->asArray()->one();
+
                 $data[] = [
                     'id' => $product['id'],
                     'title' => $product['title'],
                     'mId'  => $product['mId'],
                     'price' => $product['price'],
+                    'pic' => $product['pic'],
                     'size' => $product['value'],
                     'weight' => $product['weight'],
                     'quantity' => $item->quantity
@@ -163,12 +166,22 @@ class Cart extends \yii\db\ActiveRecord
                     'title' => $product['title'],
                     'mId'  => $mid,
                     'price' => $price,
+                    'pic' => $product['pic'],
                     'size' => $value,
                     'weight' => $weight,
                     'quantity' => $item->quantity
                 ];
-
             }
+        }
+
+        foreach($data as &$item)
+        {
+            $item['pic'] = Thumbnail::thumbnailFileUrl(
+                Yii::getAlias('@statics/uploads/dishes/') . $item['id'] . '/' . $item['pic'],
+                290,
+                193,
+                Thumbnail::THUMBNAIL_OUTBOUND 
+            );
         }
 
         return $data;

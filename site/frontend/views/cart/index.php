@@ -6,14 +6,21 @@ use yii\widgets\ActiveForm;
 
 $this->title = 'Корзина';
 
+$referrerIsSameOrigin = stripos(Yii::$app->request->referrer, 'shymovka') !== false || stripos(Yii::$app->request->referrer, 'shumovka'); // With test env
+
 ?>
 
 <div class="container-cart">
 
 <br>
-<br>
+<br class="hidden-md-down">
+
+<?php if($referrerIsSameOrigin): ?>
+    <a onclick="javascript:history.back();" class="cart-page__back">Назад</a>
+<?php endif; ?>
+
 <h1 class="title title-h1 title-cart">
- Корзина
+Корзина
 </h1>
 
     <div class="cart-page" data-role="cart-page">
@@ -112,6 +119,12 @@ $this->title = 'Корзина';
                     'class' => 'cart-order__input cart-order__textarea',
                     'placeholder' => 'Комментарий с заказу'
                 ])->label(false); ?>
+            </div>
+            <div class="col-lg-12">
+                <div class="cart-order__notice">
+                        <b>Внимание, примите к сведению:</b><br>
+                        В случае, если мы не смогли до Вас дозвонится для подтверждения, Ваш заказ будет аннулирован.
+                </div>
             </div>
             <div class="col-lg-12 cart-order__actions">
                 <?= Html::submitButton('Заказать', [

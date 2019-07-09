@@ -1,6 +1,6 @@
 .header {
 	position: relative;
-	z-index: 3;
+	z-index: 4;
 
 	.menu_fixed {
 		position: fixed;
@@ -8,6 +8,11 @@
 		top: 0;
 		left: 0;
 		background: #fff;
+		box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.06);
+		.header__container {
+			border-bottom: none;
+			padding: 11px 0 14px 0;
+		}
 	}
 
 	&__container {
@@ -16,6 +21,7 @@
 		justify-content: space-between;
 		align-items: center;
 		border-bottom: 2px solid #F2F3F5;
+		transition: all 200ms ease;
 	}
 	&__phone {
 		width: 30px;
@@ -100,16 +106,26 @@
 
 @media (max-width: 780px) {
 	.header {
+		box-shadow: 0px -2px 9px 4px rgba(113, 113, 113, 0.251);
+
+		a.header__menu {
+			&:focus {
+				color: #7db142;
+			}
+		}
+
 		.container-fluide {
 			padding: 0;
 		}
 		&__container {
-			padding: 6px 15px;
+			padding: 0 0 0 15px;
 		}
 
 		.button__menu {
-			width: 30px;
-			height: 40px;
+			width: 53px;
+			height: 53px;
+			border-left: 1px solid #eaeaea;
+			padding: 0 5px;
 			display: flex;
 			flex-wrap: wrap;
 			align-items: center;
@@ -117,7 +133,8 @@
 			align-content: center;
 			div {
 				height: 3px;
-				width: 24px;
+				width: 22px;
+				background-color: #7db142;
 				// margin-bottom: 5px;
 				&:last-child {
 					margin-bottom: 0;
@@ -127,10 +144,10 @@
 			&-active {
 				div {
 					&:first-child {
-						transform: rotate(-45deg) translate(-3px,5px);
+						transform: rotate(-45deg) translate(-4px,5px);
 					}
 					&:last-child {
-						transform: rotate(45deg) translate(-3px,-6px);
+						transform: rotate(45deg) translate(-3px,-5px);
 					}
 				}
 			}

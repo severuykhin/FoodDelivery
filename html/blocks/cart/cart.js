@@ -386,7 +386,7 @@ class Cart {
             html += pageItemTemplate(item);
         });
 
-        html += `<div class="cart-page__row"><div class="cart-page__name">Итого: ${summ} руб.</div></div>`;
+        html += `<div class="cart-page__row cart-page__row_result"><div class="cart-page__name">Сумма заказа: <span class="cart-page__totalPrice">${summ} руб.</span></div></div>`;
 
         this.cartPage.html(html);
 

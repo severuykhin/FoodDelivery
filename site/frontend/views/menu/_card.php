@@ -32,7 +32,7 @@ use yii\helpers\Json;
     </div>
     <div class="dish__info">
         <div class="dish__title"><?= $item->title ?></div>
-        <?= Html::a($categoryTitle, ['menu/category', 'slug' => $categorySlug], ['class' => 'dish__category']) ?>
+        
         <?php if($item->modifications): ?>
             <div class="dish__weight" data-role="product-weight"><?= $item->modifications[0]->weight ?></div>
         <?php else: ?>

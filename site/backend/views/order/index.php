@@ -136,6 +136,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         '</tr>';
 
                     $res .= '</table>';
+                    $res .= '<p>' . Yii::$app->formatter->asDatetime($model->created_at) . '</p>';
 
                     return $res;
                 }

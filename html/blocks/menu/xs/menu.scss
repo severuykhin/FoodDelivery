@@ -150,7 +150,7 @@
 		width: 100%;
 		height: calc(100% - 63px);
 		overflow-y: scroll;
-		top: 63px;
+		top: 53px;
 		left: 0;
 		background-color: #fff;
 		z-index: 2;
@@ -158,6 +158,14 @@
 		&__item {
 			&-dropdown::after {
 					display: none;
+			}
+
+			&-link {
+				padding: 10px 15px 5px 15px;
+				&_accent {
+					font-weight: 700;
+					color: #589411;
+				}
 			}
 		}
 		&__submenu {
@@ -167,7 +175,7 @@
 		transform: translateY(0);
 		visibility: visible;
 		width: 100%;
-		padding-left: 30px;
+		padding-left: 10px;
 		background: transparent;
 		&::after {
 			display: none;

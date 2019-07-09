@@ -7,6 +7,9 @@ export default function rawTemplate(item) {
     return `
 
     <div class="cart-page__row">
+        <div class="cart-page__img">
+            <img src="${item.pic}">
+        </div>
         <div class="cart-page__title">
             <div class="cart-page__name">${item.title}</div>
             ${size}
