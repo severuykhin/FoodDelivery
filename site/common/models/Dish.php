@@ -10,6 +10,8 @@ use yii\db\ActiveRecord;
 use yii\helpers\VarDumper;
 use common\models\Category;
 use common\models\DishModification;
+use himiklab\sortablegrid\SortableGridBehavior;
+
 
 class Dish extends ActiveRecord
 {
@@ -26,6 +28,10 @@ class Dish extends ActiveRecord
                 'attribute' => 'title',
                 // 'slugAttribute' => 'slug',
             ],
+            'sort' => [
+                'class' => SortableGridBehavior::className(),
+                'sortableAttribute' => 'sort'
+            ],
         ];
     }
 
@@ -39,6 +45,7 @@ class Dish extends ActiveRecord
         return [
             [['title', 'weight', 'price_actual', 'category_id'], 'required'],
             [['title', 'description', 'weight', 'price_actual', 'price_old'], 'string'],
+            [['sort'], 'integer'],
             [['active', 'action', 'best'], 'boolean']
         ];
     }
@@ -88,6 +95,7 @@ class Dish extends ActiveRecord
         return self::find()
                 ->where(['best' => self::STATUS_ACTIVE])
                 ->with(['category', 'modifications'])
+                ->orderBy('sort')
                 ->all();
     }
 }

@@ -4,7 +4,7 @@ use yii\helpers\Url;
 
 ?>
 
-<div class="filter">
+<div class="filter hidden-md-down">
     <div class="filter__inner">
 
     <?php foreach($categories as $category): ?>

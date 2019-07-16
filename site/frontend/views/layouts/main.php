@@ -30,7 +30,7 @@ $categories = Category::find()->orderBy(['sort' => SORT_DESC])->asArray()->all()
     <link rel="icon" type="image/png" sizes="32x32" href="/statics/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/statics/favicon-16x16.png">
     <link rel="icon" type="image/png" href="/statics/favicon.png" />
-    <link rel="stylesheet" href="/statics/styles10.css">
+    <link rel="stylesheet" href="/statics/styles12.css">
     <script src="https://www.googletagmanager.com/gtag/js?id=UA-138651791-1"></script>
     <script>
         window.addEventListener('load', function () {
@@ -44,14 +44,28 @@ $categories = Category::find()->orderBy(['sort' => SORT_DESC])->asArray()->all()
         });
     </script>
 
-    <!-- Yandex.Metrika counter --> <script type="text/javascript" > (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter47772808 = new Ya.Metrika({ id:47772808, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, trackHash:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/47772808" style="position:absolute; left:-9999px;" alt="" /></div></noscript> 
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+      (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+      (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+      ym(47772808, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true,
+            trackHash:true
+      });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/47772808" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
 
     <?= Html::csrfMetaTags() ?>
 </head>
 <body>
 <!-- HEADER -->
-<div class="header">
+<header class="header">
       <div class="header-wrapper">
         <div class="container-fluide">
           <div class="header__container">
@@ -88,7 +102,7 @@ $categories = Category::find()->orderBy(['sort' => SORT_DESC])->asArray()->all()
                   <?= Html::a('Контакты', ['/contacts'], ['class' => 'menu__item-link'])?>
                 </div>
                 <div class="menu__item hidden-md-up"> 
-                  <a class="menu__item-link menu__item-link_accent" href="+78332416646">+7 (8332) 41-66-46</a>
+                  <a class="menu__item-link menu__item-link_accent" href="tel:+78332416646">+7 (8332) 41-66-46</a>
                 </div>
                 <div class="menu__item  hidden-md-up"> 
                     <span class="menu__item-link  menu__item-link_accent">ул. Калинина д. 40</span>
@@ -108,7 +122,27 @@ $categories = Category::find()->orderBy(['sort' => SORT_DESC])->asArray()->all()
           </div>
         </div>
       </div>
-</div>
+      <div class="header__mobile-nav hidden-lg-up" data-role="header-mobile-nav">
+        <div class="header__mobile-nav-wrap">
+          <ul class="header__mobile-links">
+                <?php foreach($categories as $category): ?>
+                <?php $isActive = Yii::$app->request->get('slug') === $category['slug'] ?>
+                <li class="header__mobile-links-item">
+                  <?= Html::a(
+                    $category['title'], 
+                    [
+                      'menu/category', 'slug' => $category['slug']
+                    ], 
+                    [
+                      'class' => 'header__mobile-links-link' . ($isActive ? ' active' : ''),
+                      'title' => 'Заказать ' . $category['title']
+                    ]);?>
+                </li>
+                <?php endforeach; ?>
+          </ul>
+        </div>
+      </div>
+</header>
 <!-- HEADER END -->
     <?php $this->beginBody() ?>
         <div class="content">
@@ -156,8 +190,8 @@ $categories = Category::find()->orderBy(['sort' => SORT_DESC])->asArray()->all()
       }(window, document, "js/jquery.min.js", "jQuery");
     </script>
     <!-- /подключение jquery-->
-    <script src="/statics/libs10.js"></script>
-    <script src="/statics/main10.js"></script>
+    <script src="/statics/libs12.js"></script>
+    <script src="/statics/main12.js"></script>
 </body>
 </html>
 <?php $this->endPage() ?>

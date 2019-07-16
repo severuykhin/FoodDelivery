@@ -12,16 +12,29 @@ use common\models\CartItem;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
 use yii\helpers\VarDumper;
+use himiklab\sortablegrid\SortableGridAction;
+
 
 class MenuController extends Controller
 {
+
+    public function actions()
+    {
+        return [
+            'sort' => [
+                'class' => SortableGridAction::className(),
+                'modelName' => Dish::className(),
+            ],
+        ];
+    }
+
     public function actionIndex()
     {
         $categories = Category::getTitlesArray();
         $dataProvider = new ActiveDataProvider([
-            'query' => Dish::find()->with(['category', 'modifications'])->orderBy(['created_at' => SORT_DESC]),
+            'query' => Dish::find()->with(['category', 'modifications'])->orderBy(['sort' => SORT_ASC]),
             'pagination' => [
-	            'pageSize' => 100,
+	            'pageSize' => 150,
             ],
         ]);
 

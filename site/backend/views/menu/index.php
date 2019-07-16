@@ -1,8 +1,9 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
 use yii\helpers\VarDumper;
+use himiklab\sortablegrid\SortableGridView as GridView;
+
 
 $this->title = 'Пункты меню';
 $this->params['breadcrumbs'][] = $this->title;

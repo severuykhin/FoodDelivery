@@ -1,12 +1,20 @@
 import React, { Component } from 'react'
+import priceFormatter from '../../utils/priceFormatter';
 
 export default class Orders extends Component {
+
+  getCommissionDeductions(summ) {
+    let deductions = (summ / 100) * 2;
+    return priceFormatter(deductions);
+  }
+
   render() {
 
     const summary = this.props.summary;
 
     return (
       <div>
+      <div className="col-lg-6">
         <table className="table table-striped">
             <thead>
               <tr>
@@ -42,10 +50,18 @@ export default class Orders extends Component {
               </tr>
               <tr>
                 <td>Общий доход</td>
-                <td>{ summary.totalSumm ? `${summary.totalSumm} р` : '-' }</td>
+                <td>{ summary.totalSumm ? `${priceFormatter(summary.totalSumm)} р` : '-' }</td>
+              </tr>
+              <tr>
+                <td>Комиссия</td>
+                <td>{ summary.totalSumm ? `${this.getCommissionDeductions(summary.totalSumm)} р` : '-' }</td>
               </tr>
             </tbody>
         </table>
+      </div>
+      <div className="col-lg-6">
+          reports
+      </div> 
       </div>
     )
   }

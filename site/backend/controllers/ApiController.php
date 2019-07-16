@@ -9,6 +9,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\Cart;
 use common\models\CartOrder;
+use backend\models\ApiHelper;
 
 
 /**
@@ -26,7 +27,7 @@ class ApiController extends Controller
                     [
                         'actions' => ['orders', 'customers', 'products'],
                         'allow' => true,
-                        'roles' => ['@']
+                         'roles' => ['@']
                     ],
                 ],
             ],
@@ -35,8 +36,8 @@ class ApiController extends Controller
 
     public function actionOrders()
     {
-
-        $ordersInfo = CartOrder::getOrdersSummary();
+        $data = Yii::$app->request->get();
+        $ordersInfo = ApiHelper::getOrdersSummary($data);
 
         $responseData;
 
@@ -49,7 +50,7 @@ class ApiController extends Controller
                     'count' => $ordersInfo['ordersCount'],
                     'biggest' => $ordersInfo['biggest'],
                     'perDay' => $ordersInfo['perDay'],
-                    'totalSumm' => Yii::$app->formatter->asDecimal($ordersInfo['totalSumm']),
+                    'totalSumm' => $ordersInfo['totalSumm'],
                 ],
                 'error' => []
             ];
@@ -58,7 +59,7 @@ class ApiController extends Controller
 
             $responseData = [
                 'result' => 'error',
-                'error' => $e // TO DO - приходит пустой объект
+                'error' => $e->getMessage()
             ];
 
         } finally {

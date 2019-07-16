@@ -16,13 +16,17 @@ return [
         'class' => 'yii\filters\AccessControl',
         'rules' => [
             [
-                'actions' => ['login', 'error'],
                 'allow' => true,
+                'verbs' => ['POST', 'GET']
             ],
-            [
-                'roles' => ['@'],
-                'allow' => true,
-            ],
+            // [
+            //     'actions' => ['login', 'error'],
+            //     'allow' => true,
+            // ],
+            // [
+            //     'roles' => ['@'],
+            //     'allow' => true,
+            // ],
         ],
     ],
     'components' => [

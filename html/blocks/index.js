@@ -6,16 +6,18 @@ import 'SimpleBar';
 import initActions from './actions/xs/actions';
 import initFancy from './zoompic/xs/zoompic';
 import initCartOrder from './cart/cartOrder';
-import toggleMenu from './header/xs/header';
+import Header from './header/xs/header';
 import App from './app/xs/app';
 import Cart from './cart/cart';
 import initMap from './map/xs/map';
+
+const header = new Header();
+header.init();
 
 initActions();
 initFancy();
 initMap();
 initCartOrder();
-toggleMenu();
 
 if ($('[data-phone]').length > 0) {
 

@@ -3,6 +3,7 @@ import Orders from './Orders'
 import { connect } from 'react-redux';
 import { setOrders, toggleModal } from '../../ducks/Store';
 import axios from 'axios';
+import DatePicker from '../DatePicker/DatePicker';
 
 class OrdersContainer extends Component {
 
@@ -16,18 +17,22 @@ class OrdersContainer extends Component {
 
   async componentDidMount() {
 
-      this.setState({loading: true});
+  }
 
-      const response = await axios.get('/backend/api/orders');
+  async handleRangeChange (data) {
+    this.setState({loading: true});
+    const response = await axios.get('/backend/api/orders', {
+      params: data
+    });
 
-      if (response.data.result !== 'ok') {
-        alert('Ошибка');
-        return false;
-      } 
+    if (response.data.result !== 'ok') {
+      alert('Ошибка');
+      return false;
+    } 
 
-      this.props.setOrders(response.data.payload);
+    this.props.setOrders(response.data.payload);
 
-      this.setState({loading: false});
+    this.setState({loading: false});
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -42,7 +47,11 @@ class OrdersContainer extends Component {
 
   render() {
     return (
-      <div>
+      <div className="row">
+        <div className="col-lg-12" style={{marginBottom: '20px'}}>
+          <DatePicker
+           onChange={this.handleRangeChange.bind(this)}/>
+        </div>
         <Orders 
           summary={this.props.ordersSummary} 
           showDearestOrder={this.showDearestOrder}/>

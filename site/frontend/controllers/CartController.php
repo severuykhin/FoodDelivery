@@ -16,6 +16,8 @@ use yii\helpers\VarDumper;
 class CartController extends Controller
 {
 
+    public $enableCsrfValidation = false;
+
     public function actionIndex()
     {
         $order = new CartOrder();
@@ -42,6 +44,7 @@ class CartController extends Controller
     {
 
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        Yii::$app->controller->enableCsrfValidation = false;
 
         if (!Yii::$app->request->isPost) {
             throw new NotFoundHttpException('Страница не найдена');
@@ -62,6 +65,7 @@ class CartController extends Controller
     {
 
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        Yii::$app->controller->enableCsrfValidation = false;
 
         if (!Yii::$app->request->isPost) {
             throw new NotFoundHttpException('Страница не найдена');
@@ -81,6 +85,7 @@ class CartController extends Controller
     public function actionDelete() 
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        Yii::$app->controller->enableCsrfValidation = false;
 
         if (!Yii::$app->request->isPost) {
             throw new NotFoundHttpException('Страница не найдена');
