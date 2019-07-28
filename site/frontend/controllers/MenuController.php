@@ -28,7 +28,12 @@ class MenuController extends Controller
             $categories = Category::find()->with(['dishes'])->all();
         } else {
             $categories = Category::find()->where(['slug' => $slug])->with(['dishes'])->all();
-        } 
+        }
+
+        if (!$categories)
+        {
+            throw  new NotFoundHttpException('Страница не найдена');
+        }
             
 
         return $this->render('index', [

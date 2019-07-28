@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import priceFormatter from '../../utils/priceFormatter';
+import ReportsList from '../Reports/ReportsList';
 
 export default class Orders extends Component {
 
@@ -60,7 +61,8 @@ export default class Orders extends Component {
         </table>
       </div>
       <div className="col-lg-6">
-          reports
+          <h5>Отчеты</h5>
+          { summary.reports && <ReportsList manageActions={false} items={ summary.reports } /> }
       </div> 
       </div>
     )

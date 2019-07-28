@@ -62,13 +62,14 @@ class OrdersContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    ordersSummary: state.store.ordersSummary
+    ordersSummary: state.store.ordersSummary,
+    reports: state.reports.items
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   setOrders: (orders) => dispatch(setOrders(orders)),
-  toggleModal: (isOpen) => dispatch(toggleModal(isOpen)) 
+  toggleModal: (isOpen) => dispatch(toggleModal(isOpen))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps, null, { pure: false })(OrdersContainer);

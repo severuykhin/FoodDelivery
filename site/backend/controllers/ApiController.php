@@ -9,6 +9,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\Cart;
 use common\models\CartOrder;
+use common\models\Report;
 use backend\models\ApiHelper;
 
 
@@ -17,6 +18,8 @@ use backend\models\ApiHelper;
  */
 class ApiController extends Controller
 {
+    public $enableCsrfValidation = false;
+
     public function behaviors()
     {
         return [
@@ -27,7 +30,7 @@ class ApiController extends Controller
                     [
                         'actions' => ['orders', 'customers', 'products'],
                         'allow' => true,
-                         'roles' => ['@']
+                        //  'roles' => ['@']
                     ],
                 ],
             ],
@@ -39,7 +42,7 @@ class ApiController extends Controller
         $data = Yii::$app->request->get();
         $ordersInfo = ApiHelper::getOrdersSummary($data);
 
-        $responseData;
+        $responseData = [];
 
         try {
 
@@ -51,6 +54,7 @@ class ApiController extends Controller
                     'biggest' => $ordersInfo['biggest'],
                     'perDay' => $ordersInfo['perDay'],
                     'totalSumm' => $ordersInfo['totalSumm'],
+                    'reports' => $ordersInfo['reports']
                 ],
                 'error' => []
             ];
@@ -81,6 +85,53 @@ class ApiController extends Controller
             'result' => 'ok',
             'data' => CartOrder::getDishSummary()
         ];
+    }
+
+    public function actionReports()
+    {
+        if (Yii::$app->request->isGet) {
+
+            $data = [];
+            $result = '';
+
+            try {
+                $data = Report::find()->orderBy(['created_at' => SORT_DESC])->all();
+                $result = 'ok';
+            } catch (\Exception $e) {
+                $data = $e->getMessage();
+                $result = 'error';
+            }
+
+            return [
+                'result' => $result,
+                'data' => $data
+            ];
+        }
+
+        if (Yii::$app->request->isPost) {
+
+            $data = Yii::$app->request->post();
+
+            if (isset($data['type']) && $data['type'] == 'delete') {
+                $id = $data['id'];
+                $model = Report::findOne($id);
+                $model->delete();
+                return ['result' => 'ok', 'id' => $id];
+            } else {
+                $model = new Report([
+                    'title' => $data['title'],
+                    'text' => $data['text'],
+                    'created_at' => Yii::$app->formatter->asTimestamp($data['date'])
+                ]);
+    
+                if ($model->save()) {
+                    return ['result' => 'ok', 'data' => $model];
+                } else {
+                    return ['result' => 'error', 'data' => $model->errors];
+                }
+            }
+        }
+
     }
 
     public function beforeAction($action)

@@ -25,9 +25,18 @@ const getStartOfMonth = () => {
 const getStartOfTheWeek = () => {
     let d = new Date();
     var day = d.getDay(),
-        diff = d.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday
+        diff = d.getDate() - day + (day === 0 ? -6:1); // adjust when day is sunday
     return getDate(new Date(d.setDate(diff)));
 }
+
+const rangeInputStyle = (isActive) => ({
+    height: '20px',
+    width: isActive ? '161px' : '0px',
+    transition: 'all 400ms ease', 
+    marginLeft: isActive ? '10px' : 0,
+    border: 'none',
+    background: 'transparent'
+});
 
 
 
@@ -39,6 +48,8 @@ class DatePicker extends Component {
         let today = getDate();
         let monthStart = getStartOfMonth();
         let weekStart = getStartOfTheWeek();
+
+        this.datepicker = null;
 
         this.state = {
             variants: {
@@ -79,7 +90,7 @@ class DatePicker extends Component {
                 },
             },
             activeVariant: 1,
-            rangeModalOpen: false
+            rangeActive: false
         };
     }
 
@@ -91,13 +102,27 @@ class DatePicker extends Component {
     resolveBtnClick = (btnKey) => {
 
         this.setState({ activeVariant: btnKey });
-        if (+btnKey === 5) {
-            this.setState({ rangeModalOpen: !this.state.rangeModalOpen });
+        if (parseInt(btnKey, 10) === 5) {
+            this.setState({ rangeActive: true });
+            this.initDatepicker();
             return;
-        } 
+        } else {
+            this.setState({ rangeActive: false });
+        }
 
         let selectedRange = {...this.state.variants[btnKey]}
         this.props.onChange(selectedRange);
+    }
+
+    initDatepicker() {
+        this.datepicker = window.$('#datepicker-range').datepicker({
+            range: true,
+            multipleDatesSeparator: ' - ',
+            onSelect: this.handleRangeChange,
+            dateFormat: 'dd-mm-yyyy'
+        }).data('datepicker');
+
+        this.datepicker.show();
     }
 
     renderButtons() {
@@ -107,16 +132,40 @@ class DatePicker extends Component {
 
             let item = this.state.variants[key];
             let activeClassName = +key === +this.state.activeVariant ? 'active' : '';
+            let isRange = parseInt(key, 10) === 5;
 
             return (
                 <button 
                     key={`btn-${key}`}
-                    className={`btn btn-default ${activeClassName}`}
+                    className={`btn btn-default ${activeClassName} ${isRange && 'btn-range'}`}
                     onClick={() => { this.resolveBtnClick(key) }}>
                     { item.title }
+                    { isRange && 
+                        <input
+                            onChange={this.handleRangeChange} 
+                            type="text" 
+                            id="datepicker-range"
+                            style={ rangeInputStyle(this.state.rangeActive) } />  }
                 </button>
             );
         });
+    }
+
+    handleRangeChange = (date) => {
+        let range = date.split(' - ');
+        if (range.length <= 1) return;
+
+        this.props.onChange({
+            id: 5,
+            title: 'Диапазон',
+            start: range[0],
+            end: range[1],
+            type: 'range'
+        });
+
+        if (this.datepicker != null) {
+            this.datepicker.hide();
+        }
     }
 
     render() {

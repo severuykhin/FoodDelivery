@@ -6,6 +6,11 @@ use yii\widgets\ActiveForm;
 
 $this->title = 'Корзина';
 
+$this->registerMetaTag([
+        'name' => 'description',
+        'content' => 'Оформить заказ'
+]);
+
 $referrerIsSameOrigin = stripos(Yii::$app->request->referrer, 'shymovka') !== false || stripos(Yii::$app->request->referrer, 'shumovka'); // With test env
 
 ?>

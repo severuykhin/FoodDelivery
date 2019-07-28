@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use common\models\CartOrder;
+use common\models\Report;
 
 class ApiHelper 
 {
@@ -14,6 +15,11 @@ class ApiHelper
 
         $query->andWhere(['>=', 'created_at', $range['startTimestamp']]);
         $query->andWhere(['<=', 'created_at', $range['endTimestamp']]);
+
+        $reports = Report::find()
+                    ->where(['>=', 'created_at', $range['startTimestamp']])
+                    ->andWhere(['<=', 'created_at', $range['endTimestamp']])
+                    ->all();
 
         $total = 0;
         $biggestTotal = 0;
@@ -58,13 +64,15 @@ class ApiHelper
             'biggest' => [
                 'summ' => $biggestTotal,
                 'order' => $biggestOrder
-            ]
+            ],
+            'reports' => $reports
         ];
     }
 
     public static function getRangeInfo(array $data): array
     {
-        $start;
+        $start = 0;
+        
         if ($data['start'] == 0) {
             $firstOrderTimestamp = (int)CartOrder::findBySql("SELECT MIN(created_at) from cart_order WHERE name <> 'test'")->scalar();
             $start = $firstOrderTimestamp;

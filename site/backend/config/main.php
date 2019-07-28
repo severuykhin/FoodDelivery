@@ -17,7 +17,7 @@ return [
         'rules' => [
             [
                 'allow' => true,
-                'verbs' => ['POST', 'GET']
+                'verbs' => ['POST', 'GET', 'DELETE']
             ],
             // [
             //     'actions' => ['login', 'error'],
@@ -52,6 +52,7 @@ return [
                 'crm/products'       => 'crm/index',
                 'crm/customers'      => 'crm/index',
                 'crm/orders'         => 'crm/index',
+                'crm/reports'        => 'crm/index',
                 'reviews/<action>'   => 'reviews/<action>',
                 'pages/<action>'     => 'pages/<action>'
             ]

@@ -3,13 +3,14 @@ import Navigation from '../Navigation/Navigation'
 
 import {
   BrowserRouter,
-  Route, Redirect,
+  Route,
   Switch
 } from 'react-router-dom';
 
 import OrdersContainer from '../Orders/OrdersContainer';
 import CustomersContainer from '../Customers/CustomersContainer';
 import ProductsContainer from '../Products/ProductsContainer';
+import ReportsContainer from '../Reports/ReportsContainer';
 
 const crmBaseStyle = {
   padding: '20px'
@@ -33,6 +34,7 @@ export default class App extends Component {
                 <Route exact path="/backend/crm/orders" component={OrdersContainer} />
                 <Route exact path="/backend/crm/customers" component={CustomersContainer} />
                 <Route exact path="/backend/crm/products" component={ProductsContainer} />
+                <Route exact path="/backend/crm/reports" component={ReportsContainer} />
               </Switch>
 
             </div>

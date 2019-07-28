@@ -8,6 +8,7 @@ export default class Navigation extends Component {
             <NavLink to="/backend/crm/orders" className="btn btn-default">Сводка по заказам</NavLink>
             <NavLink to="/backend/crm/customers" className="btn btn-default">Сводка по клиентам</NavLink>
             <NavLink to="/backend/crm/products" className="btn btn-default">Сводка по меню</NavLink>
+            <NavLink to="/backend/crm/reports" className="btn btn-default">Отчеты</NavLink>
         </div>
     )
   }

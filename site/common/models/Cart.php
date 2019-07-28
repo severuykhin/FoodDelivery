@@ -87,6 +87,10 @@ class Cart extends \yii\db\ActiveRecord
         }
         $cartItem = $cartItemQuery->one();
 
+        // Пару раз в логах была ошибка "Creating default object from empty value" на строке уменьшения 
+        // Это значит, что по какой то причине в бд не обнаруживается $cartItem и туда приходит null
+        if (!$cartItem) return 'deleted';
+        
         $cartItem->quantity -= 1;
 
         if ($cartItem->quantity === 0) {
