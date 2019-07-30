@@ -16,7 +16,7 @@ use yii\helpers\Json;
                     193,
                     Thumbnail::THUMBNAIL_OUTBOUND,
                     [
-                        'alt' => $item->title . ' - заказать с доставкой на дом'
+                        'alt' => 'Фотография - ' . $item->title
                     ]
                 ); ?>
             </a>

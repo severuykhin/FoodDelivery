@@ -26,6 +26,8 @@ class CartOrder extends \yii\db\ActiveRecord
 {
     const STATUS_NEW = 0;
     const STATUS_VIEWED = 1;
+    const STATUS_CANCELED = 2;
+    const STATUS_UNABLE = 3;
 
     const PAYMENT_CASH = 0;
     const PAYMENT_CARD = 1;
@@ -64,8 +66,10 @@ class CartOrder extends \yii\db\ActiveRecord
     public static function getStatuses()
     {
         return [
-            self::STATUS_NEW => 'Новый',
-            self::STATUS_VIEWED => 'Принят'
+            self::STATUS_NEW      => 'Новый',
+            self::STATUS_VIEWED   => 'Принят',
+            self::STATUS_CANCELED => 'Отменен',
+            self::STATUS_UNABLE   => 'Недозвон'
         ];
     }
 
@@ -304,7 +308,7 @@ class CartOrder extends \yii\db\ActiveRecord
     public static function getCustomerSummary()
     {
         $ordersQuery = self::find();
-        $ordersCountByPhone = self::findBySql("SELECT `phone`, COUNT(id) as `total_count`, `name` from `cart_order` WHERE `name` <> 'test' GROUP BY `phone` ORDER BY `total_count` DESC")->asArray()->all();
+        $ordersCountByPhone = self::findBySql("SELECT `phone`, COUNT(id) as `total_count`, `name` from `cart_order` WHERE `name` <> 'test' AND `status` = 1 GROUP BY `phone` ORDER BY `total_count` DESC")->asArray()->all();
         
         foreach($ordersCountByPhone as $index => $customer)
         {
@@ -331,7 +335,7 @@ class CartOrder extends \yii\db\ActiveRecord
                         LEFT JOIN `dish` on `dish`.`id`=`cart_order_item`.`product_id` 
                         LEFT JOIN `dish_modification` on `dish_modification`.`id`=`cart_order_item`.`modification_id` 
                         LEFT JOIN `cart_order` on `cart_order_item`.`order_id`=`cart_order`.`id`
-                            WHERE `cart_order`.`name` <> 'test'
+                            WHERE `cart_order`.`name` <> 'test' AND `cart_order`.`status` = 1
                             GROUP BY `product_id`, `modification_id` ORDER BY `quantity` DESC")->asArray()->all();
         return $data;
     }

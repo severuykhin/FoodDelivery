@@ -4,7 +4,7 @@ class ReportsForm extends Component {
 
     componentDidMount() {
 
-        window.addEventListener('load', () => {
+        window.addEventListener('load', () => { // Переделать. Сработает только при загрузке страницы с этим компонентом. При навигации через роутер - отпадет
             this.datepicker = window.$('#report-date').datepicker({
                 multipleDatesSeparator: ' - ',
                 dateFormat: 'dd-mm-yyyy',

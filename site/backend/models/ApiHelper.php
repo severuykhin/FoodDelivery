@@ -13,6 +13,7 @@ class ApiHelper
         
         $range = self::getRangeInfo($data);
 
+        $query->where(['status' => CartOrder::STATUS_VIEWED]);
         $query->andWhere(['>=', 'created_at', $range['startTimestamp']]);
         $query->andWhere(['<=', 'created_at', $range['endTimestamp']]);
 
@@ -31,7 +32,7 @@ class ApiHelper
         foreach($query->each() as $index => $order)
         {
 
-            if ($order['name'] == 'test') continue;
+            if ($order['name'] == 'test' || $order['status'] != CartOrder::STATUS_VIEWED) continue;
 
             $orderData = $order->compile();
             $orderTotal = 0;
@@ -74,7 +75,7 @@ class ApiHelper
         $start = 0;
         
         if ($data['start'] == 0) {
-            $firstOrderTimestamp = (int)CartOrder::findBySql("SELECT MIN(created_at) from cart_order WHERE name <> 'test'")->scalar();
+            $firstOrderTimestamp = (int)CartOrder::findBySql("SELECT MIN(created_at) from cart_order WHERE name <> 'test' AND status = 1")->scalar();
             $start = $firstOrderTimestamp;
         } else {
             $start = strtotime($data['start']);

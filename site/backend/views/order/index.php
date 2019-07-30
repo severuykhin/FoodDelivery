@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use common\models\CartOrder;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -10,10 +11,49 @@ use yii\widgets\Pjax;
 $this->title = 'Заказы';
 $this->params['breadcrumbs'][] = $this->title;
 
+$labelMap = [
+    0 => 'label-danger',
+    1 => 'label-success',
+    2 => 'label-warning',
+    3 => 'label-warning'
+];
+
+$stateClassMap = [
+    0 => 'has-error',
+    1 => 'has-success',
+    2 => 'has-warning',
+    3 => 'has-warning'
+];
+
 ?>
 
 
 <div class="cart-order-index">
+
+    <style>
+        .order-label {
+            margin-right: 10px;
+            margin-top: 6px; 
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        .order-status {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .label:empty {
+            display: inline-block !important;
+        }
+    </style>
+
+    <script>
+        window.labelClassMap = <?= json_encode($labelMap) ?>;
+        window.stateClassMap = <?= json_encode($stateClassMap) ?>;
+    </script>
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -28,17 +68,25 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             [
                 'attribute' => 'status',
-                'content' => function ($model) {
+                'headerOptions' => [
+                    'style' => 'width: 161px'
+                ],
+                'content' => function ($model) use ($labelMap, $stateClassMap) {
                     $statusText = $model->getStatus();
-                    $labelClassName = $model->status === 0 ? 'label-danger' : 'label-success';
-                    if ($model->status === 0) 
-                    {
-                        return '<span class="label label-danger" style="margin-bottom: 15px; display: inline-block;">' .
-                                $statusText .
-                                '</span><br><button data-role="order-confirm" data-id="' . $model->id . '" class="btn btn-success btn-xs">Принять</button>';
-                    } else {
-                        return '<span class="label label-success">' . $statusText . '</span>';
-                    }
+                    $labelClassName = $labelMap[$model->status];
+                    $stateClassName = $stateClassMap[$model->status];
+                    
+                    $dropDown = '<div class="order-status form-group '. $stateClassName .'">' . Html::dropDownList(
+                            'CartOrder[status]', 
+                            $model->status, 
+                            CartOrder::getStatuses(), [
+                                'data-id' => $model->id,
+                                'data-role' => 'order-status-select',
+                                'class' => 'form-control has-error',
+                            ]) . '</div>';
+
+                    return '<span class="order-label label '. $labelClassName .'">' .
+                            '</span>' . $dropDown;
                 }
             ],
             // 'phone',
@@ -141,16 +189,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $res;
                 }
             ],
-            // 'street',
-            // 'house',
-            // 'code',
-            // 'change',
-            // 'apartment',
-            // 'floor',
-            // 'entrance',
-            // 'comment',
 
-            ['class' => 'yii\grid\ActionColumn', 'template' => '{view} {update}'],
+            ['class' => 'yii\grid\ActionColumn', 'template' => '{view} {update} {delete}'],
         ],
     ]); ?>
 
@@ -164,21 +204,36 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php
 
 $script = <<< JS
-    $(document).on('click', '[data-role="order-confirm"]', function () {
-        var id = $(this).data('id');
+    $(document).on('change', '[data-role="order-status-select"]', function () {
 
-        var self = this;
-        var label = $(this).prev().prev();
+        var elem = $(this),
+            id = elem.data('id'),
+            statusId = parseInt(elem.val(), 10),
+            formGroup = elem.parent(),
+            label = formGroup.prev(),
+            labelClass = window.labelClassMap[statusId],
+            selectClass = window.stateClassMap[statusId];
 
         $.ajax({
-            url: '/backend/order/confirm',
-            data: { id: id },
+            url: '/backend/order/state',
+            data: { id: id, status: statusId },
             method: 'POST',
             success: function (response) {
-                label.removeClass('label-danger');
-                label.addClass('label-success');
-                label.text('Принят');
-                self.remove();
+
+                if (response !== 'ok') {
+                    alert('Ошибка: ' + response);
+                    return;
+                }
+
+                label.attr(
+                    'class',
+                    label.attr('class').replace(/label-\S+/g, labelClass)
+                );
+
+                formGroup.attr(
+                    'class',
+                    formGroup.attr('class').replace(/has-\S+/g, selectClass)
+                );
             }
         });
     });

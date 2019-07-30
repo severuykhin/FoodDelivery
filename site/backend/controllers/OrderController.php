@@ -14,6 +14,7 @@ use yii\filters\VerbFilter;
  */
 class OrderController extends Controller
 {
+    public $enableCsrfValidation = false;
     /**
      * {@inheritdoc}
      */
@@ -109,7 +110,7 @@ class OrderController extends Controller
         return $this->redirect(['index']);
     }
 
-    public function actionConfirm()
+    public function actionState()
     {   
 
         if (false === Yii::$app->request->isPost) 
@@ -118,7 +119,7 @@ class OrderController extends Controller
         }
 
         $model = $this->findModel(Yii::$app->request->post('id'));
-        $model->status = 1;
+        $model->status = Yii::$app->request->post('status');
         $model->save();
         return 'ok';
     }

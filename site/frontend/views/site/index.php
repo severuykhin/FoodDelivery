@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 
-$this->title = 'Доставка еды в Кирове | Шумовка';
+$this->title = 'Доставка еды на дом в Кирове';
 
 $this->registerMetaTag([
   'name'    => 'description',
