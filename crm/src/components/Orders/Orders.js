@@ -15,7 +15,7 @@ export default class Orders extends Component {
 
     return (
       <div>
-      <div className="col-lg-6">
+      <div className="col-lg-8">
         <table className="table table-striped">
             <thead>
               <tr>
@@ -60,7 +60,7 @@ export default class Orders extends Component {
             </tbody>
         </table>
       </div>
-      <div className="col-lg-6">
+      <div className="col-lg-4">
           <h5>Отчеты</h5>
           { summary.reports && <ReportsList manageActions={false} items={ summary.reports } /> }
       </div> 

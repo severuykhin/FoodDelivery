@@ -3,20 +3,17 @@ import React, { Component } from 'react'
 class ReportsForm extends Component {
 
     componentDidMount() {
-
-        window.addEventListener('load', () => { // Переделать. Сработает только при загрузке страницы с этим компонентом. При навигации через роутер - отпадет
-            this.datepicker = window.$('#report-date').datepicker({
-                multipleDatesSeparator: ' - ',
-                dateFormat: 'dd-mm-yyyy',
-                timepicker: true,
-                onSelect: (fDate, date, inst) => {
-                    this.props.updateFormData({
-                        name: 'date',
-                        value: fDate
-                    });
-                }
-            }).data('datepicker');
-        });
+        this.datepicker = window.$('#report-date').datepicker({
+            multipleDatesSeparator: ' - ',
+            dateFormat: 'dd-mm-yyyy',
+            timepicker: true,
+            onSelect: (fDate, date, inst) => {
+                this.props.updateFormData({
+                    name: 'date',
+                    value: fDate
+                });
+            }
+        }).data('datepicker');
     }
 
     update = (e) => {

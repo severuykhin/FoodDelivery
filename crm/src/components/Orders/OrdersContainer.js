@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Orders from './Orders'
 import { connect } from 'react-redux';
-import { setOrders, toggleModal } from '../../ducks/Store';
+import { setOrders, setOrdersQuery, toggleModal } from '../../ducks/Store';
 import axios from 'axios';
 import DatePicker from '../DatePicker/DatePicker';
 
@@ -11,7 +11,8 @@ class OrdersContainer extends Component {
     super(props);
 
     this.state = {
-      loading: false
+      loadingOrders: false,
+      loadingStatistics: false
     };
   }
 
@@ -20,7 +21,13 @@ class OrdersContainer extends Component {
   }
 
   async handleRangeChange (data) {
-    this.setState({loading: true});
+    this.ordersRequest(data);
+    this.statisticsRequest(data);
+  }
+
+  async ordersRequest(data) {
+    this.setState({loadingOrders: true});
+
     const response = await axios.get('/backend/api/orders', {
       params: data
     });
@@ -29,10 +36,22 @@ class OrdersContainer extends Component {
       alert('Ошибка');
       return false;
     } 
-
     this.props.setOrders(response.data.payload);
 
-    this.setState({loading: false});
+    this.setState({loadingOrders: false});
+  }
+
+
+  async statisticsRequest(data) {
+    this.setState({loadingOrders: true});
+
+    axios.get('/backend/api/statistics', { params: data
+    }).then((response) => {
+      console.log(response);
+      this.setState({loadingOrders: false});
+    }).catch(e => {
+      console.log(e);
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -63,13 +82,15 @@ class OrdersContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     ordersSummary: state.store.ordersSummary,
-    reports: state.reports.items
+    reports: state.reports.items,
+    ordersQuery: state.store.ordersQuery
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   setOrders: (orders) => dispatch(setOrders(orders)),
-  toggleModal: (isOpen) => dispatch(toggleModal(isOpen))
+  toggleModal: (isOpen) => dispatch(toggleModal(isOpen)),
+  setOrdersQuery: (data) => dispatch(setOrdersQuery(data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps, null, { pure: false })(OrdersContainer);

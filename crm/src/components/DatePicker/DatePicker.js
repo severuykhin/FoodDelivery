@@ -38,6 +38,12 @@ const rangeInputStyle = (isActive) => ({
     background: 'transparent'
 });
 
+const dateInputStyle = (isActive) => {
+    let baseStyles = rangeInputStyle(isActive);
+    baseStyles.width = isActive ? '100px' : '0px';
+    return baseStyles; 
+};
+
 
 
 class DatePicker extends Component {
@@ -50,6 +56,7 @@ class DatePicker extends Component {
         let weekStart = getStartOfTheWeek();
 
         this.datepicker = null;
+        this.dateDatepicker = null;
 
         this.state = {
             variants: {
@@ -88,30 +95,82 @@ class DatePicker extends Component {
                     end: 0,
                     type: 'range'
                 },
+                6: {
+                    id: 6,
+                    title: 'Дата',
+                    start: 0,
+                    end: 0,
+                    type: 'date'
+                },
+            },
+            detailVariants: {
+                1: {
+                    id: 1,
+                    title: 'По дням',
+                    type: 'days'
+                },
+                2: {
+                    id: 2,
+                    title: 'По месяцам',
+                    type: 'monthes'
+                }
             },
             activeVariant: 1,
-            rangeActive: false
+            activeDetailVariant: 1,
+            rangeActive: false,
+            dateActive: false,
+            activeQuery: {}
         };
     }
 
     componentDidMount() {
         // Force trigger default init range
-        this.props.onChange(this.state.variants[this.state.activeVariant]);
+        let queryData = this.state.variants[this.state.activeVariant];
+        queryData.detail = this.getDetailType();
+        this.setState({ activeQuery: queryData });
+        this.props.onChange(queryData);
+    }
+
+    getDetailType(index) {
+        if (typeof index !== 'undefined') {
+            return this.state.detailVariants[index].type;
+        } 
+        return this.state.detailVariants[this.state.activeDetailVariant].type;
     }
 
     resolveBtnClick = (btnKey) => {
 
+        let key = parseInt(btnKey, 10);
+
         this.setState({ activeVariant: btnKey });
-        if (parseInt(btnKey, 10) === 5) {
-            this.setState({ rangeActive: true });
+        if (key === 5) {
+            this.setState({ rangeActive: true, dateActive: false });
             this.initDatepicker();
             return;
-        } else {
-            this.setState({ rangeActive: false });
+        } 
+        else if (key === 6) {
+            this.setState({ dateActive: true, rangeActive: false });
+            this.initDateDatepicker();
+            return;
+        }
+        else {
+            this.setState({ rangeActive: false, dateActive: false });
         }
 
-        let selectedRange = {...this.state.variants[btnKey]}
+        let selectedRange = {
+            ...this.state.variants[btnKey],
+            detail: this.getDetailType()
+        }
         this.props.onChange(selectedRange);
+    }
+
+    initDateDatepicker() {
+        this.dateDatepicker = window.$('#datepicker-date').datepicker({
+            onSelect: this.handleDateChange,
+            dateFormat: 'dd-mm-yyyy'
+        }).data('datepicker');
+
+        this.dateDatepicker.show();
     }
 
     initDatepicker() {
@@ -133,6 +192,7 @@ class DatePicker extends Component {
             let item = this.state.variants[key];
             let activeClassName = +key === +this.state.activeVariant ? 'active' : '';
             let isRange = parseInt(key, 10) === 5;
+            let isDate = parseInt(key, 10) === 6;
 
             return (
                 <button 
@@ -146,6 +206,12 @@ class DatePicker extends Component {
                             type="text" 
                             id="datepicker-range"
                             style={ rangeInputStyle(this.state.rangeActive) } />  }
+                    { isDate && 
+                        <input
+                            onChange={this.handleDateChange} 
+                            type="text" 
+                            id="datepicker-date"
+                            style={dateInputStyle(this.state.dateActive)} />  }
                 </button>
             );
         });
@@ -155,17 +221,61 @@ class DatePicker extends Component {
         let range = date.split(' - ');
         if (range.length <= 1) return;
 
-        this.props.onChange({
-            id: 5,
-            title: 'Диапазон',
-            start: range[0],
-            end: range[1],
-            type: 'range'
-        });
+        let detail = this.getDetailType();
 
+        this.handleChange(range[0], range[1], detail);
         if (this.datepicker != null) {
             this.datepicker.hide();
         }
+    }
+
+    handleDateChange = (date) => {
+
+        let detail = this.getDetailType();
+
+        this.handleChange(date, date, detail);
+        if (this.dateDatepicker != null) {
+            this.dateDatepicker.hide();
+        }
+    }
+
+    handleChange = (start, end, detail) => {
+
+        let queryData = this.state.variants[this.state.activeVariant];
+        queryData.start = start;
+        queryData.end = end;
+        queryData.detail = detail;
+
+        this.setState({ activeQuery: queryData });
+        this.props.onChange(queryData);
+    }
+
+    renderDetailButtons() {
+        let keys = Object.keys(this.state.detailVariants);
+
+        return keys.map((key, index) => {
+            let item = this.state.detailVariants[key];
+            let activeClassName = +key === +this.state.activeDetailVariant ? 'active' : '';
+
+            return (
+                <button 
+                    key={`btn-${key}`}
+                    className={`btn btn-default ${activeClassName}`}
+                    onClick={() => { this.resolveDetailClick(key) }}>
+                    { item.title }
+                </button>
+            );
+        });
+    }
+
+    resolveDetailClick(index) {
+        this.setState({ activeDetailVariant: index });
+        this.handleChange(
+            this.state.activeQuery.start, 
+            this.state.activeQuery.end,
+            this.getDetailType(index)
+        );
+
     }
 
     render() {
@@ -174,6 +284,9 @@ class DatePicker extends Component {
             <div>
                 <div className="btn-group" style={{marginRight: '20px'}} role="group" aria-label="...">
                     { this.renderButtons() }
+                </div>
+                <div className="btn-group" style={{marginRight: '20px'}} role="group" aria-label="...">
+                    { this.renderDetailButtons() }
                 </div>
             </div>
         )
