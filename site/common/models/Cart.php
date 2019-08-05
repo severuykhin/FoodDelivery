@@ -176,7 +176,10 @@ class Cart extends \yii\db\ActiveRecord
                     'pic' => $product['pic'],
                     'size' => $value,
                     'weight' => $weight,
-                    'quantity' => $item->quantity
+                    'quantity' => $item->quantity,
+                    'category_id' => $product['category']['id'],
+                    'category_title' => $product['category']['title'],
+                    'category_slug' => $product['category']['slug']
                 ];
             }
         }

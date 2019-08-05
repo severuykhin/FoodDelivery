@@ -35,8 +35,11 @@ class CartController extends Controller
             Yii::$app->end();
         }
 
+        $souses = Dish::find()->where(['category_id' => 20])->all();
+
         return $this->render('index', [
-            'order' => $order
+            'order' => $order,
+            'souses' => $souses
         ]);
     }
 

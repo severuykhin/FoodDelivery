@@ -1,6 +1,9 @@
 import widgetItemTemplate from './widgetTemplate';
 import pageItemTemplate from './rawTemplate';
 import mobileWidget from './mobileWidget';
+import mountSouses from './cartSouses';
+
+const SOUSES_CATEGORY_ID = 20;
 
 class Cart {
 
@@ -12,6 +15,7 @@ class Cart {
         this.count = $('[data-role="cart-counter"]');
         this.widget = $('[data-role="cart-widget"]');
         this.cartPage = $('[data-role="cart-page"]');
+        this.cartPageSummCount = $('[data-role="cart-page-summ-count"]');
 
         this.scrollBar = null;
 
@@ -31,6 +35,8 @@ class Cart {
     init() {
         this.initHandlers();
         this.actualize();
+
+        mountSouses();
 
         if ($(window).width() <= 990) {
             mobileWidget();
@@ -344,6 +350,7 @@ class Cart {
         } else {
             let html = '';
             Array.prototype.slice.call(this.state.storage).forEach(item => {
+                if (item.category_id == SOUSES_CATEGORY_ID) return '';
                 html += widgetItemTemplate(item);
             });
             this.widget.html(html);
@@ -383,12 +390,12 @@ class Cart {
         let html = '';
 
         Array.prototype.slice.call(this.state.storage).forEach(item => {
+            if (item.category_id == SOUSES_CATEGORY_ID) return '';
             html += pageItemTemplate(item);
         });
 
-        html += `<div class="cart-page__row cart-page__row_result"><div class="cart-page__name">Сумма заказа: <span class="cart-page__totalPrice">${summ} руб.</span></div></div>`;
-
         this.cartPage.html(html);
+        this.cartPageSummCount.html(`${summ} руб.`);
 
         if (summ < 450) {
             this.form.hide();

@@ -44,7 +44,8 @@ $this->registerMetaTag([
 	                		<?= $this->render('_item', [
 	                			'item'          => $item,
 	                			'categoryTitle' => $category->title,
-	                			'categorySlug'  => $category->slug
+								'categorySlug'  => $category->slug,
+								'categoryId'    => $category->id
 	                		]);?>
 
 	                	<?php endforeach;?>

@@ -45,7 +45,7 @@ class Dish extends ActiveRecord
         return [
             [['title', 'weight', 'price_actual', 'category_id'], 'required'],
             [['title', 'description', 'weight', 'price_actual', 'price_old'], 'string'],
-            [['sort'], 'integer'],
+            [['sort', 'bonus', 'bonus_type'], 'integer'],
             [['active', 'action', 'best'], 'boolean']
         ];
     }

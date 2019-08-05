@@ -24,12 +24,40 @@ $referrerIsSameOrigin = stripos(Yii::$app->request->referrer, 'shymovka') !== fa
     <a onclick="javascript:history.back();" class="cart-page__back">Назад</a>
 <?php endif; ?>
 
-<h1 class="title title-h1 title-cart">
-Корзина
-</h1>
+    <h1 class="title title-h1 title-cart">
+    Ваша корзина
+    </h1>
 
     <div class="cart-page" data-role="cart-page">
         
+    </div>
+
+    <h2 class="title title-h2 title-cart title-cart_sub">
+        <span>Выберите соусы</span> <br>
+        <span class="cart-page__souses" data-role="cart-page-souse-count">
+            3 бесплатно
+        </span>
+    </h2>
+    
+    <div class="cart-souses-glide glide jsGlide">
+        <div class="cart-souses-wrap glide__track" data-glide-el="track">
+            <div class="cart-souses glide__slides">
+                <?php foreach($souses as $sous):?>
+
+                    <div class="cart-souses__item glide__slide">
+                        <?= $this->render('../menu/_card-sous', [
+                            'item' => $sous,
+                            'categoryTitle' => 'Соусы',
+                            'categorySlug'  => 'souses'
+                        ]) ?>
+                    </div>    
+
+                <?php endforeach;?>
+            </div>
+        </div>
+        <div class="glide__arrows" data-glide-el="controls">
+            <button class="glide__arrow glide__arrow--right" data-glide-dir=">"></button>
+        </div>
     </div>
 
     <div class="cart-order" data-role="cart-order-form" style="display: none;">
@@ -132,6 +160,7 @@ $referrerIsSameOrigin = stripos(Yii::$app->request->referrer, 'shymovka') !== fa
                 </div>
             </div>
             <div class="col-lg-12 cart-order__actions">
+                <div class="cart-page__name">Сумма заказа: <span class="cart-page__totalPrice" data-role="cart-page-summ-count">1000 руб.</span></div>
                 <?= Html::submitButton('Заказать', [
                     'class' => 'button button__primary button__form'
                 ]) ?>

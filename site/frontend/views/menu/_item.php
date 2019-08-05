@@ -9,6 +9,7 @@ use yii\helpers\Html;
 	<?= $this->render('_card', [
 		'item' => $item,
 		'categoryTitle' => $categoryTitle,
-		'categorySlug'  => $categorySlug
+		'categorySlug'  => $categorySlug,
+		'categoryId'    => $categoryId
 ]) ?>
 </div>

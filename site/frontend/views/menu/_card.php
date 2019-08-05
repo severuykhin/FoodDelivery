@@ -59,7 +59,8 @@ use yii\helpers\Json;
                         'title' => $item->title,
                         'price' => Yii::$app->formatter->asDecimal($modification->price),
                         'weight' => $modification->weight,
-                        'size' => $modification->value,    
+                        'size' => $modification->value,
+                        'category_id' => $categoryId    
                     ];
                 
                 ?>
@@ -95,7 +96,8 @@ use yii\helpers\Json;
                 'title'=> $item->title,
                 'price' => $item->modifications ? Yii::$app->formatter->asDecimal($item->modifications[0]->price) : Yii::$app->formatter->asDecimal($item->price_actual),
                 'weight'=> $item->modifications ? $item->modifications[0]->weight : '',
-                'size' => $item->modifications ? $item->modifications[0]->value : ''
+                'size' => $item->modifications ? $item->modifications[0]->value : '',
+                'category_id' => $categoryId
             ];
         
         ?>

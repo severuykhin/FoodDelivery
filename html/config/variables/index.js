@@ -61,7 +61,9 @@ module.exports = {
         sass: [
             "setting.block/bootstrap.scss",
             "setting.block/custom.scss",
-            "node_modules/simplebar/dist/simplebar.min.css"
+            "node_modules/simplebar/dist/simplebar.min.css",
+            "node_modules/@glidejs/glide/dist/css/glide.core.min.css",
+            "node_modules/@glidejs/glide/dist/css/glide.theme.min.css"
         ],
         images: [],
         fonts : 'fonts/**/*',

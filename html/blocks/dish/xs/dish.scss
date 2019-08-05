@@ -225,6 +225,43 @@
       }
     }
   }
+
+  &_sous {
+    padding-bottom: 0px;
+    .zoompic {
+      &::after {
+        margin-top: -17px;
+        margin-left: -18px;
+      }
+    }
+    &-wrap {
+    }
+    .dish__image {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 15px auto;
+      overflow: hidden;
+      border-radius: 50%;
+      img {
+        display: inline-block;
+        width: 107px;
+        position: relative;
+        left: -30px;
+      }
+    }
+
+    .dish__info {
+      text-align: center;
+      padding-top: 0;
+      margin-bottom: 10px;
+    }
+
+    .dish__order {
+      position: static;
+      margin-right: 0;
+      padding-right: 4px;
+    }
+  }
 }
 
 @media screen and (max-width: 1220px) {

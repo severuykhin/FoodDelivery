@@ -51,7 +51,7 @@ class CartItem extends \yii\db\ActiveRecord
 
     public function getProduct()
     {
-        return Dish::find()->where(['id' => $this->product_id]);
+        return Dish::find()->where(['id' => $this->product_id])->with(['category']);
     }
 
     public function getProductWithModification()

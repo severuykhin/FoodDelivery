@@ -6,6 +6,7 @@
   "author": "Lihachev Alexey",
   "license": "MIT",
   "dependencies": {
+    "@glidejs/glide": "^3.3.0",
     "autoprefixer": "^6.6.1",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",

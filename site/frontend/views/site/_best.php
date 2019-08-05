@@ -15,7 +15,10 @@ use yii\helpers\Html;
         <div class="best__inner">
         <?php foreach($bestDishes as $item): ?>
             <div class="best__item">
-                <?= $this->render('../menu/_card', [ 'item' => $item ])?>
+                <?= $this->render('../menu/_card', [ 
+                    'item' => $item,
+                    'categoryId' => $item->category->id
+                ])?>
             </div>
         <?php endforeach;?>
         </div>

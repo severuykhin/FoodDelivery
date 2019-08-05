@@ -205,6 +205,11 @@
 
 .title-cart {
     margin-bottom: 40px;
+    &_sub {
+        br {
+            display: none;
+        }
+    }
 }
 
 .container-cart {
@@ -238,6 +243,9 @@
     &__actions {
         text-align: center;
         padding: 30px 0 50px 0;
+        .cart-page__name {
+            margin-bottom: 20px;
+        }
     }
 
     .form-group {
@@ -350,12 +358,94 @@
     font-size: 20px;
 }
 
+.cart-souses {
+    &-glide {
+        position: relative;
+        &::after {
+            width: 140px;
+            height: 100%;
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: linear-gradient(to right, rgba(255,255,255, 0), rgba(255,255,255, 1));
+        }
+
+        .glide__arrow--right {
+            width: 50px;
+            height: 100%;
+            z-index: 2;
+            right: 0;
+            box-shadow: none;
+            border: none;
+            &:hover {
+                &::before {
+                    background-color: #acacac;    
+                }
+            }
+            &:active {
+                &::before {
+                    background-color: #979797;    
+                }
+            }
+            &::after {
+                position: absolute;
+                content: '';
+                width: 10px;
+                height: 10px;
+                top: 50%;
+                margin-top: -5px;
+                left: 18px;
+                border-right: 2px solid #fff;
+                border-bottom: 2px solid #fff;
+                transform: rotate(-45deg);
+                z-index: 1;
+            }
+
+            &::before {
+                position: absolute;
+                content: '';
+                width: 40px;
+                height: 40px;
+                top: 50%;
+                margin-top: -20px;
+                left: 5px;
+                background-color: #bdbdbd;
+                border-radius: 50%;
+                z-index: 1;
+            }
+        }
+    }
+    &__item {
+        padding: 15px;
+        border: 2px dashed #eaeaea;
+        border-radius: 10px;
+        display: inline-block;
+    }
+    .dish_sous {
+        
+    }
+}
+
 .cart-page {
 
     min-height: 190px;
 
     .dish__regulator {
         flex-shrink: 0;
+    }
+
+    &__souses {
+        display: inline-block;
+        font-size: 16px;
+        font-family: 'Montserrat', sans-serif;
+        background-color: #ffd84c;
+        font-weight: 500;
+        padding: 10px 20px;
+        border-radius: 20px;
+        margin-bottom: 0px;
+        margin-left: 20px;
+        vertical-align: middle;
     }
 
     &__back {
@@ -425,6 +515,24 @@
         width: 200px;
         padding-left: 30px;
         text-align: center;
+    }
+}
+
+.title-cart {
+    &_sub {
+        margin-top: 40px;
+    }
+}
+
+@media(min-width: 768px) {
+    .cart-order {
+        &__actions {
+            padding: 40px 15px 50px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            align-content: center;
+        }
     }
 }
 
