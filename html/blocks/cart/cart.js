@@ -28,7 +28,8 @@ class Cart {
         this.orderStub = $('[data-role="cart-order-stub"]');
 
         this.state = {
-            storage: []
+            storage: [],
+            bonuses: []
         };
     }
 
@@ -54,7 +55,10 @@ class Cart {
             }
         }
 
-        this.state.storage = initialState;
+        console.log(initialState);
+
+        this.state.storage = initialState.items;
+        this.state.bonuses = initialState.bonuses;
         this.updateCards();
         this.update();
     }
@@ -147,7 +151,7 @@ class Cart {
      */
     addToCart(addButton) {
 
-        let product = addButton.attr('data-product');
+        let product = addButton.attr('data-product');        
 
         try {
             product = JSON.parse(product);
@@ -158,6 +162,10 @@ class Cart {
         let itemIndex = this.findProductIndex(product);
 
         let quantity;
+
+        if (addButton.data('bonus') == true && this.bonusesAvailable() > 0) {
+            this.addLCBonus(product);
+        }
 
         // Если в корзине нет товаров или нет конкретного товара
         if (this.state.storage.length == 0 || itemIndex < 0) {
@@ -170,11 +178,36 @@ class Cart {
         }
         
         this.resolveRegulator(addButton, quantity);
+
         this.send(product, 'add')
             .then((data) => { 
                 this.update();
                 this.reachGoal('cart_add');
-            });
+            });   
+
+    }
+
+    addLCBonus(product) {
+        let items = JSON.parse(localStorage.getItem('bonuses'));
+        items.push(product);
+        localStorage.setItem('bonuses', JSON.stringify(items));
+
+    }
+
+    removeLCBonus(product) {
+        let items = JSON.parse(localStorage.getItem('bonuses'));
+        let index;
+
+        items.forEach((item, i) => {
+            if (product.id == item.id) {
+                index = i;
+                return;
+            }
+        });
+
+        if (index) {
+            
+        }
 
     }
 
@@ -185,6 +218,13 @@ class Cart {
             product = JSON.parse(product);
         } catch(e) {
             throw e; // Some useful stuff if error
+        }
+
+        let sousToPizza = this.countCategoryAmount(3) - this.countCategoryAmount(20);
+
+        if (removeButton.data('bonus') == true 
+            && sousToPizza <= 0) {
+            this.removeLCBonus(product);              
         }
 
         let itemIndex = this.findProductIndex(product);
@@ -374,6 +414,8 @@ class Cart {
             this.applyCustomScroll();
         }
 
+        console.log(this.state.storage);
+
 
     }
 
@@ -403,6 +445,33 @@ class Cart {
         } else {
             this.form.show();
             this.orderStub.hide();
+        }
+    }
+
+    bonusesAvailable() {
+        let pizzaCount = this.countCategoryAmount(3); // 3 - pizza category id
+        let sousBonusCount = this.countBonusAmount();
+
+        let availableSousBonuses = pizzaCount - sousBonusCount;
+
+        return availableSousBonuses;
+    }
+
+    updateSousCount() {
+        
+        let sousBonusAmount = this.bonusesAvailable();
+        let textValue = souseTextValue(sousBonusAmount);
+
+        if (sousBonusAmount > 0) {
+            this.cartPageSousCount
+                .removeClass('disabled')
+                .addClass('active')
+                .text(textValue);
+        } else {
+            this.cartPageSousCount
+                .removeClass('active')
+                .addClass('disabled')
+                .text(textValue);
         }
     }
 
@@ -463,6 +532,25 @@ class Cart {
     countItems() {
         let counter = this.state.storage.reduce((previous, item) => {
             return previous + item.quantity;
+        }, 0);
+
+        return counter;
+    }
+
+    countBonusAmount(type) {
+        if (localStorage.getItem('bonuses')) {
+            return JSON.parse(localStorage.getItem('bonuses')).length;
+        } return 0;
+    }
+
+    countCategoryAmount(category_id) {
+        let counter = this.state.storage.reduce((previous, item) => {
+            if (parseInt(item.category_id, 10) === category_id) {
+                console.log(item);
+                return previous + item.quantity;
+            } else {
+                return previous;
+            }
         }, 0);
 
         return counter;

@@ -446,6 +446,20 @@
         margin-bottom: 0px;
         margin-left: 20px;
         vertical-align: middle;
+        opacity: 0;
+        visibility: hidden;
+        z-index: -1;
+        transition: all 200ms ease;
+        &.active {
+            opacity: 1;
+            visibility: visible;
+            z-index: 1;
+        }
+        &.disabled {
+            opacity: 0;
+            visibility: hidden;
+            z-index: -1;
+        }
     }
 
     &__back {

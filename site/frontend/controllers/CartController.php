@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use yii\web\Controller;
+use common\models\CartBonus;
 use common\models\Category;
 use common\models\Dish;
 use common\models\CartOrder;

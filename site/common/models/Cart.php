@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 use common\models\CartItem;
+use common\models\CartBonus;
 use yii\helpers\VarDumper;
 use aquy\thumbnail\Thumbnail;
 
@@ -47,6 +48,11 @@ class Cart extends \yii\db\ActiveRecord
     public function getItems()
     {
         return $this->hasMany(CartItem::class, ['cart_id' => 'id']);
+    }
+
+    public function getBonuses()
+    {
+        return $this->hasMany(CartBonus::class, ['cart_id' => 'id']);
     }
 
     public function add(array $item)
@@ -122,6 +128,17 @@ class Cart extends \yii\db\ActiveRecord
     public function getActualItems()
     {
         $items = $this->getItems()->all();
+        return $this->processItems($items);
+    }
+
+    public function getActualBonues()
+    {
+        $bonuses = $this->getBonuses()->asArray()->all();
+        return $bonuses;
+    }
+
+    private function processItems(array $items)
+    {
         $data = [];
 
         foreach($items as $index => $item)
@@ -141,6 +158,8 @@ class Cart extends \yii\db\ActiveRecord
                     'category_id' => $product['category_id'],
                     'category_title' => $product['category_title'],
                     'category_slug' => $product['category_slug'],
+                    'bonus' => $item->bonus,
+                    'bonus_type' => $item->bonus_type
                 ];                
             }
 
@@ -179,7 +198,9 @@ class Cart extends \yii\db\ActiveRecord
                     'quantity' => $item->quantity,
                     'category_id' => $product['category']['id'],
                     'category_title' => $product['category']['title'],
-                    'category_slug' => $product['category']['slug']
+                    'category_slug' => $product['category']['slug'],
+                    'bonus' => $item->bonus,
+                    'bonus_type' => $item->bonus_type
                 ];
             }
         }

@@ -2,7 +2,6 @@
  * Точка входа в приложение
  */
 import '@babel/polyfill';
-import 'SimpleBar';
 import initActions from './actions/xs/actions';
 import initFancy from './zoompic/xs/zoompic';
 import initCartOrder from './cart/cartOrder';

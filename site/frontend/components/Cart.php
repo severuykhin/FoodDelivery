@@ -55,8 +55,14 @@ class Cart extends Component
     {
         $cart = self::getInstance();
 
-        if (!$cart) return [];
+        if (!$cart) return [
+            'items' => [],
+            'bonuses' => []
+        ];
 
-        return $cart->getActualItems();
+        return [
+            'items' => $cart->getActualItems(),
+            'bonuses' => $cart->getActualBonues()
+        ];
     }
 }
