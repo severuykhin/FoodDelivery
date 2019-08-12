@@ -15,7 +15,7 @@
                         Thumbnail::THUMBNAIL_OUTBOUND,
                         false
                     ); ?>
-                	<img src="/statics/images/picplaceholder.jpg" data-lazy="<?= $file?>">
+                	<img src="/statics/images/picplaceholder.jpg" alt="Фотография - кафе Шумовка" data-lazy="<?= $file?>">
                 <?php endif;?>
             </a>
 	</div>

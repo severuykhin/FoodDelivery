@@ -37,3 +37,5 @@ $this->registerMetaTag([
       </div>
     </div>
   </div>
+
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>

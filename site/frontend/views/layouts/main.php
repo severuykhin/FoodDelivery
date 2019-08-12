@@ -18,7 +18,6 @@ $categories = Category::find()->orderBy(['sort' => SORT_DESC])->asArray()->all()
     <title><?= $this->title ?></title>
     <?php $this->head() ?>
     <meta charset="<?= Yii::$app->charset ?>"/>
-    <meta charset="UTF-8">
     <meta name="yandex-verification" content="f2d8219c1de3abe8" />
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -30,7 +29,8 @@ $categories = Category::find()->orderBy(['sort' => SORT_DESC])->asArray()->all()
     <link rel="icon" type="image/png" sizes="32x32" href="/statics/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/statics/favicon-16x16.png">
     <link rel="icon" type="image/png" href="/statics/favicon.png" />
-    <link rel="stylesheet" href="/statics/styles.css">
+    <link rel="stylesheet" href="/statics/styles13.css">
+
     <script src="https://www.googletagmanager.com/gtag/js?id=UA-138651791-1"></script>
     <script>
         window.addEventListener('load', function () {
@@ -45,20 +45,19 @@ $categories = Category::find()->orderBy(['sort' => SORT_DESC])->asArray()->all()
     </script>
 
     <!-- Yandex.Metrika counter -->
-    <script type="text/javascript" >
-      (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-      m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-      (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    <script>
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-      ym(47772808, "init", {
+        ym(47772808, "init", {
             clickmap:true,
             trackLinks:true,
             accurateTrackBounce:true,
             webvisor:true,
             trackHash:true
-      });
+        });
     </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/47772808" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
 
     <?= Html::csrfMetaTags() ?>
@@ -174,7 +173,6 @@ $categories = Category::find()->orderBy(['sort' => SORT_DESC])->asArray()->all()
       window.initialData = <?= Json::encode(CartComponent::actualize()) ?> 
     </script>
 
-    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
@@ -190,8 +188,8 @@ $categories = Category::find()->orderBy(['sort' => SORT_DESC])->asArray()->all()
       }(window, document, "js/jquery.min.js", "jQuery");
     </script>
     <!-- /подключение jquery-->
-    <script src="/statics/libs.js"></script>
-    <script src="/statics/main.js"></script>
+    <script src="/statics/libs12.js"></script>
+    <script src="/statics/main12.js"></script>
 </body>
 </html>
 <?php $this->endPage() ?>
