@@ -46,7 +46,7 @@
 }
 
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 840px) {
   .best {
     &__item {
       width: calc(50% - 30px);
@@ -58,11 +58,15 @@
   }
 }
 
-@media screen and (max-width: 573px) {
+@media screen and (max-width: 640px) {
   .best {
     &__item {
       width: 100%;
-      margin: 20px 15px;
+      margin: 0 0 20px 0;
+      padding: 0 15px;
+      border-bottom: 1px dashed rgba(68, 68, 68, 0.21);
+      border-radius: 0px;
+      padding-bottom: 4px;
     }
   }
 }

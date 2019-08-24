@@ -32,31 +32,30 @@ $referrerIsSameOrigin = stripos(Yii::$app->request->referrer, 'shymovka') !== fa
         
     </div>
 
-    <h2 class="title title-h2 title-cart title-cart_sub">
-        <span>Выберите соусы</span> <br>
-        <span class="cart-page__souses" data-role="cart-page-souse-count">
-            3 бесплатно
-        </span>
-    </h2>
-    
-    <div class="cart-souses-glide glide jsGlide">
-        <div class="cart-souses-wrap glide__track" data-glide-el="track">
-            <div class="cart-souses glide__slides">
-                <?php foreach($souses as $sous):?>
+    <div class="card-souses-wrap" data-role="cart-souses-wrap" style="display: none;">
+        <h2 class="title title-h2 title-cart title-cart_sub">
+            <span>Выберите соусы</span> <br>
+            <span class="cart-page__souses" data-role="cart-page-souse-count">
+                
+            </span>
+        </h2>
+        
+        <div class="cart-souses-glide">
+            <div class="cart-souses-wrap">
+                <div class="cart-souses">
+                    <?php foreach($souses as $sous):?>
 
-                    <div class="cart-souses__item glide__slide">
-                        <?= $this->render('../menu/_card-sous', [
-                            'item' => $sous,
-                            'categoryTitle' => 'Соусы',
-                            'categorySlug'  => 'souses'
-                        ]) ?>
-                    </div>    
+                        <div class="cart-souses__item">
+                            <?= $this->render('../menu/_card-sous', [
+                                'item' => $sous,
+                                'categoryTitle' => 'Соусы',
+                                'categorySlug'  => 'souses'
+                            ]) ?>
+                        </div>    
 
-                <?php endforeach;?>
+                    <?php endforeach;?>
+                </div>
             </div>
-        </div>
-        <div class="glide__arrows" data-glide-el="controls">
-            <button class="glide__arrow glide__arrow--right" data-glide-dir=">"></button>
         </div>
     </div>
 

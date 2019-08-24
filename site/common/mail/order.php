@@ -2,6 +2,10 @@
 
 use yii\helpers\Html;
 
+$data = $model->compile();
+$cost = 0;
+$freeSousAmount = $model->getFreeSousAmount();
+
 ?>
 
 <p>
@@ -78,6 +82,7 @@ use yii\helpers\Html;
     <tbody>
         <?php 
             $cost = 0; 
+            $amount = 0;
         ?>
         <?php foreach($data as $index => $item): ?>
             <?php 
@@ -93,6 +98,28 @@ use yii\helpers\Html;
                 <td style="border: 1px solid #999;"><?= $item['price'] * $item['quantity'] ?></td>
             </tr>
         <?php endforeach; ?>
+
+        <?php 
+            if ($freeSousAmount) {
+                $cost = $cost - ($freeSousAmount * 30);
+            }
+        ?>
+        <?php if($freeSousAmount): ?>
+            <tr>
+                <td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #999;"></td>
+                <td style="border: 1px solid #999;">Бесплатные соусы</td>
+                <td style="border: 1px solid #999;"></td>
+                <td style="border: 1px solid #999;"><?= $freeSousAmount ?></td>
+                <td style="border: 1px solid #999;">0</td>
+                <td style="border: 1px solid #999;">-<?= $freeSousAmount * 30 ?></td>
+            </tr>
+        <?php endif; ?>
+            <tr>
+                <td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
             <tr>
                 <td style="border: 1px solid #999;"></td>
                 <td style="border: 1px solid #999;"></td>

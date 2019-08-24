@@ -1,9 +1,11 @@
 import widgetItemTemplate from './widgetTemplate';
 import pageItemTemplate from './rawTemplate';
 import mobileWidget from './mobileWidget';
-import mountSouses from './cartSouses';
+import souseTextValue from './souseTextValue';
+import renderSouses from './renderSouses';
 
-const SOUSES_CATEGORY_ID = 20;
+export const SOUSES_CATEGORY_ID = 20;
+export const SOUS_COST = 30;
 
 class Cart {
 
@@ -16,6 +18,8 @@ class Cart {
         this.widget = $('[data-role="cart-widget"]');
         this.cartPage = $('[data-role="cart-page"]');
         this.cartPageSummCount = $('[data-role="cart-page-summ-count"]');
+        this.cartPageSousCount = $('[data-role="cart-page-souse-count"]');
+        this.sousesWrap = $('[data-role="cart-souses-wrap"]');
 
         this.scrollBar = null;
 
@@ -31,13 +35,13 @@ class Cart {
             storage: [],
             bonuses: []
         };
+
+        this.freeSousesAvailable = 0;
     }
 
     init() {
         this.initHandlers();
         this.actualize();
-
-        mountSouses();
 
         if ($(window).width() <= 990) {
             mobileWidget();
@@ -55,12 +59,12 @@ class Cart {
             }
         }
 
-        console.log(initialState);
-
         this.state.storage = initialState.items;
         this.state.bonuses = initialState.bonuses;
+        this.freeSousesAvailable = this.getPizzaCount() - this.getSousCount();
         this.updateCards();
         this.update();
+
     }
 
     initHandlers() {
@@ -163,13 +167,10 @@ class Cart {
 
         let quantity;
 
-        if (addButton.data('bonus') == true && this.bonusesAvailable() > 0) {
-            this.addLCBonus(product);
-        }
-
         // Если в корзине нет товаров или нет конкретного товара
         if (this.state.storage.length == 0 || itemIndex < 0) {
             product.quantity = 1;
+            product.bonus = 1;
             quantity = 1;
             this.state.storage.push(product);
         } else {
@@ -187,30 +188,6 @@ class Cart {
 
     }
 
-    addLCBonus(product) {
-        let items = JSON.parse(localStorage.getItem('bonuses'));
-        items.push(product);
-        localStorage.setItem('bonuses', JSON.stringify(items));
-
-    }
-
-    removeLCBonus(product) {
-        let items = JSON.parse(localStorage.getItem('bonuses'));
-        let index;
-
-        items.forEach((item, i) => {
-            if (product.id == item.id) {
-                index = i;
-                return;
-            }
-        });
-
-        if (index) {
-            
-        }
-
-    }
-
     removeFromCart(removeButton) {
         let product = removeButton.attr('data-product');
 
@@ -218,13 +195,6 @@ class Cart {
             product = JSON.parse(product);
         } catch(e) {
             throw e; // Some useful stuff if error
-        }
-
-        let sousToPizza = this.countCategoryAmount(3) - this.countCategoryAmount(20);
-
-        if (removeButton.data('bonus') == true 
-            && sousToPizza <= 0) {
-            this.removeLCBonus(product);              
         }
 
         let itemIndex = this.findProductIndex(product);
@@ -253,6 +223,11 @@ class Cart {
      */
     resolveRegulator(addButton, quantity) {
 
+        let isFree = this.canAddFreeSous(); 
+
+        let dataCategoryId = addButton.data('product').category_id,
+            price = addButton.data('product').price;
+
         // If this is Order button, not plus
         if (addButton.attr('data-type') === 'add-init') {
 
@@ -262,9 +237,7 @@ class Cart {
             regulator.find('[data-role="dish-amount"]').text(quantity);
 
         } else if (addButton.attr('data-type') === 'add-plus') {
-
             addButton.prev().text(quantity);
-
         }
     }   
 
@@ -390,9 +363,12 @@ class Cart {
         } else {
             let html = '';
             Array.prototype.slice.call(this.state.storage).forEach(item => {
-                if (item.category_id == SOUSES_CATEGORY_ID) return '';
-                html += widgetItemTemplate(item);
+
+                let isFree = this.canAddFreeSous();
+
+                html += widgetItemTemplate(item, isFree);
             });
+
             this.widget.html(html);
 
         }
@@ -414,9 +390,6 @@ class Cart {
             this.applyCustomScroll();
         }
 
-        console.log(this.state.storage);
-
-
     }
 
     updatePage() {
@@ -426,6 +399,7 @@ class Cart {
         if (this.state.storage.length <= 0) {
             this.cartPage.html('Добавьте что-нибудь из меню');
             this.form.hide();
+            this.sousesWrap.hide();
             return false;            
         }
 
@@ -439,39 +413,54 @@ class Cart {
         this.cartPage.html(html);
         this.cartPageSummCount.html(`${summ} руб.`);
 
+        this.updateSousCount();
+
         if (summ < 450) {
             this.form.hide();
+            this.sousesWrap.hide();
             this.orderStub.show();
         } else {
             this.form.show();
+            this.sousesWrap.show();
             this.orderStub.hide();
         }
+
+        $('.dish_sous').each((index, item) => {
+            let elem = $(item),
+                priceElem = elem.find('[data-role="product-price"]'),
+                charElem  = priceElem.next(),
+                data = elem.find('[data-role="product-add"]').data('product');
+
+            let isFree = this.canAddFreeSous();
+            if (isFree) {
+                priceElem.text('Бесплатно');
+                charElem.hide();
+            } else {
+                priceElem.text(data.price);
+                charElem.show().css({'opacity': 1});
+            }
+        });
     }
 
-    bonusesAvailable() {
-        let pizzaCount = this.countCategoryAmount(3); // 3 - pizza category id
-        let sousBonusCount = this.countBonusAmount();
-
-        let availableSousBonuses = pizzaCount - sousBonusCount;
-
-        return availableSousBonuses;
+    canAddFreeSous() {
+        return this.getFreeSousAmount() < this.getPizzaCount();
     }
 
     updateSousCount() {
         
-        let sousBonusAmount = this.bonusesAvailable();
-        let textValue = souseTextValue(sousBonusAmount);
+        let sousBonusLeft = this.getPizzaCount() - this.getFreeSousAmount(),
+            textValue = souseTextValue(sousBonusLeft);
 
-        if (sousBonusAmount > 0) {
+        if (sousBonusLeft > 0) {
             this.cartPageSousCount
                 .removeClass('disabled')
-                .addClass('active')
                 .text(textValue);
+                setTimeout(() => { this.cartPageSousCount.addClass('active') }, 100)
         } else {
             this.cartPageSousCount
                 .removeClass('active')
-                .addClass('disabled')
-                .text(textValue);
+                .addClass('disabled');
+                setTimeout(() => { this.cartPageSousCount.text(textValue) }, 200);
         }
     }
 
@@ -491,11 +480,13 @@ class Cart {
                 let modButton = $(`[data-modification="${cartItem.mId}"]`);
                 modButton.click();
             }
-            
         }
     }
 
     updateCard(data) {
+
+        let isFree = this.canAddFreeSous();
+
         let productBtn = $(`[data-productid="${data.id}"]`);
 
         if (productBtn.length <= 0) return false;
@@ -526,7 +517,9 @@ class Cart {
             return previous + nextValue;
         }, 0);
 
-        return summ;
+
+        let freeSousAmount = this.getFreeSousAmount();
+        return summ - (freeSousAmount * SOUS_COST);
     }
 
     countItems() {
@@ -537,16 +530,9 @@ class Cart {
         return counter;
     }
 
-    countBonusAmount(type) {
-        if (localStorage.getItem('bonuses')) {
-            return JSON.parse(localStorage.getItem('bonuses')).length;
-        } return 0;
-    }
-
     countCategoryAmount(category_id) {
         let counter = this.state.storage.reduce((previous, item) => {
             if (parseInt(item.category_id, 10) === category_id) {
-                console.log(item);
                 return previous + item.quantity;
             } else {
                 return previous;
@@ -554,6 +540,22 @@ class Cart {
         }, 0);
 
         return counter;
+    }
+
+    getPizzaCount() {
+        return this.countCategoryAmount(3);
+    }
+
+    getSousCount() {
+        return this.countCategoryAmount(20);
+    }
+
+    getFreeSousAmount() {
+        let sousesAmount = this.getSousCount(),
+            pizzaAmount  = this.getPizzaCount(),
+            freeSousAmount = sousesAmount >= pizzaAmount ? pizzaAmount : sousesAmount;
+
+        return freeSousAmount
     }
 
     updateItem(item, quantity) {

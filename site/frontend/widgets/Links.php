@@ -18,6 +18,7 @@ class Links extends Widget
     {
 
         $categories =  Category::find()
+            ->where(['<>', 'id', 20])
             ->orderBy(['sort' => SORT_DESC])
             ->all();
 

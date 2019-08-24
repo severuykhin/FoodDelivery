@@ -62,7 +62,7 @@ class Cart extends Component
 
         return [
             'items' => $cart->getActualItems(),
-            'bonuses' => $cart->getActualBonues()
+            'bonuses' => []
         ];
     }
 }

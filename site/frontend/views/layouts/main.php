@@ -8,7 +8,7 @@ use frontend\widgets\Cart;
 use frontend\components\Cart as CartComponent;
 use yii\helpers\Json;
 
-$categories = Category::find()->orderBy(['sort' => SORT_DESC])->asArray()->all();
+$categories = Category::find()->where(['<>', 'id', 20])->orderBy(['sort' => SORT_DESC])->asArray()->all();
 
 ?>
 <?php $this->beginPage() ?>

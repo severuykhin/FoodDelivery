@@ -29,14 +29,18 @@ class CartController extends Controller
             $order->cart_id = $cart->id;
             $order->save();
             $orderData = Cart::actualize();
-            $order->send($orderData);
             $order->process($cart);
+            $order->send();
             Yii::$app->session->setFlash('orderSuccess', $order->id);
             $this->redirect(['site/spasibo']);
             Yii::$app->end();
         }
 
-        $souses = Dish::find()->where(['category_id' => 20])->all();
+        $souses = Dish::find()
+                    ->where(['category_id' => 20])
+                    ->andWhere(['id' => [135, 137, 133, 136]])
+                    ->orderBy('sort')
+                    ->all();
 
         return $this->render('index', [
             'order' => $order,

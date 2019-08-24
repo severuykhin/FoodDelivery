@@ -25,9 +25,9 @@ class MenuController extends Controller
     public function actionCategory($slug = 'all')
     {
         if ($slug === 'all') {
-            $categories = Category::find()->with(['dishes'])->all();
+            $categories = Category::find()->where(['<>', 'id', 20])->with(['dishes'])->all();
         } else {
-            $categories = Category::find()->where(['slug' => $slug])->with(['dishes'])->all();
+            $categories = Category::find()->where(['slug' => $slug])->andWhere(['<>', 'id', 20])->with(['dishes'])->all();
         }
 
         if (!$categories)

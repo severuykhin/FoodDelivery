@@ -32,6 +32,8 @@ class CartOrder extends \yii\db\ActiveRecord
     const PAYMENT_CASH = 0;
     const PAYMENT_CARD = 1;
 
+    const SOUS_PRICE = 30;
+
     public $items = [];
     public $details;
 
@@ -188,19 +190,51 @@ class CartOrder extends \yii\db\ActiveRecord
         return $data;
     }
 
-    public function send($data)
+    public function send()
     {
         foreach (Yii::$app->params['emails'] as $email) 
         {
             Yii::$app->mailer->compose('order', [
-                'model' => $this,
-                'data'  => $data
+                'model' => $this
                 ])
                 ->setFrom([Yii::$app->params['supportEmail'] => 'shymovka43.ru'])
                 ->setTo($email)
                 ->setSubject('Заявка на доставку shymovka43.ru')
                 ->send();
         }
+    }
+
+    private function getCategoryCount(int $id)
+    {
+        $data = self::findBySql("SELECT SUM(`cart_order_item`.`quantity`) 
+                    from `cart_order_item` 
+                    LEFT JOIN `dish` on `dish`.`id` = `cart_order_item`.`product_id`
+                    WHERE `cart_order_item`.`order_id` = :id 
+                    AND `dish`.`category_id` = :cid", [
+                        ':id' => $this->id,
+                        ':cid' => $id
+                    ])->scalar();
+
+        return $data ? (int)$data : 0;
+    }
+
+    public function getPizzaCount()
+    {
+        return $this->getCategoryCount(3);
+    }
+
+    public function getSousCount()
+    {
+        return $this->getCategoryCount(20);
+    }
+
+    public function getFreeSousAmount()
+    {
+        $sousesAmount = $this->getSousCount();
+        $pizzaAmount  = $this->getPizzaCount();
+        $freeSousAmount = $sousesAmount >= $pizzaAmount ? $pizzaAmount : $sousesAmount;
+
+        return $freeSousAmount;
     }
 
     public static function paymentTypes()
@@ -229,6 +263,7 @@ class CartOrder extends \yii\db\ActiveRecord
     public function countTotal()
     {
         $data = $this->compile();
+        $freeSousAmount = $this->getFreeSousAmount();
         $res = 0;
 
         foreach($data as $index => $item)
@@ -236,7 +271,7 @@ class CartOrder extends \yii\db\ActiveRecord
             $res += (int)$item['price'] * (int)$item['quantity'];
         }
 
-        return $res;
+        return $res - ($freeSousAmount - self::SOUS_PRICE);
     }
 
     public static function getOrdersSummary()
@@ -308,7 +343,13 @@ class CartOrder extends \yii\db\ActiveRecord
     public static function getCustomerSummary()
     {
         $ordersQuery = self::find();
-        $ordersCountByPhone = self::findBySql("SELECT `phone`, COUNT(id) as `total_count`, `name` from `cart_order` WHERE `name` <> 'test' AND `status` = 1 GROUP BY `phone` ORDER BY `total_count` DESC")->asArray()->all();
+        $ordersCountByPhone = self::findBySql(
+            "SELECT MAX(`phone`) as `phone`, COUNT(id) as `total_count`, MAX(`name`) as `name` 
+                from `cart_order` 
+                WHERE `name` <> 'test' 
+                AND `status` = 1 
+                GROUP BY `phone` 
+                ORDER BY `total_count` DESC")->asArray()->all();
         
         foreach($ordersCountByPhone as $index => $customer)
         {

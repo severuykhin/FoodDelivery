@@ -285,9 +285,9 @@ class DatePicker extends Component {
                 <div className="btn-group" style={{marginRight: '20px'}} role="group" aria-label="...">
                     { this.renderButtons() }
                 </div>
-                <div className="btn-group" style={{marginRight: '20px'}} role="group" aria-label="...">
+                {/* <div className="btn-group" style={{marginRight: '20px'}} role="group" aria-label="...">
                     { this.renderDetailButtons() }
-                </div>
+                </div> */}
             </div>
         )
     }

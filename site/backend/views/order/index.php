@@ -96,6 +96,7 @@ $stateClassMap = [
                 'content' => function ($model) {
                     $data = $model->compile();
                     $cost = 0;
+                    $freeSousAmount = $model->getFreeSousAmount();
 
                     $res = '';
 
@@ -118,7 +119,15 @@ $stateClassMap = [
                         $res .= '</p>';
                     }
 
-                    $res .= '<p> <b>Всего: '. $cost .' руб.</b></p>';
+                    if ($freeSousAmount) {
+                        $cost = $cost - ($freeSousAmount * 30);
+                        $res .= '<hr>';
+                        $res .= "<p><b>Соусы</b>: $freeSousAmount бесплатно</p>";
+                    }
+
+                    $res .= '<hr>';
+                    $res .= '<p> <b>Итого к оплате: '. $cost .' руб.</b></p>';
+
                     
                     return $res;
                 }

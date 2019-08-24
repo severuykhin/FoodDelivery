@@ -37,6 +37,14 @@ class ApiController extends Controller
         ];
     }
 
+    public function actions()
+    {
+        return [
+            'cross-sell' => 'backend\actions\products\CrossSell',
+            'order-map'  => 'backend\actions\orders\OrderMap'
+        ];
+    }
+
     public function actionOrders()
     {
         $data = Yii::$app->request->get();

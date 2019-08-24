@@ -7,6 +7,7 @@ use yii\helpers\Json;
 ?>
 
 <div class="dish" data-role="product">
+
     <div class="dish__image">
         <?php if(file_exists(Yii::getAlias('@statics/uploads/dishes/' . $item->id . '/' . $item->pic))): ?>
             <a href="<?= '/statics/uploads/dishes/' . $item->id . '/' . $item->pic ?>" data-fancybox class="zoompic zoompic-dark">
@@ -30,6 +31,7 @@ use yii\helpers\Json;
             </div>
         <?php endif;?>
     </div>
+
     <div class="dish__info">
         <div class="dish__title"><?= $item->title ?></div>
         
@@ -57,7 +59,7 @@ use yii\helpers\Json;
                         'id' => $item->id,
                         'mId' => $modification->id,
                         'title' => $item->title,
-                        'price' => Yii::$app->formatter->asDecimal($modification->price),
+                        'price' => Yii::$app->formatter->asDecimal($modification->price, 0),
                         'weight' => $modification->weight,
                         'size' => $modification->value,
                         'category_id' => $categoryId    
@@ -82,9 +84,9 @@ use yii\helpers\Json;
             $price_old = $item->modifications ? $item->modifications[0]->price_old : $item->price_old; 
         ?>
         <div class="dish__price">
-            <span data-role="product-price"><?= Yii::$app->formatter->asDecimal($price)?></span> ₽
+            <span data-role="product-price"><?= Yii::$app->formatter->asDecimal($price, 0)?></span> ₽
             <?php if (!empty($price_old)): ?>
-                <div class="dish__old"><?= Yii::$app->formatter->asDecimal($price_old) ?> ₽</div>
+                <div class="dish__old"><?= Yii::$app->formatter->asDecimal($price_old, 0) ?> ₽</div>
             <?php endif;?>
         </div>
 
@@ -94,7 +96,7 @@ use yii\helpers\Json;
                 'id' => $item->id,
                 'mId' => $item->modifications ? $item->modifications[0]->id : '',
                 'title'=> $item->title,
-                'price' => $item->modifications ? Yii::$app->formatter->asDecimal($item->modifications[0]->price) : Yii::$app->formatter->asDecimal($item->price_actual),
+                'price' => $item->modifications ? Yii::$app->formatter->asDecimal($item->modifications[0]->price, 0) : Yii::$app->formatter->asDecimal($item->price_actual, 0),
                 'weight'=> $item->modifications ? $item->modifications[0]->weight : '',
                 'size' => $item->modifications ? $item->modifications[0]->value : '',
                 'category_id' => $categoryId
@@ -128,4 +130,5 @@ use yii\helpers\Json;
             </button>   
         </div>
     </div>
+   
 </div>

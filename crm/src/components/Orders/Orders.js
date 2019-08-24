@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import priceFormatter from '../../utils/priceFormatter';
-import ReportsList from '../Reports/ReportsList';
+import priceFormatter from '../../utils/priceFormatter'
+import ReportsList from '../Reports/ReportsList'
+import OrderMapContainer from '../OrderMap/OrderMapContainer'
 
 export default class Orders extends Component {
 
@@ -15,7 +16,7 @@ export default class Orders extends Component {
 
     return (
       <div>
-      <div className="col-lg-8">
+      <div className="col-lg-4">
         <table className="table table-striped">
             <thead>
               <tr>
@@ -59,6 +60,9 @@ export default class Orders extends Component {
               </tr>
             </tbody>
         </table>
+      </div>
+      <div className="col-lg-4">
+            <OrderMapContainer />
       </div>
       <div className="col-lg-4">
           <h5>Отчеты</h5>

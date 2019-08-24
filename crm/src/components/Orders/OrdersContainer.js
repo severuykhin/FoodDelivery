@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Orders from './Orders'
 import { connect } from 'react-redux';
-import { setOrders, setOrdersQuery, toggleModal } from '../../ducks/Store';
+import { setOrders, setOrdersQuery, toggleModal, getOrderMap } from '../../ducks/Store';
 import axios from 'axios';
 import DatePicker from '../DatePicker/DatePicker';
 
@@ -22,11 +22,14 @@ class OrdersContainer extends Component {
 
   async handleRangeChange (data) {
     this.ordersRequest(data);
-    this.statisticsRequest(data);
+    // this.statisticsRequest(data);
   }
 
   async ordersRequest(data) {
     this.setState({loadingOrders: true});
+
+    // Так же диспатчим экшен на получение карты заказов
+    this.props.getOrderMap(data);
 
     const response = await axios.get('/backend/api/orders', {
       params: data
@@ -65,6 +68,7 @@ class OrdersContainer extends Component {
   }
 
   render() {
+
     return (
       <div className="row">
         <div className="col-lg-12" style={{marginBottom: '20px'}}>
@@ -90,7 +94,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => ({
   setOrders: (orders) => dispatch(setOrders(orders)),
   toggleModal: (isOpen) => dispatch(toggleModal(isOpen)),
-  setOrdersQuery: (data) => dispatch(setOrdersQuery(data))
+  setOrdersQuery: (data) => dispatch(setOrdersQuery(data)),
+  getOrderMap: (data) => dispatch(getOrderMap(data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps, null, { pure: false })(OrdersContainer);
