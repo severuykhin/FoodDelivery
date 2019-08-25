@@ -29,7 +29,7 @@ $categories = Category::find()->where(['<>', 'id', 20])->orderBy(['sort' => SORT
     <link rel="icon" type="image/png" sizes="32x32" href="/statics/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/statics/favicon-16x16.png">
     <link rel="icon" type="image/png" href="/statics/favicon.png" />
-    <link rel="stylesheet" href="/statics/styles13.css">
+    <link rel="stylesheet" href="/statics/styles.css">
 
     <script src="https://www.googletagmanager.com/gtag/js?id=UA-138651791-1"></script>
     <script>
@@ -188,8 +188,8 @@ $categories = Category::find()->where(['<>', 'id', 20])->orderBy(['sort' => SORT
       }(window, document, "js/jquery.min.js", "jQuery");
     </script>
     <!-- /подключение jquery-->
-    <script src="/statics/libs12.js"></script>
-    <script src="/statics/main12.js"></script>
+    <script src="/statics/libs.js"></script>
+    <script src="/statics/main.js"></script>
 </body>
 </html>
 <?php $this->endPage() ?>

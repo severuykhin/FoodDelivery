@@ -41,7 +41,8 @@ class ApiController extends Controller
     {
         return [
             'cross-sell' => 'backend\actions\products\CrossSell',
-            'order-map'  => 'backend\actions\orders\OrderMap'
+            'order-map'  => 'backend\actions\orders\OrderMap',
+            'customers'  => 'backend\actions\customers\CustomersReport'
         ];
     }
 
@@ -77,14 +78,6 @@ class ApiController extends Controller
         } finally {
             return $responseData;
         }
-    }
-
-    public function actionCustomers()
-    {
-
-        $customersSummary = CartOrder::getCustomerSummary();
-
-        return $customersSummary;
     }
 
     public function actionProducts()

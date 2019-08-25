@@ -339,36 +339,6 @@ class CartOrder extends \yii\db\ActiveRecord
         return number_format((float)$perDay, 1, '.', '');
     }
 
-
-    public static function getCustomerSummary()
-    {
-        $ordersQuery = self::find();
-        $ordersCountByPhone = self::findBySql(
-            "SELECT MAX(`phone`) as `phone`, COUNT(id) as `total_count`, MAX(`name`) as `name` 
-                from `cart_order` 
-                WHERE `name` <> 'test' 
-                AND `status` = 1 
-                GROUP BY `phone` 
-                ORDER BY `total_count` DESC")->asArray()->all();
-        
-        foreach($ordersCountByPhone as $index => $customer)
-        {
-            $orders = self::find()->where(['phone' => $customer['phone']])->all();
-
-            foreach($orders as $order)  
-            {
-                $ordersCountByPhone[$index]['name'] = $order->name;
-                $ordersCountByPhone[$index]['orders'][] = $order;
-                $ordersCountByPhone[$index]['count'][] = [
-                    'order_id' => $order->id,
-                    'order_total' => $order->countTotal()
-                ];
-            }
-        }
-
-        return $ordersCountByPhone;
-    }
-
     public static function getDishSummary()
     {
         $data = self::findBySql("SELECT `cart_order_item`.`product_id`, `cart_order_item`.`modification_id`, COUNT(`cart_order_item`.`quantity`) as `quantity`, `dish`.`title`, `dish_modification`.`value` as `modification_name` 

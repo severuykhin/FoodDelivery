@@ -3,6 +3,7 @@ import Customers from './Customers';
 import axios from 'axios';
 import { setCustomers } from '../../ducks/Store';
 import { connect } from 'react-redux';
+import { getRegularCustomerReport } from '../../redux/selectors/customers';
 
 class CustomersContainer extends Component {
 
@@ -14,15 +15,19 @@ class CustomersContainer extends Component {
   render() {
     return (
       <div>
-        <Customers summary={this.props.customers} />
+        <Customers 
+          summary={this.props.customers} 
+          regularCustomerReport={this.props.regularCustomerReport}
+          />
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (store) => {
   return {
-    customers: state.store.customerSummary
+    customers: store.store.customerSummary,
+    regularCustomerReport: getRegularCustomerReport({...store})
   };
 }
 

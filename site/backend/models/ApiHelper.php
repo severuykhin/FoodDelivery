@@ -153,7 +153,9 @@ class ApiHelper
             $weekday = date('N', $order->created_at);
             $hour = date('H', $order->created_at);
 
-            $daysMap[$weekday][$hour]["count"] += 1;
+            if(isset($daysMap[$weekday][$hour])) {
+                $daysMap[$weekday][$hour]["count"] += 1;
+            }
         }
 
         return [
@@ -176,7 +178,7 @@ class ApiHelper
 
         foreach($days as &$day) 
         {
-           for($i = 0; $i <= 23; $i++)
+           for($i = 7; $i <= 23; $i++)
            {
                $hour = $i > 9 ? "$i" : "0$i";
                 $day[$hour] = [

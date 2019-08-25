@@ -22,7 +22,9 @@ function* getOrderMapAsync(action) {
             params: payload
         });
 
-        if (response.status === 200 && response.statusText === 'OK') {
+        console.log(response);
+
+        if (response.status === 200) {
             yield put(putOrderMap(response.data))
         } else {
             // Process some errors if exists
