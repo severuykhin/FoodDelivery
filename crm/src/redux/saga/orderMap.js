@@ -22,8 +22,6 @@ function* getOrderMapAsync(action) {
             params: payload
         });
 
-        console.log(response);
-
         if (response.status === 200) {
             yield put(putOrderMap(response.data))
         } else {

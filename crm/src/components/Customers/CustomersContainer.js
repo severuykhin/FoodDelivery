@@ -8,8 +8,12 @@ import { getRegularCustomerReport } from '../../redux/selectors/customers';
 class CustomersContainer extends Component {
 
   async componentDidMount() {
-    let response = await axios.get('/backend/api/customers');
-    this.props.setCustomersSummary(response.data);
+
+    if (this.props.customers.length <= 0) {
+      let response = await axios.get('/backend/api/customers');
+      this.props.setCustomersSummary(response.data);
+    }
+    
   }
 
   render() {
@@ -26,7 +30,7 @@ class CustomersContainer extends Component {
 
 const mapStateToProps = (store) => {
   return {
-    customers: store.store.customerSummary,
+    customers: [...store.store.customerSummary],
     regularCustomerReport: getRegularCustomerReport({...store})
   };
 }
