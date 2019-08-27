@@ -73,6 +73,12 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
+.site__index-img {
+    img {
+        width: 100%;
+    }
+}
+
 .fancybox-image {
     border-radius: 6px;
 }
@@ -89,10 +95,21 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
 }
 
+
+
 @media (max-width: 780px) {
 
     h1.title_category {
         font-size: 24px;
+    }
+
+    .site__index-img {
+        height: 300px;
+        background: url('index-img.jpg') center no-repeat;
+        background-size: cover;
+        img {
+            display: none;
+        }
     }
 
     .title-cart {
@@ -106,5 +123,11 @@ h1, h2, h3, h4, h5, h6 {
             font-size: 24px;
             margin-bottom: 20px;
         }
+    }
+}
+
+@media (max-width: 450px) {
+    .site__index-img {
+        background-position: 43% 50%;
     }
 }

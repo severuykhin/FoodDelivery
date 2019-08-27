@@ -1,8 +1,11 @@
 import widgetItemTemplate from './widgetTemplate';
 import pageItemTemplate from './rawTemplate';
+import pageGiftTemplate from './pageGiftTemplate';
+import summTemplate from './summTemplate';
 import mobileWidget from './mobileWidget';
 import souseTextValue from './souseTextValue';
 import renderSouses from './renderSouses';
+import CartGift from './cartGift';
 
 export const SOUSES_CATEGORY_ID = 20;
 export const SOUS_COST = 30;
@@ -36,6 +39,10 @@ class Cart {
             bonuses: []
         };
 
+        this.gift = new CartGift({
+            maxValue: 950
+        });
+
         this.freeSousesAvailable = 0;
     }
 
@@ -46,6 +53,11 @@ class Cart {
         if ($(window).width() <= 990) {
             mobileWidget();
         }
+
+        if (this.cartPage.length > 0) {
+            this.gift.init(this.countSumm());
+        }
+
     }
 
     actualize() {
@@ -410,19 +422,28 @@ class Cart {
             html += pageItemTemplate(item);
         });
 
+        if (summ >= 950) {
+            html += pageGiftTemplate();
+        }
+
+        html += summTemplate(summ);
+
         this.cartPage.html(html);
         this.cartPageSummCount.html(`${summ} руб.`);
 
         this.updateSousCount();
+        this.gift.update(summ);
 
         if (summ < 450) {
             this.form.hide();
             this.sousesWrap.hide();
             this.orderStub.show();
+            this.gift.hide();
         } else {
             this.form.show();
             this.sousesWrap.show();
             this.orderStub.hide();
+            this.gift.show();
         }
 
         $('.dish_sous').each((index, item) => {

@@ -117,16 +117,26 @@ $freeSousAmount = $model->getFreeSousAmount();
                 <td style="border: 1px solid #999;">-<?= $freeSousAmount * 30 ?></td>
             </tr>
         <?php endif; ?>
-            <tr>
-                <td></td><td></td><td></td><td></td><td></td><td></td>
-            </tr>
-            <tr>
-                <td style="border: 1px solid #999;"></td>
-                <td style="border: 1px solid #999;"></td>
-                <td style="border: 1px solid #999;">Итого</td>
-                <td style="border: 1px solid #999;"><?= $amount ?></td>
-                <td style="border: 1px solid #999;"></td>
-                <td style="border: 1px solid #999;"><?= $cost ?></td>
-            </tr>
+        <tr>
+            <td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <?php if ($cost >= 950 && $model->created_at > 1566930000): ?>
+        <tr>
+            <td style="border: 1px solid #999;"></td>
+            <td style="border: 1px solid #999;">Подарок: Пицца с салями и моцареллой</td>
+            <td style="border: 1px solid #999;">40 см.</td>
+            <td style="border: 1px solid #999;">1</td>
+            <td style="border: 1px solid #999;">0</td>
+            <td style="border: 1px solid #999;">0</td>
+        </tr>
+        <?php endif; ?>
+        <tr>
+            <td style="border: 1px solid #999;"></td>
+            <td style="border: 1px solid #999;"></td>
+            <td style="border: 1px solid #999;">Итого</td>
+            <td style="border: 1px solid #999;"><?= $amount ?></td>
+            <td style="border: 1px solid #999;"></td>
+            <td style="border: 1px solid #999;"><?= $cost ?></td>
+        </tr>
     </tbody>
 </table>

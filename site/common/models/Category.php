@@ -79,6 +79,9 @@ class Category extends ActiveRecord
 
     public function getDishes()
     {
-        return $this->hasMany(Dish::className(), ['category_id' => 'id'])->orderBy('sort');
+        return $this
+            ->hasMany(Dish::className(), ['category_id' => 'id'])
+            ->andFilterWhere(['active' => Dish::STATUS_ACTIVE])
+            ->orderBy('sort');
     }
 }

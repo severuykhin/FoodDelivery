@@ -11,15 +11,9 @@ $this->registerMetaTag([
 
 ?>
 
-<!-- Actions -->
-<!-- <?= $this->render('_actions', [
-  'banners' => $banners
-]);?> -->
-<!-- Actions end -->
-
-<!-- Advantages -->
-<?= $this->render('_adv');?>
-<!-- Advantages end -->
+<div class="site__index-img">
+  <img src="/statics/images/index-img.jpg" alt="Акция - при заказе от 950 руб. - Пицца 40см в подарок!">
+</div>
 
 <!-- Блок Любимые блюда -->
 <?= $this->render('_best', [

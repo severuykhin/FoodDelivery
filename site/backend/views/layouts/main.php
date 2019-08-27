@@ -32,7 +32,7 @@ AppAsset::register($this);
     <?php $this->beginBody() ?>
     <?php
     NavBar::begin([
-        'brandLabel' => 'Шумовка - еда на вынос и не только...',
+        'brandLabel' => 'Шумовка',
         'brandUrl' => '/',
         'innerContainerOptions' => [
 	        'class' => 'container-fluid'

@@ -1,4 +1,59 @@
 .cart {
+    &-gift {
+        padding: 20px 0;
+        &-inner {
+            position: relative;
+            height: 20px;
+            border: 1px solid #eaeaea;
+            border-radius: 20px;
+            margin-bottom: 14px;
+            width: 300px;
+            &::before {
+                position: absolute;
+                content: '';
+                width: 40px;
+                height: 40px;
+                top: -19px;
+                right: -49px;
+                background: url('order-gift.svg') center no-repeat;
+                background-size: cover;
+            }
+
+            &::after {
+                position: absolute;
+                content: '950 р.';
+                font-weight: bold;
+                width: 59px;
+                height: 20px;
+                top: -5px;
+                right: -114px;
+            }
+        }
+
+        &-caption {
+            font-weight: 600;
+        }
+
+        &-track {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border-radius: 10px;
+            overflow: hidden;
+            &-back {
+                position: absolute;
+                width: 0%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                background-color: rgb(255, 154, 64);
+                transition: all 600ms ease;
+            }
+        }
+    }
+
     &-widget {
         position: relative;
         display: flex;
@@ -382,6 +437,10 @@
         flex-shrink: 0;
     }
 
+    &__total {
+        font-weight: 600;
+    }
+
     &__souses {
         display: inline-block;
         font-size: 16px;
@@ -662,6 +721,11 @@
        position: relative;
     }
     .cart {
+        &-gift {
+            &-inner {
+                width: calc(100% - 100px);
+            }
+        }
         &-order {
             &__title {
                 margin-top: 52px;
@@ -681,6 +745,10 @@
                 margin-bottom: 15px;
                 &_result {
                     padding-top: 0;
+                }
+
+                &_nopadding {
+                    padding-top: 0px;
                 }
             }
             &__title {
