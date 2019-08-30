@@ -14,7 +14,9 @@
         "yiisoft/yii2-apidoc": "*",
         "aquy/yii2-thumbnail": "*",
         "vova07/yii2-imperavi-widget": "*",
-        "kartik-v/yii2-widget-select2": "@dev"
+        "kartik-v/yii2-widget-select2": "@dev",
+        "cboden/ratchet": "^0.4.1",
+        "workerman/workerman": "^3.5"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

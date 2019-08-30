@@ -11,6 +11,20 @@ const store = createStore(reducer, applyMiddleware(thunk, logger,  browserRouter
 
 sagaMiddleware.run(rootSaga);
 
+if (process.env.NODE_ENV === 'development') {
+    const socket = new WebSocket('ws://localhost:1234');
+    
+    const heartBeat = () => {
+        socket.send('Heartbeat');
+    };
+    
+    socket.onopen = function (e) {
+        console.log('Message connection ready');
+        setInterval(heartBeat, 3000);
+    }
+}
+
+
 export default store;
 
 window.store = store;

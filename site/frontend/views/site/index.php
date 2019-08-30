@@ -14,6 +14,8 @@ $this->registerMetaTag([
 <div class="site__index-img">
   <img src="/statics/images/index-img.jpg" alt="Акция - при заказе от 950 руб. - Пицца 40см в подарок!">
 </div>
+<br>
+<div class="container-fluide">*Акция не суммируется с другими акциями и скидками кафе</div>
 
 <!-- Блок Любимые блюда -->
 <?= $this->render('_best', [

@@ -11,6 +11,7 @@ import OrdersContainer from '../Orders/OrdersContainer';
 import CustomersContainer from '../Customers/CustomersContainer';
 import ProductsContainer from '../Products/ProductsContainer';
 import ReportsContainer from '../Reports/ReportsContainer';
+import CartlineContainer from '../Cartline/CartlineContainer';
 
 const crmBaseStyle = {
   padding: '20px'
@@ -31,6 +32,7 @@ export default class App extends Component {
             <div style={crmContainerStyle} className="crm-container">
 
               <Switch>
+                <Route exact path="/backend/crm/cartline" component={CartlineContainer} />
                 <Route exact path="/backend/crm/orders" component={OrdersContainer} />
                 <Route exact path="/backend/crm/customers" component={CustomersContainer} />
                 <Route exact path="/backend/crm/products" component={ProductsContainer} />

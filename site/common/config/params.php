@@ -10,5 +10,8 @@ return [
     'emails' => [
         'severuykhin.igor@gmail.com',
         'shumovka43@yandex.ru'
+    ],
+    'constants' => [
+        'ADD_ORDER' => 'ORDER:ADD_ORDER'
     ]
 ];

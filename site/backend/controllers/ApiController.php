@@ -11,6 +11,7 @@ use common\models\Cart;
 use common\models\CartOrder;
 use common\models\Report;
 use backend\models\ApiHelper;
+use console\components\SocketWorker;
 
 
 /**
@@ -126,6 +127,7 @@ class ApiController extends Controller
                 ]);
     
                 if ($model->save()) {
+                    SocketWorker::send(['result' => 'ok', 'data' => (array) $model]);
                     return ['result' => 'ok', 'data' => $model];
                 } else {
                     return ['result' => 'error', 'data' => $model->errors];

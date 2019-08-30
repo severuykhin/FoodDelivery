@@ -12,6 +12,7 @@ use frontend\components\Cart;
 use yii\web\NotFoundHttpException;
 use yii\base\Exception;
 use yii\helpers\VarDumper;
+use console\components\SocketWorker;
 
 
 class CartController extends Controller
@@ -27,10 +28,27 @@ class CartController extends Controller
         if ($order->load(Yii::$app->request->post())) 
         {
             $order->cart_id = $cart->id;
+            $order->status = CartOrder::STATUS_NEW;
+            
             $order->save();
+            
             $orderData = Cart::actualize();
             $order->process($cart);
             $order->send();
+
+            try {
+                SocketWorker::send([
+                    'type' => Yii::$app->params['constants']['ADD_ORDER'],
+                    'data' => [
+                        'items' => $order->compile(),
+                        'order' => $order->asArray()
+                    ]
+                ]);
+            } catch (Exception $e) {
+               // Som log stuff 
+            }
+
+
             Yii::$app->session->setFlash('orderSuccess', $order->id);
             $this->redirect(['site/spasibo']);
             Yii::$app->end();

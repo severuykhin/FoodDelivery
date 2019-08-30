@@ -5,6 +5,7 @@ namespace common\models;
 use Yii;
 use common\models\CartOrderItem;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "cart_order".
@@ -349,5 +350,26 @@ class CartOrder extends \yii\db\ActiveRecord
                             WHERE `cart_order`.`name` <> 'test' AND `cart_order`.`status` = 1
                             GROUP BY `product_id`, `modification_id` ORDER BY `quantity` DESC")->asArray()->all();
         return $data;
+    }
+
+    public function asArray()
+    {
+        return ArrayHelper::toArray($this, [
+            'common\models\CartOrder' => [
+                'id',
+                'cart_id',
+                'phone',
+                'email',
+                'payment',
+                'street',
+                'house',
+                'code',
+                'apartment',
+                'floor',
+                'entrance',
+                'comment',
+                'status'
+            ],
+        ]);
     }
 }
