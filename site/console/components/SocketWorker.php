@@ -5,7 +5,7 @@ namespace console\components;
 class SocketWorker
 { 
 
-    const LOCAL_SOCKET = 'tcp://127.0.0.1:8000';
+    const LOCAL_SOCKET = 'tcp://127.0.0.1:8080';
 
     public static function send($data) {
         $instance = stream_socket_client(self::LOCAL_SOCKET);

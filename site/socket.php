@@ -18,45 +18,106 @@ $config = yii\helpers\ArrayHelper::merge(
 $application = new yii\web\Application($config);
 
 use Workerman\Worker;
+use common\models\User;
+use yii\web\BadRequestHttpException;
 
-$users = [];
-
-$ws_worker = new Worker("websocket://0.0.0.0:1234");
-$ws_worker->onWorkerStart = function() use (&$users)
+class ServerWorker
 {
-    $inner_tcp_worker = new Worker("tcp://127.0.0.1:8000");
-    $inner_tcp_worker->onMessage = function($connection, $data) use (&$users) {
+    public $connections = [];
 
-        // if (isset($users[$data->user])) {
-        //     $webconnection = $users[$data->user];
-        //     $webconnection->send($data->message);
-        // }
+    private $wsWorker;
+    private $innerTcpWorker;
 
-        foreach($users as $user)
-        {   
-            $user->send($data);
-        }
-    };
-    $inner_tcp_worker->listen();
-};
-
-$ws_worker->onMessage = function () use (&$users)
-{
-   // TO DO message request 
-};
-
-$ws_worker->onConnect = function($connection) use (&$users)
-{
-    $connection->onWebSocketConnect = function($connection) use (&$users)
+    public function createWorker()
     {
-        $users[] = $connection;
-    };
-};
 
-$ws_worker->onClose = function($connection) use(&$users)
+        $connections = &$this->connections;
+        $self = $this;
+
+        $this->wsWorker = new Worker("websocket://0.0.0.0:1234");
+
+
+        $this->wsWorker->onWorkerStart = function() use (&$self)
+        {
+            $self->createInnerWorker();
+        };
+
+
+
+        $this->wsWorker->onMessage = function () use (&$connections)
+        {
+            
+        };
+
+
+
+        $this->wsWorker->onConnect = function($connection) use (&$connections)
+        {
+            $connection->onWebSocketConnect = function($connection) use (&$connections)
+            {
+                if (isset($_GET['token']) && $this->checkToken($_GET['token'])) {
+
+                    echo 'New connection' . PHP_EOL;
+                    $connections[] = $connection;
+
+                } else {
+
+                    $connection->close('Bad request');
+
+                }
+            };
+        };
+
+        $this->wsWorker->onClose = function($connection) use(&$connections)
+        {
+            $user = array_search($connection, $connections);
+            unset($connections[$user]);
+        };
+
+        $this->wsWorker->onError = function () {
+            echo 'Socket error. Try to create a new instance';
+            // SocketServer::run();
+        };
+
+        Worker::runAll();
+    }
+
+    private function createInnerWorker()
+    {
+
+        $connections = &$this->connections;
+
+        $this->innerTcpWorker = new Worker("tcp://127.0.0.1:8080");
+
+        $this->innerTcpWorker->onMessage = function($connection, $data) use (&$connections) {
+            foreach($connections as $user)
+            {   
+                $user->send($data);
+            }
+        };
+
+        $this->listen();
+    }
+
+    private function checkToken(string $token): bool
+    {
+        return User::find()->where(['auth_key' => $token])->exists();
+    }
+
+    public function listen()
+    {
+        $this->innerTcpWorker->listen();
+    }
+}
+
+class SocketServer
 {
-    $user = array_search($connection, $users);
-    unset($users[$user]);
-};
+    
+    public static function run()
+    {
+        $serverWorker = new ServerWorker();
+        $serverWorker->createWorker();
+    }
+}
 
-Worker::runAll();
+SocketServer::run();
