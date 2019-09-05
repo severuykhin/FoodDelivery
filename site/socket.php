@@ -19,7 +19,6 @@ $application = new yii\web\Application($config);
 
 use Workerman\Worker;
 use common\models\User;
-use yii\web\BadRequestHttpException;
 
 class ServerWorker
 {
