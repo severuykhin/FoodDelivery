@@ -30,6 +30,13 @@ class OrderController extends Controller
         ];
     }
 
+    public function actions()
+    {
+        return [
+            'print'  => 'backend\actions\orders\PrintOrder',
+        ];
+    }
+
     /**
      * Lists all CartOrder models.
      * @return mixed

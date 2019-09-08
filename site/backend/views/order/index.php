@@ -85,8 +85,17 @@ $stateClassMap = [
                                 'class' => 'form-control has-error',
                             ]) . '</div>';
 
+                    $printBtn = Html::button('Распечатать', 
+                        [
+                        'class' => 'btn btn-xs btn-default', 
+                        'data-id' => $model->id,
+                        'data-role' => 'print-order',
+                        'data-toggle'=> 'modal',
+                        'data-target' => '#modal'
+                        ]);
+
                     return '<span class="order-label label '. $labelClassName .'">' .
-                            '</span>' . $dropDown;
+                            '</span>' . $dropDown . $printBtn;
                 }
             ],
             // 'phone',
@@ -215,6 +224,24 @@ $stateClassMap = [
   <source src="/statics/bell.mp3" type="audio/mpeg">
 </audio>
 
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Распечатать заказ</h4>
+      </div>
+      <div class="modal-body">
+        <iframe style="width:100%; height: 1000px;" data-role="print-iframe" src="" frameborder="0"></iframe>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <?php
 
 $script = <<< JS
@@ -296,6 +323,11 @@ $script = <<< JS
     setInterval(checkNewOrders, 30 * 1000);
 
     checkNewOrders();
+
+    $('[data-role="print-order"]').on('click', function () {
+        let id = $(this).data('id');
+        $('[data-role="print-iframe"]').attr('src', '/backend/order/print?' + 'id=' + id)
+    });
 
 JS;
 $this->registerJs($script, yii\web\View::POS_READY);

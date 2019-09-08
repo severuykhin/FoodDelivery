@@ -7,6 +7,7 @@ use common\models\CartOrder;
 use common\models\CartOrderItem;
 use common\models\Report;
 use common\models\Dish;
+use common\models\Category;
 
 class ApiHelper 
 {
@@ -134,37 +135,7 @@ class ApiHelper
         return $data;
     }
 
-    public static function getOrderMap(array $data): array 
-    {   
-
-        $range = self::getRangeInfo($data);
-        
-        $ordersQuery = CartOrder::find();
-        $ordersQuery->where(['status' => CartOrder::STATUS_VIEWED]);
-        $ordersQuery->andWhere(['>=', 'created_at', $range['startTimestamp']]);
-        $ordersQuery->andWhere(['<=', 'created_at', $range['endTimestamp']]);
-        
-        $ordersCount = $ordersQuery->count();
-
-        $daysMap = self::fillDaysMap();
-
-        foreach($ordersQuery->each() as $order)
-        {
-            $weekday = date('N', $order->created_at);
-            $hour = date('H', $order->created_at);
-
-            if(isset($daysMap[$weekday][$hour])) {
-                $daysMap[$weekday][$hour]["count"] += 1;
-            }
-        }
-
-        return [
-            "items" => $daysMap,
-            "ordersCount" => $ordersCount
-        ];
-    }
-
-    private static function fillDaysMap()
+    public static function fillDaysMap()
     {
         $days = [
             1 => [],
@@ -183,11 +154,30 @@ class ApiHelper
                $hour = $i > 9 ? "$i" : "0$i";
                 $day[$hour] = [
                     "hour" => $hour,
-                    "count" => 0
+                    "count" => 0,
+                    "categories" => [
+                        'data' => [],
+                        'totalAmount' => 0
+                    ]
                 ];
            } 
         }
 
         return $days;
+    }
+
+    public static function getOrderCategories(CartOrder $order): array
+    {
+
+        $query = Yii::$app->db->createCommand(
+            "SELECT SUM(`cart_order_item`.`quantity`) as 'quantity', MAX(`categories`.`title`) as 'title', `categories`.`id` FROM `cart_order_item`
+                INNER JOIN `dish` ON `cart_order_item`.`product_id` = `dish`.`id`
+                INNER JOIN `categories` ON `dish`.`category_id` = `categories`.`id`
+                WHERE `cart_order_item`.`order_id` = :order_id
+                GROUP BY `categories`.`id`
+            "
+        )->bindValue(':order_id', $order->id);
+
+        return $query->queryAll();
     }
 }

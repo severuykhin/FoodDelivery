@@ -1,3 +1,5 @@
+<style>body{margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}code{font-family:source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace}.orderMap-td{position:relative}.orderMap-td:hover{box-shadow:0 0 0 2px #f7b2b2}.orderMap-td:hover .categories-top{opacity:1;visibility:visible;z-index:1}.categories-top{position:absolute;opacity:0;background-color:#fff;width:250px;top:100%;left:0;visibility:hidden;z-index:-1;padding:10px;box-shadow:0 0 10px 0 #9e9e9e;-webkit-transition:all .3s;transition:all .3s}
+    /*# sourceMappingURL=main.2601e766.chunk.css.map */</style>
 <div id="root"></div>
 <script>
         ! function(l) {
@@ -74,5 +76,5 @@
             a()
         }([])
 </script>
-<script src="/backend/2.48bb2b80.chunk.js"></script>
-<script src="/backend/main.ea7e494c.chunk.js"></script>
+<script src="/backend/2.f3ca14ce.chunk.js"></script>
+<script src="/backend/main.15c9414d.chunk.js"></script>

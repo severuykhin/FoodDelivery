@@ -79,25 +79,50 @@ class OrderMap extends React.Component {
     }
 
     renderDayHourCounter(hour, days, items, ordersCount) {
+
         return (days.map((day, index) => {
 
             let count = 0;
             let alfaChannelValue = 0;
             let percent = ordersCount / 100;
+            let categoriesTop = <div className="categories-top">Нет данных</div>;
 
             if (items[day] && items[day][hour]) {
                 count = items[day][hour]['count'];
                 alfaChannelValue = ((count / percent) / 20).toFixed(4);
+
+                if (Array.isArray(items[day][hour]['categories']['data']) === false) {
+                    categoriesTop = this.renderCategoriesTop(items[day][hour]['categories']);
+                }
             } 
             return <td 
                     key={index}
+                    className="orderMap-td"
                     style={{
                         'color': '#6d6d6d',
                         'textAlign': 'center',
                         'background': `rgba(255,0,0, ${alfaChannelValue})`
                     }}
-                    >{ count }</td>
+                    >{ count } { categoriesTop }</td>
         }) )
+    }
+
+    renderCategoriesTop(categoriesData) {
+        let categoriesArray = Object.keys(categoriesData.data)
+                                .map(key => categoriesData.data[key])
+                                .sort((a,b) => a.quantity > b.quantity ? -1 : 1)
+                                .slice(0, 5);
+
+        return <div className="categories-top"> { categoriesArray.map(category => {
+            return (
+                <div 
+                    key={category.id} 
+                    className="categories-top-item">
+                    {`${category.title} ${category.percentage}%`}
+                </div>
+            );
+        }) }
+        </div>
     }
 
 
