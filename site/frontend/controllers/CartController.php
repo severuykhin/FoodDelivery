@@ -12,6 +12,7 @@ use frontend\components\Cart;
 use yii\web\NotFoundHttpException;
 use yii\base\Exception;
 use yii\helpers\VarDumper;
+use common\components\GoogleECommerce;
 
 
 class CartController extends Controller
@@ -26,11 +27,26 @@ class CartController extends Controller
 
         if ($order->load(Yii::$app->request->post())) 
         {
+            // Process and save cart order
             $order->cart_id = $cart->id;
             $order->save();
-            $orderData = Cart::actualize();
             $order->process($cart);
             $order->send();
+            
+            try {
+                //Safely sending data to google analytics e-commerce
+                $ga = new GoogleECommerce($order);
+                $ga->sendOrder();
+            } catch (\Exception $e) {
+                $messageLog = [
+                    'status' => 'GA transaction error',
+                    'error' => $e->getMessage()
+                ];
+
+                Yii::info($messageLog, 'ga_transaction_error');
+            }
+
+            // Redirect user
             Yii::$app->session->setFlash('orderSuccess', $order->id);
             $this->redirect(['site/spasibo']);
             Yii::$app->end();

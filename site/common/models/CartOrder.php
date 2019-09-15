@@ -146,7 +146,9 @@ class CartOrder extends \yii\db\ActiveRecord
                     'price' => $product['price'],
                     'size' => $product['value'],
                     'weight' => $product['weight'],
-                    'quantity' => $item->quantity
+                    'quantity' => $item->quantity,
+                    'order_id' => $item->order_id,
+                    'category_id' => $product['category_id']
                 ];                
             }
 
@@ -181,7 +183,9 @@ class CartOrder extends \yii\db\ActiveRecord
                     'price' => $price,
                     'size' => $value,
                     'weight' => $weight,
-                    'quantity' => $item->quantity
+                    'quantity' => $item->quantity,
+                    'order_id' => $item->order_id,
+                    'category_id' => $product['category_id']
                 ];
 
             }
@@ -271,7 +275,7 @@ class CartOrder extends \yii\db\ActiveRecord
             $res += (int)$item['price'] * (int)$item['quantity'];
         }
 
-        return $res - ($freeSousAmount - self::SOUS_PRICE);
+        return $res - ($freeSousAmount * self::SOUS_PRICE);
     }
 
     public static function getOrdersSummary()

@@ -22,6 +22,12 @@ return [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
                 ],
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'categories' => ['ga_transaction_error'],
+                    'logFile' => '@runtime/logs/ga.log',
+                    'logVars' => []
+                ],
             ],
         ],
         'urlManager' => [
