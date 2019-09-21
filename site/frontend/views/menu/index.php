@@ -1,7 +1,9 @@
 <?php
 
+use yii\helpers\Url;
 use yii\helpers\VarDumper;
 use frontend\widgets\Links;
+use frontend\widgets\SeoActiveLinks;
 
 $isRoot = $slug === 'all'; 
 $title = $isRoot ? 'Доставка еды в Кирове. Заказать еду на дом' : $categories[0]->seo_page_title;
@@ -39,13 +41,14 @@ $this->registerMetaTag([
 										<h3 style="padding-top: 30px;"><?= $category->title ?></h3>	
 									<?php endif; ?>
 	                <div class="store__items">
-	                	<?php foreach($category->dishes as $item):?>
+	                	<?php foreach($category->dishes as $index => $item):?>
 
 	                		<?= $this->render('_item', [
 	                			'item'          => $item,
 	                			'categoryTitle' => $category->title,
 								'categorySlug'  => $category->slug,
-								'categoryId'    => $category->id
+								'categoryId'    => $category->id,
+								'index' => $index
 	                		]);?>
 
 	                	<?php endforeach;?>
@@ -67,3 +70,4 @@ $this->registerMetaTag([
 <br>
 <br>
 <?php endif; ?>
+<?= SeoActiveLinks::widget() ?>

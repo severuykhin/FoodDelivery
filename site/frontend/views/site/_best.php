@@ -13,11 +13,12 @@ use yii\helpers\Html;
             </h2>
         </div>
         <div class="best__inner">
-        <?php foreach($bestDishes as $item): ?>
+        <?php foreach($bestDishes as $index => $item): ?>
             <div class="best__item">
                 <?= $this->render('../menu/_card', [ 
                     'item' => $item,
-                    'categoryId' => $item->category->id
+                    'categoryId' => $item->category->id,
+                    'index' => $index
                 ])?>
             </div>
         <?php endforeach;?>

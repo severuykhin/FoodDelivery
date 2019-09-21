@@ -4,6 +4,8 @@ use aquy\thumbnail\Thumbnail;
 use yii\helpers\Html;
 use yii\helpers\Json;
 
+$even = $index % 2 === 0;
+
 ?>
 
 <div class="dish" data-role="product">
@@ -17,7 +19,7 @@ use yii\helpers\Json;
                     193,
                     Thumbnail::THUMBNAIL_OUTBOUND,
                     [
-                        'alt' => 'Фотография - ' . $item->title
+                        'alt' => ($even ? 'Доставка еды ' : 'Заказать - ') . $item->title
                     ]
                 ); ?>
             </a>

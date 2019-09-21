@@ -10,6 +10,7 @@ use yii\helpers\Html;
 		'item' => $item,
 		'categoryTitle' => $categoryTitle,
 		'categorySlug'  => $categorySlug,
-		'categoryId'    => $categoryId
+		'categoryId'    => $categoryId,
+		'index' => $index
 ]) ?>
 </div>
