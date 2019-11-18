@@ -68,56 +68,72 @@ $categories = Category::find()->where(['<>', 'id', 20])->orderBy(['sort' => SORT
       <div class="header-wrapper">
         <div class="container-fluide">
           <div class="header__container">
-            <a class="logo" href="/"> 
-              <img class="logo__main" src="/statics/images/logo.png" alt="Кафе Шумовка Киров">
-            </a>
-            <?= Html::a('Наше меню', ['/menu'], ['class' => 'header__menu']);?>
-              <div class="menu">
+              <div class="header__container_left">
+                <a class="logo" href="/"> 
+                  <img class="logo__main" src="/statics/images/logo.png" alt="Кафе Шумовка Киров">
+                </a>
 
-                
+                <div class="menu">
 
-                <div class="menu__item menu__item-dropdown"> 
-                <?= Html::a('Наше меню', ['menu/category', 'slug' => 'all'], ['class' => 'menu__item-link'])?>
-                  <div class="menu__submenu">
-                    <?php foreach($categories as $category): ?>
+                  <div class="menu__item"> 
+                    <?= Html::a('О нас', ['/about'], ['class' => 'menu__item-link'])?>
+                  </div>
+
+                  <div class="menu__item"> 
+                    <?= Html::a('Контакты', ['/contacts'], ['class' => 'menu__item-link'])?>
+                  </div>
+                  <div class="menu__item hidden-md-up"> 
+                    <a class="menu__item-link menu__item-link_accent" href="tel:+78332416646">+7 (8332) 41-66-46</a>
+                  </div>
+                  <div class="menu__item  hidden-md-up"> 
+                      <span class="menu__item-link  menu__item-link_accent">ул. Калинина д. 40</span>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="header__work">
+              <div class="header__work-item">Ежедневно с 10:00 - 22:00</div>
+              <a class="header__work-item header__work-bold" href="tel:+78332416646">+7-(8332)-41-66-46</a>
+              </div>
+              <div class="button__menu" data-role="toggle-menu">
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="header__menu_desktop">
+        <div class="container-fluide">
+          <div class="header__menu_desktop-wrap">
+            <div class="header__menu_desktop-inner">
+              <?php foreach($categories as $category): ?>
+                  <?php if(Yii::$app->request->get('slug') === $category['slug']): ?>
+                    <?= Html::tag(
+                      'span',
+                      $category['title'],
+                      [
+                        'class' => 'header__menu_link active'
+                    ]);?>
+                  <?php else: ?>
                     <?= Html::a(
                       $category['title'], 
                       [
                         'menu/category', 'slug' => $category['slug']
                       ], 
                       [
-                        'class' => 'menu__subitem',
+                        'class' => 'header__menu_link',
                         'title' => 'Заказать ' . $category['title']
-                      ]);?>
-                    <?php endforeach; ?>
-                  </div>
-                </div>
-
-                <div class="menu__item"> 
-                  <?= Html::a('О нас', ['/about'], ['class' => 'menu__item-link'])?>
-                </div>
-
-                <div class="menu__item"> 
-                  <?= Html::a('Контакты', ['/contacts'], ['class' => 'menu__item-link'])?>
-                </div>
-                <div class="menu__item hidden-md-up"> 
-                  <a class="menu__item-link menu__item-link_accent" href="tel:+78332416646">+7 (8332) 41-66-46</a>
-                </div>
-                <div class="menu__item  hidden-md-up"> 
-                    <span class="menu__item-link  menu__item-link_accent">ул. Калинина д. 40</span>
-                </div>
-
-              </div>
-              <div class="header__work">
-              <div class="header__work-item">Ежедневно с 10:00 - 22:00</div>
-              <a class="header__work-item header__work-bold" href="tel:+78332416646">+7-(8332)-41-66-46</a>
-              </div>
+                      ]
+                    );?>
+                  <?php endif; ?>
+              <?php endforeach; ?>
+            </div>
+            <div class="header__menu_desktop-cart">
               <?= Cart::widget(); ?>
-              <div class="button__menu" data-role="toggle-menu">
-                <div></div>
-                <div></div>
-                <div></div>
-              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -139,6 +155,7 @@ $categories = Category::find()->where(['<>', 'id', 20])->orderBy(['sort' => SORT
                 </li>
                 <?php endforeach; ?>
           </ul>
+          <?= Cart::widget(); ?>
         </div>
       </div>
 </header>

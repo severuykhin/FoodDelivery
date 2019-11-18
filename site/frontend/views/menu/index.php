@@ -30,7 +30,6 @@ $this->registerMetaTag([
 <div class="content__block">
         <div class="container-fluide">
           <div class="store" data-role="store">
-						<?= Links::widget() ?>
             <div class="store__inner">
 								<div class="store__category">
 									<h1 class="title_category"><?= $h1 ?></h1>

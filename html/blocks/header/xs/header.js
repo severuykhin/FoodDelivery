@@ -6,8 +6,8 @@ export default class Header {
 			// Desctop elements
 			mobileBtn: $('[data-role="toggle-menu"]'),
 			windowObj: $(window),
-			menuWrap: $('.header-wrapper'),
-			menuContainer: $('.header-wrapper').parent(),
+			menuWrap: $('.header__menu_desktop'),
+			menuContainer: $('.header__menu_desktop').parent(),
 
 			// Mobile elements
 			mobileHeader: $('.header'),
@@ -18,7 +18,7 @@ export default class Header {
 		this.MOBILE_BREAKPOINT = 990;
 		this.WINDOW_WIDTH = this.DOMMap.windowObj.width();
 		this.menuOffsetTop = (this.DOMMap.menuWrap.length && this.DOMMap.menuWrap.offset().top) || 100;
-		this.menuHeight = this.DOMMap.menuWrap.height();
+		this.menuHeight = this.DOMMap.menuContainer.height();
 		this.mobileMenuHeight = this.DOMMap.mobileHeader.height();
 
 	}

@@ -6,11 +6,11 @@ use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\SluggableBehavior;
+use himiklab\sortablegrid\SortableGridBehavior;
 use yii\db\ActiveRecord;
 use yii\helpers\VarDumper;
 use common\models\Category;
 use common\models\DishModification;
-use himiklab\sortablegrid\SortableGridBehavior;
 
 
 class Dish extends ActiveRecord
@@ -45,7 +45,7 @@ class Dish extends ActiveRecord
         return [
             [['title', 'weight', 'price_actual', 'category_id'], 'required'],
             [['title', 'description', 'weight', 'price_actual', 'price_old'], 'string'],
-            [['sort', 'bonus', 'bonus_type'], 'integer'],
+            [['sort'], 'integer'],
             [['active', 'action', 'best'], 'boolean']
         ];
     }

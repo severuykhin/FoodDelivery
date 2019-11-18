@@ -91,7 +91,7 @@
 
         &__money {
             display: inline-block;
-            width: 80px;
+            width: 50px;
             text-align: right;
             &-bottom {
             font-family: 'Montserrat', sans-serif;
@@ -106,14 +106,14 @@
         &__link {
             display: block;
             position: relative;
-            width: 40px;
-            height: 40px;
+            width: 75px;
+            height: 41px;
             flex-shrink: 0;
-            border-radius: 50%;
-            background: url('shopping-cart.svg') no-repeat center, #88bd4b;
+            border-radius: 3px;
+            background: url('shopping-cart.svg') no-repeat 41px 8px, #88bd4b;
             background-size: 24px;
             transition: all 200ms ease;
-            margin-left: 20px;
+            margin-left: 12px;
             &:hover {
                 box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.109);
             }
@@ -247,13 +247,13 @@
             color: #fff;
             font-size: 13px;
             text-align: center;
-            top: -14px;
-            left: 0;
+            top: 6px;
+            left: 20px;
             transform: translateX(-50%);
             height: 29px;
             min-width: 29px;
             font-weight: 600;
-            border-radius: 50%;
+            border-radius: 3px;
             padding: 5px;
         }
     }
@@ -647,7 +647,8 @@
             }
 
             &__counter {
-                top: -5px;
+                top: -18px;
+                left: -6px;
 
             }
 
@@ -711,6 +712,12 @@
                 }
             }
         }
+    }
+}
+
+@media(max-width: 1125px) {
+	.cart-widget__summ {
+        font-size: 14px;
     }
 }
 
