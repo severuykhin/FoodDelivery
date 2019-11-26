@@ -345,13 +345,23 @@ class CartOrder extends \yii\db\ActiveRecord
 
     public static function getDishSummary()
     {
-        $data = self::findBySql("SELECT `cart_order_item`.`product_id`, `cart_order_item`.`modification_id`, COUNT(`cart_order_item`.`quantity`) as `quantity`, `dish`.`title`, `dish_modification`.`value` as `modification_name` 
+        $data = self::findBySql(
+                    "SELECT 
+                    `cart_order_item`.`product_id`, 
+                    `cart_order_item`.`modification_id`, 
+                    COUNT(`cart_order_item`.`quantity`) as `quantity`, 
+                    `dish`.`title`, 
+                    `dish_modification`.`value` as `modification_name`,
+                    `categories`.`title` as `c_title`,
+                    `categories`.`id` as `c_id` 
                     from `cart_order_item` 
                         LEFT JOIN `dish` on `dish`.`id`=`cart_order_item`.`product_id` 
                         LEFT JOIN `dish_modification` on `dish_modification`.`id`=`cart_order_item`.`modification_id` 
+                        LEFT JOIN `categories` on `dish`.`category_id` = `categories`.`id`
                         LEFT JOIN `cart_order` on `cart_order_item`.`order_id`=`cart_order`.`id`
                             WHERE `cart_order`.`name` <> 'test' AND `cart_order`.`status` = 1
-                            GROUP BY `product_id`, `modification_id` ORDER BY `quantity` DESC")->asArray()->all();
+                            GROUP BY `product_id`, `modification_id` ORDER BY `quantity` DESC"
+                )->asArray()->all();
         return $data;
     }
 }

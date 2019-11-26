@@ -82,6 +82,6 @@ class Category extends ActiveRecord
         return $this
             ->hasMany(Dish::className(), ['category_id' => 'id'])
             ->andFilterWhere(['active' => Dish::STATUS_ACTIVE])
-            ->orderBy('sort');
+            ->orderBy(['sort' => SORT_DESC]);
     }
 }

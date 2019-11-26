@@ -18,17 +18,7 @@ $this->registerMetaTag([
 <br>
 <div class="container-fluide">*Акция не суммируется с другими акциями и скидками кафе</div>
 
-<!-- Блок Любимые блюда -->
-<?= $this->render('_best', [
-  'bestDishes' => $bestDishes
-]);?>
-<!-- Блок Любимые блюда END -->
-
-<!-- Блок с фото -->
-<?= $this->render('_photoblock', [
-  'photos' => array_slice($aboutPhotos, 0, 4)
-]);?>
-<!-- Блок с фото END -->
+<?= \frontend\widgets\MainGoods::widget() ?>
 
 <!-- Блок о нас -->
 <?= $this->render('_about'); ?>
