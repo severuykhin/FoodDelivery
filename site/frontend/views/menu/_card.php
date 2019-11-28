@@ -13,7 +13,7 @@ $even = $index % 2 === 0;
     <div class="dish__image">
         <?php if(file_exists(Yii::getAlias('@statics/uploads/dishes/' . $item->id . '/' . $item->pic))): ?>
             <a href="<?= '/statics/uploads/dishes/' . $item->id . '/' . $item->pic ?>" data-fancybox class="zoompic zoompic-dark">
-                <?= Thumbnail::thumbnailImg(
+                <?php $full = Thumbnail::thumbnailFileUrl(
                     Yii::getAlias('@statics/uploads/dishes/' . $item->id . '/' . $item->pic),
                     290,
                     193,
@@ -22,6 +22,10 @@ $even = $index % 2 === 0;
                         'alt' => ($even ? 'Доставка еды ' : 'Заказать - ') . $item->title
                     ]
                 ); ?>
+                <img
+                    data-lazy="<?= $full ?>" 
+                    src="/statics/images/foodplaceholder.png" 
+                    alt="<?= ($even ? 'Доставка еды ' : 'Заказать - ') . $item->title ?>">
             </a>
         <?php else:?>
         <img src="/statics/images/picplaceholder.jpg">

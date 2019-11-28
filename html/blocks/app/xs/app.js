@@ -20,24 +20,43 @@
         },
 
         lazyLoad : {
+            images : [],
+            index: 0,
             showVisible  :  function () {
-                var allImages = App.getAll(roleLazyLoad),
-                    len       = allImages.length;
+                this.images = [].slice.call(App.getAll(roleLazyLoad));
+                this.showNext();
+            },
 
-                    for (var i = 0; i < len; i++) {
+            showNext : function () {
 
-                        var img = allImages[i];
-
-                        var realSrc = img.getAttribute('data-lazy');
-
-                        if (!realSrc) continue;
-
-                        img.src = realSrc;
-
-                        img.removeAttribute('data-lazy');
-                    } 
-
+                if (!this.images[this.index]) {
                     return false;
+                }
+
+                var img = this.images[this.index];
+
+                var realSrc = img.getAttribute('data-lazy');
+
+                if (!realSrc) {
+                    this.showNext();
+                    this.index++;
+                }
+
+
+                img.src = realSrc;
+
+                img.addEventListener('load', () => {
+                    this.index++;
+                    this.showNext();
+                    img.removeAttribute('data-lazy');
+                });
+
+                img.onerror = () => {
+                    this.index++;
+                    this.showNext();
+                    img.removeAttribute('data-lazy');
+                }
+
             },
 
             init : function () {
