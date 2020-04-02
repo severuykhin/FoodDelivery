@@ -159,7 +159,8 @@ class Cart extends \yii\db\ActiveRecord
                     'category_title' => $product['category_title'],
                     'category_slug' => $product['category_slug'],
                     'bonus' => $item->bonus,
-                    'bonus_type' => $item->bonus_type
+                    'bonus_type' => $item->bonus_type,
+                    'act_in_action' => $product['act_in_action']
                 ];                
             }
 
@@ -200,7 +201,8 @@ class Cart extends \yii\db\ActiveRecord
                     'category_title' => $product['category']['title'],
                     'category_slug' => $product['category']['slug'],
                     'bonus' => $item->bonus,
-                    'bonus_type' => $item->bonus_type
+                    'bonus_type' => $item->bonus_type,
+                    'act_in_action' => $product['act_in_action']
                 ];
             }
         }

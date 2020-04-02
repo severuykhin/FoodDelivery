@@ -404,9 +404,15 @@ class Cart {
 
     }
 
+    getHasNoActionsProducts() {
+        let noActionsItems = this.state.storage.filter((item) => item.act_in_action == 0);
+        return noActionsItems.length > 0;
+    }
+
     updatePage() {
 
         let summ = this.countSumm();
+        let hasNoActionsProducts = this.getHasNoActionsProducts();
 
         if (this.state.storage.length <= 0) {
             this.cartPage.html('Добавьте что-нибудь из меню');
@@ -422,8 +428,10 @@ class Cart {
             html += pageItemTemplate(item);
         });
 
-        if (summ >= 950) {
-            html += pageGiftTemplate();
+        if (false === hasNoActionsProducts) {
+            if (summ >= 950) {
+                html += pageGiftTemplate();
+            }
         }
 
         html += summTemplate(summ);
@@ -432,7 +440,11 @@ class Cart {
         this.cartPageSummCount.html(`${summ} руб.`);
 
         this.updateSousCount();
-        this.gift.update(summ);
+
+        if (hasNoActionsProducts === false) {
+            this.gift.update(summ);
+        }
+
 
         if (summ < 450) {
             this.form.hide();
@@ -443,7 +455,11 @@ class Cart {
             this.form.show();
             this.sousesWrap.show();
             this.orderStub.hide();
-            this.gift.show();
+            if (hasNoActionsProducts) {
+                this.gift.hide();
+            } else {
+                this.gift.show();
+            }
         }
 
         $('.dish_sous').each((index, item) => {

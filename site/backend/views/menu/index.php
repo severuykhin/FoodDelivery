@@ -22,7 +22,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'      => 'category_id',
                 'contentOptions' => ['class' => ''],
                 'content'        => function ($data) {
-                    return $data->category->title;
+                    if ($data->category) {
+                        return $data->category->title;
+                    } else {
+                        return '';
+                    }
                 }
 
             ],

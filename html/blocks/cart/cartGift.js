@@ -29,6 +29,7 @@ class CartGift {
     }
 
     show() {
+        console.log(this.DOMMap.elem);
         this.DOMMap.elem.show();
     }
 

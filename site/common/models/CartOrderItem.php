@@ -57,7 +57,7 @@ class CartOrderItem extends \yii\db\ActiveRecord
 
     public function getProductWithModification()
     {
-        $query = Dish::findBySql('SELECT dish.title, dish.id, dish.category_id, dish_modification.id as mId, dish_modification.price as price, dish_modification.weight as weight, dish_modification.value FROM dish LEFT JOIN dish_modification on dish.id = dish_modification.dish_id WHERE dish.id = :did AND dish_modification.id = :mid', 
+        $query = Dish::findBySql('SELECT dish.title, dish.act_in_action, dish.id, dish.category_id, dish_modification.id as mId, dish_modification.price as price, dish_modification.weight as weight, dish_modification.value FROM dish LEFT JOIN dish_modification on dish.id = dish_modification.dish_id WHERE dish.id = :did AND dish_modification.id = :mid', 
         [':did' => $this->product_id, ':mid' => $this->modification_id]);
         $query->multiple = true;
         return $query;

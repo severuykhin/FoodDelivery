@@ -106,11 +106,16 @@ $stateClassMap = [
                     $data = $model->compile();
                     $cost = 0;
                     $freeSousAmount = $model->getFreeSousAmount();
+                    $has_no_action_products = false;
 
                     $res = '';
 
                     foreach($data as $index => $item) 
                     {
+
+                        if ($item['act_in_action'] == 0) {
+                            $has_no_action_products = true;
+                        }
 
                         $cost += $item['price'] * $item['quantity'];
 
@@ -134,7 +139,7 @@ $stateClassMap = [
                         $res .= "<p><b>Соусы</b>: $freeSousAmount бесплатно</p>";
                     }
 
-                    if ($cost >= 950 && $model->created_at > 1566930000) {
+                    if ($cost >= 950 && $model->created_at > 1566930000 && $has_no_action_products == false) {
                         $res .= '<hr>';
                         $res .= "<p><b>Подарок</b>: Пицца с салями и моцареллой 40 см - 1 шт.</p>";
                     }

@@ -83,9 +83,16 @@ $freeSousAmount = $model->getFreeSousAmount();
         <?php 
             $cost = 0; 
             $amount = 0;
+            $has_no_action_products = false;
+
+
+
         ?>
         <?php foreach($data as $index => $item): ?>
             <?php 
+                if ($item['act_in_action'] == 0) {
+                    $has_no_action_products = true;
+                }   
                 $amount += $item['quantity'];
                 $cost += $item['price'] * $item['quantity']; 
             ?>
@@ -120,7 +127,7 @@ $freeSousAmount = $model->getFreeSousAmount();
         <tr>
             <td></td><td></td><td></td><td></td><td></td><td></td>
         </tr>
-        <?php if ($cost >= 950 && $model->created_at > 1566930000): ?>
+        <?php if ($cost >= 950 && $model->created_at > 1566930000 && $has_no_action_products == false): ?>
         <tr>
             <td style="border: 1px solid #999;"></td>
             <td style="border: 1px solid #999;">Подарок: Пицца с салями и моцареллой</td>

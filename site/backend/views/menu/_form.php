@@ -50,6 +50,8 @@ use \yii\jui\AutoComplete;
 
             <?= $form->field($model, 'action')->checkbox() ?>
 
+            <?= $form->field($model, 'act_in_action')->checkbox() ?>
+
             <?= $form->field($model, 'weight')->textInput([
                 'placeholder' => '100 гр'
             ]);?>

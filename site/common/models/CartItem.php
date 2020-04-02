@@ -61,6 +61,7 @@ class CartItem extends \yii\db\ActiveRecord
             dish.id, 
             dish.pic,
             dish.category_id, 
+            dish.act_in_action,
             dish_modification.id as mId, 
             dish_modification.price as price, 
             dish_modification.weight as weight, 

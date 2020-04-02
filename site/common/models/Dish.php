@@ -46,7 +46,7 @@ class Dish extends ActiveRecord
             [['title', 'weight', 'price_actual', 'category_id'], 'required'],
             [['title', 'description', 'weight', 'price_actual', 'price_old'], 'string'],
             [['sort'], 'integer'],
-            [['active', 'action', 'best'], 'boolean']
+            [['active', 'action', 'best', 'act_in_action'], 'boolean']
         ];
     }
 
@@ -59,6 +59,7 @@ class Dish extends ActiveRecord
             'category_id'  => 'Категория',
             'active'       => 'Активно',
             'action'       => 'Акция',
+            'act_in_action' => 'Участвует в акциях',
             'best'         => 'Лучшие',
             'pic'          => 'Изображение',
             'price_actual' => 'Текущая цена',

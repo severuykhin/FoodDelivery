@@ -148,7 +148,8 @@ class CartOrder extends \yii\db\ActiveRecord
                     'weight' => $product['weight'],
                     'quantity' => $item->quantity,
                     'order_id' => $item->order_id,
-                    'category_id' => $product['category_id']
+                    'category_id' => $product['category_id'],
+                    'act_in_action' => $product['act_in_action']
                 ];                
             }
 
@@ -185,7 +186,8 @@ class CartOrder extends \yii\db\ActiveRecord
                     'weight' => $weight,
                     'quantity' => $item->quantity,
                     'order_id' => $item->order_id,
-                    'category_id' => $product['category_id']
+                    'category_id' => $product['category_id'],
+                    'act_in_action' => $product['act_in_action']
                 ];
 
             }
