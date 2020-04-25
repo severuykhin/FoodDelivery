@@ -136,4 +136,9 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionPartners() 
+    {
+        return $this->render('partners');
+    }
+
 }

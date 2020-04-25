@@ -82,6 +82,9 @@ $categories = Category::find()->where(['<>', 'id', 20])->orderBy(['sort' => SORT
                   <div class="menu__item"> 
                     <?= Html::a('Контакты', ['/contacts'], ['class' => 'menu__item-link'])?>
                   </div>
+                  <div class="menu__item"> 
+                    <?= Html::a('Наши парнеры', ['/partners'], ['class' => 'menu__item-link'])?>
+                  </div>
                   <div class="menu__item hidden-md-up"> 
                     <a class="menu__item-link menu__item-link_accent" href="tel:+78332416646">+7 (8332) 41-66-46</a>
                   </div>

@@ -43,6 +43,7 @@ return [
                 ''             => 'site/index',
                 '/reviews'     => 'site/reviews',
                 '/contacts'    => 'site/contacts',
+                '/partners'    => 'site/partners',
                 '/about'       => 'site/about',
                 'menu/<slug>'  => 'menu/category',
                 '/menu'         => 'menu/category',

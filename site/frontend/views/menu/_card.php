@@ -65,7 +65,7 @@ $even = $index % 2 === 0;
                         'id' => $item->id,
                         'mId' => $modification->id,
                         'title' => $item->title,
-                        'price' => Yii::$app->formatter->asDecimal($modification->price, 0),
+                        'price' => $modification->price,
                         'weight' => $modification->weight,
                         'size' => $modification->value,
                         'category_id' => $categoryId    
@@ -102,7 +102,7 @@ $even = $index % 2 === 0;
                 'id' => $item->id,
                 'mId' => $item->modifications ? $item->modifications[0]->id : '',
                 'title'=> $item->title,
-                'price' => $item->modifications ? Yii::$app->formatter->asDecimal($item->modifications[0]->price, 0) : Yii::$app->formatter->asDecimal($item->price_actual, 0),
+                'price' => $item->modifications ? $item->modifications[0]->price : $item->price_actual,
                 'weight'=> $item->modifications ? $item->modifications[0]->weight : '',
                 'size' => $item->modifications ? $item->modifications[0]->value : '',
                 'category_id' => $categoryId
