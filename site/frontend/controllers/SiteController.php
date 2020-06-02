@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
 use yii\web\Controller;
 use yii\helpers\VarDumper;
+use common\models\CartOrder;
 
 /**
  * Отображение страниц сайта
@@ -139,6 +140,34 @@ class SiteController extends Controller
     public function actionPartners() 
     {
         return $this->render('partners');
+    }
+
+    public function actionFeed()
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $orders = CartOrder::find();
+
+        $data = [];
+
+        foreach($orders->each() as $order) {
+            $items = $order->compile();
+
+            $data[] = [
+                'data' => [
+                    'id' => $order->id,
+                    'phone' => $order->phone,
+                    'name' => $order->name,
+                    'date' => $order->created_at,
+                    'street' => $order->street,
+                    'house' => $order->house,
+                    'full_address' => 'г. Киров ' . $order->street . ', ' . $order->house
+                ],
+                'items' => $items
+            ];
+        }
+
+        return $data;
     }
 
 }

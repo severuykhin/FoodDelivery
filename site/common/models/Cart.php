@@ -197,9 +197,9 @@ class Cart extends \yii\db\ActiveRecord
                     'size' => $value,
                     'weight' => $weight,
                     'quantity' => $item->quantity,
-                    'category_id' => $product['category']['id'],
-                    'category_title' => $product['category']['title'],
-                    'category_slug' => $product['category']['slug'],
+                    'category_id' => $product['category'] ? $product['category']['id'] : null,
+                    'category_title' => $product['category'] ? $product['category']['title'] : null,
+                    'category_slug' => $product['category'] ? $product['category']['slug'] : null,
                     'bonus' => $item->bonus,
                     'bonus_type' => $item->bonus_type,
                     'act_in_action' => $product['act_in_action']

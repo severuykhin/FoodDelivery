@@ -44,6 +44,7 @@ return [
                 '/reviews'     => 'site/reviews',
                 '/contacts'    => 'site/contacts',
                 '/partners'    => 'site/partners',
+                '/feed'        => 'site/feed',
                 '/about'       => 'site/about',
                 'menu/<slug>'  => 'menu/category',
                 '/menu'         => 'menu/category',
