@@ -13,12 +13,21 @@ use yii\web\NotFoundHttpException;
 use yii\base\Exception;
 use yii\helpers\VarDumper;
 use common\components\GoogleECommerce;
-
+use common\events\EventDispatcher;
+use common\events\OrderCreateEvent;
 
 class CartController extends Controller
 {
 
     public $enableCsrfValidation = false;
+
+    private $eventDispatcher;
+
+    public function __construct($id, $module, EventDispatcher $eventDispatcher, $config = [])
+    {
+        $this->eventDispatcher = $eventDispatcher;
+        parent::__construct($id, $module, $config);
+    }
 
     public function actionIndex()
     {
@@ -31,9 +40,11 @@ class CartController extends Controller
             $order->cart_id = $cart->id;
             $order->save();
             $order->process($cart);
-            $order->send();
             
             try {
+
+                $this->eventDispatcher->dispatch(new OrderCreateEvent($order));
+
                 //Safely sending data to google analytics e-commerce
                 $ga = new GoogleECommerce($order);
                 $ga->sendOrder();

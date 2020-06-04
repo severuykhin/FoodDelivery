@@ -209,7 +209,7 @@ $categories = Category::find()->where(['<>', 'id', 20])->orderBy(['sort' => SORT
     </script>
     <!-- /подключение jquery-->
     <script src="/statics/libs.js"></script>
-    <script src="/statics/main18.js"></script>
+    <script src="/statics/main.js"></script>
 </body>
 </html>
 <?php $this->endPage() ?>
