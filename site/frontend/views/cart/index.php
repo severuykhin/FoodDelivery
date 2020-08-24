@@ -32,15 +32,6 @@ $referrerIsSameOrigin = stripos(Yii::$app->request->referrer, 'shymovka') !== fa
         
     </div>
 
-    <div class="cart-gift" data-role="cart-gift" style="display: none;">
-        <div class="cart-gift-inner">
-            <div class="cart-gift-track">
-                <div class="cart-gift-track-back" data-role="cart-gift-track"></div>
-            </div>
-        </div>
-        <div class="cart-gift-caption">Подарок - Пицца с салями и моцареллой 40 см.</div>
-    </div>
-
     <div class="card-souses-wrap" data-role="cart-souses-wrap" style="display: none;">
         <h2 class="title title-h2 title-cart title-cart_sub">
             <span>Выберите соусы</span> <br>

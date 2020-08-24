@@ -127,13 +127,10 @@ $this->registerMetaTag([
   <div class="main-slider-item main-slider-item-3 site__index-img">
     <!-- <img src="/statics/images/shum_kombo1.jpg" alt="Комбо-набор Детский"> -->
   </div>
-  <div class="main-slider-item main-slider-item-4 site__index-img">
-    <!-- <img src="/statics/images/index-img.jpg" alt="Акция - при заказе от 950 руб. - Пицца 40см в подарок!"> -->
-  </div>
 </div>
 
 <br>
-<div class="container-fluide">*Акции не суммируются с другими акциями, комбо-наборами и скидками кафе</div>
+<div class="container-fluide">*Акции не суммируются с другими акциями, комбо-наборами, сертификатами и скидками кафе</div>
 
 <?= \frontend\widgets\MainGoods::widget() ?>
 

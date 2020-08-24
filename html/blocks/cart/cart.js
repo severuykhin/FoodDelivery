@@ -429,9 +429,9 @@ class Cart {
         });
 
         if (false === hasNoActionsProducts) {
-            if (summ >= 950) {
-                html += pageGiftTemplate();
-            }
+            // if (summ >= 950) {
+            //     html += pageGiftTemplate();
+            // }
         }
 
         html += summTemplate(summ);

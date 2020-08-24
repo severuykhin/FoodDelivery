@@ -127,16 +127,6 @@ $freeSousAmount = $model->getFreeSousAmount();
         <tr>
             <td></td><td></td><td></td><td></td><td></td><td></td>
         </tr>
-        <?php if ($cost >= 950 && $model->created_at > 1566930000 && $has_no_action_products == false): ?>
-        <tr>
-            <td style="border: 1px solid #999;"></td>
-            <td style="border: 1px solid #999;">Подарок: Пицца с салями и моцареллой</td>
-            <td style="border: 1px solid #999;">40 см.</td>
-            <td style="border: 1px solid #999;">1</td>
-            <td style="border: 1px solid #999;">0</td>
-            <td style="border: 1px solid #999;">0</td>
-        </tr>
-        <?php endif; ?>
         <tr>
             <td style="border: 1px solid #999;"></td>
             <td style="border: 1px solid #999;"></td>

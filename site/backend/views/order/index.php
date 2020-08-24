@@ -139,7 +139,7 @@ $stateClassMap = [
                         $res .= "<p><b>Соусы</b>: $freeSousAmount бесплатно</p>";
                     }
 
-                    if ($cost >= 950 && $model->created_at > 1566930000 && $has_no_action_products == false) {
+                    if ($cost >= 950 && $model->created_at > 1566930000 && $model->created_at < 1598298696 && $has_no_action_products == false) {
                         $res .= '<hr>';
                         $res .= "<p><b>Подарок</b>: Пицца с салями и моцареллой 40 см - 1 шт.</p>";
                     }
